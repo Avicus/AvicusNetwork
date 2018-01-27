@@ -91,7 +91,7 @@
     </dependency>
     <dependency>
       <groupId>net.avicus</groupId>
-      <artifactId>atlas-competitve-objectives</artifactId>
+      <artifactId>atlas-competitive-objectives</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
