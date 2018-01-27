@@ -1,0 +1,11 @@
+name: ${plugin.name}
+description: ${project.description}
+main: ${plugin.mainClass}
+version: ${project.version}-${git.commit.id.abbrev}
+authors: [The Avicus Network]
+depend:
+- ProtocolLib
+- Compendium
+- Magma
+- Hook
+website: https://github.com/AustinLMayes/Atrio

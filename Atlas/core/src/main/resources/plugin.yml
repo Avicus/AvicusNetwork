@@ -1,0 +1,53 @@
+name: Atlas
+main: net.avicus.atlas.Atlas
+version: ${project.version}-${git.commit.id.abbrev}
+authors:
+- Avicus Network
+depend:
+- Compendium
+- Magma
+- Grave
+- Tracker
+- WorldEdit
+softdepend:
+- Tutorial
+permissions:
+  atlas.*:
+    description: Access to all Atlas permissible features.
+    default: false
+    children:
+      atlas.dev.*: true
+      atlas.join.*: true
+      atlas.rotation.*: true
+      atlas.states.*: true
+  atlas.dev.*:
+    description: Access to all Atlas developer commands.
+    default: false
+    children:
+      atlas.dev.verison: true
+      atlas.dev.dump: true
+      atlas.dev.queuerestart: true
+      atlas.dev.testall: true
+  atlas.join.*:
+    description: Grants full access to picking and joining teams.
+    default: false
+    children:
+      atlas.join.pick: true
+      atlas.join.full: true
+      atlas.join.force: true
+  atlas.rotation.*:
+    description: All rotation modification commands.
+    default: false
+    children:
+      atlas.rotation.append: true
+      atlas.rotation.insert: true
+      atlas.rotation.set: true
+      atlas.rotation.setnext: true
+  atlas.states.*:
+    description: All match state modification commands.
+    default: false
+    children:
+      atlas.states.cycle: true
+      atlas.states.end: true
+      atlas.states.next: true
+      atlas.states.start: true

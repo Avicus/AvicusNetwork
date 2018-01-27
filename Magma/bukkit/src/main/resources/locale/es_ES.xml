@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<locale country="es" lang="es">
+  <commands>
+    <server>
+      <connecting>Conectándote a {0}.</connecting>
+      <current>Actualmente conectado a {0}.</current>
+      <error>
+        <offline>El servidor '{0}' está fuera de línea.</offline>
+      </error>
+      <query>
+        <none>No se han encontrado servidores.</none>
+        <group>
+          <none>Ningún servidor en ese grupo está actualmente disponible.</none>
+        </group>
+      </query>
+    </server>
+    <staff>
+      <title>Online Staff</title>
+      <none>There are no staff online.</none>
+    </staff>
+    <togglepermissible>
+      <toggled>Toggled server permissible status to: {0}</toggled>
+    </togglepermissible>
+  </commands>
+  <error>
+    <commands>
+      <permission>
+        <premium>Tienes que ser un jugador premium para utilizar ese comando.</premium>
+      </permission>
+    </commands>
+    <unknown>
+      <player>No se ha encontrado ningún jugador llamado '{0}'. ¿Está en línea.</player>
+    </unknown>
+    <no>
+      <key>You do not have a matching crate and key. Find a matching key at {0}.</key>
+    </no>
+  </error>
+  <freeze>
+    <broadcast>
+      <froze>{0} froze {1}</froze>
+      <joined>{0} has joined while frozen</joined>
+      <unfroze>{0} unfroze {1}</unfroze>
+    </broadcast>
+    <froze>You have frozen {0}.</froze>
+    <frozen>You have been frozen by {0}.</frozen>
+    <unfroze>You have unfrozen {0}.</unfroze>
+    <unfrozen>You have been unfrozen by {0}.</unfrozen>
+  </freeze>
+  <generic>
+    <type>
+      <boolean>
+        <true>enabled</true>
+        <false>disabled</false>
+      </boolean>
+      <confirm>
+        <cancel>
+          <name>Cancel</name>
+          <description>Click to cancel.</description>
+        </cancel>
+        <confirm>
+          <name>Confirm</name>
+          <description>Click to confirm.</description>
+        </confirm>
+      </confirm>
+    </type>
+  </generic>
+  <gui>
+    <generic>
+      <back>Atrás</back>
+      <online>
+        <not>{0} no está conectado.</not>
+      </online>
+    </generic>
+    <click>
+      <key>Use this key on its corresponding crate.</key>
+    </click>
+    <server>
+      <title>Servidores</title>
+      <click>
+        <left>Left-click to find a match!</left>
+        <right>Right-click to view all servers</right>
+      </click>
+    </server>
+    <rarity>
+      <common>Common</common>
+      <uncommon>Uncommon</uncommon>
+      <rare>Rare</rare>
+      <extremely>Extremely Rare</extremely>
+    </rarity>
+    <page>
+      <next>Next Page</next>
+      <prev>Previous Page</prev>
+    </page>
+    <rank>
+      <gadget>Rank Gadget: {0}</gadget>
+      <received>You have received the {0} rank! Relog to get any permissions from the rank!
+      </received>
+    </rank>
+  </gui>
+  <join>
+    <disallow>
+      <permission>No tienes permiso para entrar a este servidor.</permission>
+    </disallow>
+  </join>
+  <prestige>
+    <commands>
+      <prestige>
+        <confirm>You're about to level up to prestige {0}. Are you sure? {1} - {2}</confirm>
+      </prestige>
+    </commands>
+  </prestige>
+  <report>
+    <cooldown>
+      <plural>You must wait {0} seconds before using /report again.</plural>
+      <singular>You must wait {0} second before using /report again.</singular>
+    </cooldown>
+    <recent>
+      <none>There are no recent reports to view.</none>
+      <title>
+        <global>Recent Reports</global>
+        <player>Recent Reports ({0})</player>
+        <server>Recent Reports ({0})</server>
+      </title>
+      <view>
+        <player>View recent reports for {0}</player>
+      </view>
+    </recent>
+    <sent>Your report has been sent to online staff.</sent>
+  </report>
+  <rtp>
+    <generic>
+      <success>
+        <player>Has sido teleportado a {0}.</player>
+      </success>
+    </generic>
+    <server>
+      <connect>Conectar a {0}</connect>
+      <connecting>Conectándose a {0}</connecting>
+    </server>
+    <player>
+      <teleport>
+        <local>Teletransportarse a {0}</local>
+        <remote>Teletransporte a {0} en {1}</remote>
+        <fail>
+          <participating>No te puedes teletransportar mientras estas en una partida.</participating>
+        </fail>
+      </teleport>
+      <teleporting>
+        <local>Teletransportandose a {0}</local>
+        <remote>Teletransportandote a {0} en {1}</remote>
+      </teleporting>
+    </player>
+  </rtp>
+  <setting>
+    <reportnotification>
+      <name>ReportNotification</name>
+      <summary>If a sound should be played when you receive a report.</summary>
+    </reportnotification>
+    <staffchannels>
+      <name>StaffChannels</name>
+      <summary>If staff channels (reports, staff, etc) should be viewed.</summary>
+      <disabled>You currently have staff channels disabled.</disabled>
+    </staffchannels>
+    <bar>
+      <name>ShowXPBar</name>
+      <description>Show the bar above your hotbar that indicates your prestige progress.
+      </description>
+    </bar>
+    <premium>
+      <name>PremiumChat</name>
+      <description>If premium chat should be shown.</description>
+    </premium>
+  </setting>
+  <prestige>
+    <levelup>
+      <success>You have leveled up!</success>
+      <fail>You do not have enough XP levels to reach the next prestige. ({0} ({1} levels) more XP
+        required).
+      </fail>
+      <max>You have reached the max prestige and may not level up any more. Good job! The next
+        season starts in
+        {0}.
+      </max>
+      <canceled>Level up action canceled.</canceled>
+      <broadcast>{0} has leveled up and is now at level {1}!</broadcast>
+      <nearby>You have received {0} XP because you were near a player who leveled up.</nearby>
+      <maxbroadcast>WOW!! {0} has reached the max prestige level for this season! That takes
+        dedication
+      </maxbroadcast>
+    </levelup>
+  </prestige>
+</locale>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<locale country="us" lang="en">
+  <errors>
+    <no-punishments>No punishments matched query.</no-punishments>
+    <clean-history>This user does not have any punishments.</clean-history>
+    <no-players>No players matched query.</no-players>
+    <no-servers>No servers matched query.</no-servers>
+    <no-servers-group>No server in that group is currently available.</no-servers-group>
+    <server-offline>Unable to connect to offline server, {0}.</server-offline>
+    <join-server>You are not allowed to join this server.</join-server>
+    <no-permission-premium>You must be a premium user to use that command.</no-permission-premium>
+    <no-permission-stats-history>You must be a premium user for stats beyond 1 day ago.
+    </no-permission-stats-history>
+    <error-occurred>An error occurred: {0}</error-occurred>
+    <no-reply>No one to reply to.</no-reply>
+    <no-atlas>You must be on a game server to use this!</no-atlas>
+    <already-friends>You are already friends with {0}.</already-friends>
+    <already-requested-friends>You are already requested friendship with {0}.
+    </already-requested-friends>
+    <not-friends>You are not friends with {0}.</not-friends>
+    <friend-yourself>You cannot friend yourself.</friend-yourself>
+    <channel-permission>You cannot send messages in that channel.</channel-permission>
+    <track-in-progress>A track is currently in progress.</track-in-progress>
+    <cannot-afford>You cannot afford to do that, you need {0} credits.</cannot-afford>
+    <unmet-requirements>You need {0} to purchase that gadget.</unmet-requirements>
+    <cannot-use>You may not use this gadget on match servers.</cannot-use>
+    <auth-not-found>That authentication token did not match any pending client registrations.
+    </auth-not-found>
+    <no-friends>You have no friends.</no-friends>
+    <no-such-user>Could not find a user named {0}.</no-such-user>
+    <gadgets>
+      <set-next>
+        <queued>A setnext request has already been queued! Please wait until the next map to make a
+          request.
+        </queued>
+        <playing>You can't set the currently playing map again!</playing>
+        <error>The map you chose could not be loaded! Please choose a different one.</error>
+        <restarting>You cannot set a map because the server will restart soon.</restarting>
+      </set-next>
+    </gadgets>
+  </errors>
+  <generic>
+    <teleported>You have teleported to {0}.</teleported>
+    <credits>You have {0} credits.</credits>
+    <appealed>You have appealed punishment #{0}.</appealed>
+    <appealed-deleted>You have deleted punishment #{0}.</appealed-deleted>
+    <stats-since>Stats since {0}: {1}</stats-since>
+    <joined-server>{0} has joined {1}.</joined-server>
+    <left-server>{0} has left {1}.</left-server>
+    <switched-servers>{0} switched from {1} to {2}</switched-servers>
+    <cancelled-friend>You have cancelled your request with {0}.</cancelled-friend>
+    <requested-friend>You have requested friendship with {0}.</requested-friend>
+    <accepted-friend>You are now friends with {0}.</accepted-friend>
+    <removed-friend>You have removed {0} as a friend.</removed-friend>
+    <deleted-alert>Alert deleted successfully.</deleted-alert>
+    <retrieving-servers>Retrieving updated server information, please wait.</retrieving-servers>
+    <connecting-server>Connecting to {0}.</connecting-server>
+    <track-playing>{0} started playing a track!</track-playing>
+    <message-from>(From {0}): {1}</message-from>
+    <message-to>(To {0}): {1}</message-to>
+    <gadget-purchased>You have purchased {0} for {1} credits.</gadget-purchased>
+    <permissible-toggled>Toggled server permissible status to: {0}</permissible-toggled>
+    <resetting-stats>Resetting stats... Please wait...</resetting-stats>
+    <stats-reset-cancelled>You have cancelled resetting your stats.</stats-reset-cancelled>
+    <stats-reset>Your stats have been reset!</stats-reset>
+    <registered>You have been successfully authenticated as {0}.</registered>
+    <crate-reward>A {0} has been rewarded to {1}!</crate-reward>
+  </generic>
+  <ui>
+    <enabled>Enabled</enabled>
+    <disabled>Disabled</disabled>
+    <friends-online>{0} Friend Online ({1}/{2})</friends-online>
+    <friends-online-plural>{0} Friends Online ({1}/{2})</friends-online-plural>
+    <click-me>Click to continue</click-me>
+    <click-to-connect>Click to connect</click-to-connect>
+    <usages>{0}/{1} usages</usages>
+    <left-click-join>Left-click to find a match!</left-click-join>
+    <right-click-view>Right-click to view all servers</right-click-view>
+    <kills>Kills: {0}</kills>
+    <deaths>Deaths: {0}</deaths>
+    <kd>K/D: {0}</kd>
+    <currently-on>{0} is online playing {1}.</currently-on>
+    <last-seen>{0} was last seen {1}.</last-seen> <!-- funkystudios was last seen 5 seconds ago. -->
+    <not-online>{0} is not online.</not-online>
+    <online-users>Online Users {0}: {1}</online-users>
+    <online-staff>Online Staff</online-staff>
+    <player-history>Infraction History for {0}</player-history>
+    <server-menu>Server Menu</server-menu>
+    <crate-reveal>Crate Reveal</crate-reveal>
+    <gadget-store>Gadget Store</gadget-store>
+    <backpack-use>Left-click to use this item.</backpack-use>
+    <backpack-trash>Left-click to discard this item.</backpack-trash>
+    <trash-bin>Trash Bin</trash-bin>
+    <trash-info>Click the trash bin, then click a gadget that you wish to permanently remove from
+      your backpack.
+    </trash-info>
+    <badge>Badge: {0}</badge>
+    <morph>{0} Morph</morph>
+    <moph-active>You are now disguised as a {0}!</moph-active>
+    <moph-off>You are no longer disguised as a {0}.</moph-off>
+    <sound>{0} Sound: {1}</sound>
+    <gun>{0} Gun</gun>
+    <nyan>Nyan Cat</nyan>
+    <blaster>{0} Credits Credit Blaster</blaster>
+    <track>Track: {0}</track>
+    <click-track>Plays this track to the server!</click-track>
+    <credit-bomb>Credit Bomb ({0} credits)</credit-bomb>
+    <back>Back</back>
+    <prev-page>Previous Page</prev-page>
+    <next-page>Next Page</next-page>
+    <confirm>Confirm</confirm>
+    <cancel>Cancel</cancel>
+    <confirm-cancel>Confirm or cancel operation</confirm-cancel>
+    <set-next>Next Map Selector</set-next>
+    <start-vote>Start Map Vote</start-vote>
+    <set-success>Set the next map to {0}!</set-success>
+    <reward>
+      <monument-destroyed>You destroyed a monument!</monument-destroyed>
+      <monument-damaged>You damaged a monument!</monument-damaged>
+      <flag-captured>You captured a flag!</flag-captured>
+      <wool-place>You placed a wool!</wool-place>
+      <wool-pickup>You picked up a wool!</wool-pickup>
+      <leakable-leak>You leaked a leakable!</leakable-leak>
+      <scorebox-enter>You entered a scorebox!</scorebox-enter>
+      <hill-capture>You helped capture a hill!</hill-capture>
+      <kill-player>You killed a player!</kill-player>
+      <win>You won the match!</win>
+      <participation>You participated in a match.</participation>
+      <rate>You rated a map ({0} {1}).</rate>
+      <item>You picked up a credit item!</item>
+    </reward>
+    <click-map>Click to set next</click-map>
+    <name-history>Username History for {0}</name-history>
+    <stats-reset>Reset your stats?</stats-reset>
+    <afk>
+      <line-1>You have been kicked for being AFK for too long.</line-1>
+      <line-2>Find us online at {0}!</line-2>
+    </afk>
+    <achievement>{0} has unlocked the {1} achievement!</achievement>
+  </ui>
+  <punishment>
+    <!-- funkystudios » Permanently Banned » KyloCode » BEING A COMPLETE LOOSER -->
+    <!-- funkystudios » Temporarily Banned (2 days) » KyloCode » Advertising -->
+    <broadcast>{0} » {1} » {2} » {3}</broadcast>
+    <broadcast-time>{0} » {1} ({2}) » {3} » {4}</broadcast-time>
+    <appeal>Visit {0} to appeal.</appeal>
+    <muted>Muted</muted>
+    <warned>Warned</warned>
+    <kicked>Kicked</kicked>
+    <tempbanned>Temporarily Banned</tempbanned>
+    <banned>Permanently Banned</banned>
+    <web-banned>Permanently Website Banned</web-banned>
+    <web-tempbanned>Temporarily Website Banned</web-tempbanned>
+    <tm-banned>Tournament Banned</tm-banned>
+    <discord-warned>Warned (on Discord)</discord-warned>
+    <discord-kicked>Kicked from Discord</discord-kicked>
+    <discord-tempbanned>Temporarily Discord Banned</discord-tempbanned>
+    <discord-banned>Permanently Discord Banned</discord-banned>
+    <success>Successfully punished user.</success>
+    <ip-ban>Your IP address has been blocked from our servers!</ip-ban>
+  </punishment>
+  <settings>
+    <punishment-alert>PunishmentAlert</punishment-alert>
+    <punishment-alert-summary>Punishment alerts shown to you.</punishment-alert-summary>
+    <show-trails>ShowTrails</show-trails>
+    <show-trails-summary>Show player trail particle effects.</show-trails-summary>
+    <show-arrow-trails>ShowArrowTrails</show-arrow-trails>
+    <show-arrow-trails-summary>Show arrow trail particle effects.</show-arrow-trails-summary>
+    <private-messages>PrivateMessages</private-messages>
+    <private-messages-summary>Configure which private messages you receive.
+    </private-messages-summary>
+    <achievements>ShowAchievements</achievements>
+    <achievements-summary>Configure rather or not you see other users' achievement messages.
+    </achievements-summary>
+  </settings>
+  <map-ratings>
+    <message>Rate this map by clicking: {0} {1} {2} {3} {4}</message>
+    <button-hover>Click to rate this map {0}.</button-hover>
+    <out-of-range>Invalid rating. Valid ratings are 1-5.</out-of-range>
+    <success>Rating of {0} for {1} {2} successfully saved.</success>
+    <previous>Your rating of {0} for {1} {2} has not changed.</previous>
+    <success-book>You may provide additional feedback for this map by filling out the provided
+      book.
+    </success-book>
+    <feedback>
+      <book-title>Feedback for {0} {1}</book-title>
+      <success>Feedback for {0} {1} successfully saved.</success>
+    </feedback>
+    <summary>
+      <overall>{0} {1} ratings: {2}/{3}/{4}/{5}/{6} ({7})</overall>
+      <rating-of>rating of {0}</rating-of>
+    </summary>
+    <not-yet>
+      <started>You can't rate this map before the match has started.</started>
+      <joined>You can't rate this map before you've joined the match.</joined>
+    </not-yet>
+  </map-ratings>
+  <rtp>
+    <server>
+      <connect>Connect to {0}</connect>
+      <connecting>Connecting to {0}</connecting>
+    </server>
+    <player>
+      <teleport>
+        <local>Teleport to {0}</local>
+        <remote>Teleport to {0} on {1}</remote>
+        <fail>
+          <participating>You cannot teleport while participating in a match.</participating>
+        </fail>
+      </teleport>
+      <teleporting>
+        <local>Teleporting to {0}</local>
+        <remote>Teleporting to {0} on {1}</remote>
+      </teleporting>
+    </player>
+  </rtp>
+</locale>

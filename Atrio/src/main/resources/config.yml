@@ -1,0 +1,62 @@
+update-interval: 20
+spawn:
+  location:
+    region: block
+    location: 0, 0, 0
+    velocity: 0, 0, 0
+signs:
+  - server: Name
+    location: 0, 1, 0
+
+announce-forum: 0
+
+portals:
+  - type: click # click (button/block) | enter
+    open: 02-15-19 11:13 # Date/Time (UTC) after which portal can be used (optional)
+    close: 02-15-19 15:13 # Date/Time (UTC) after which portal can no longer be used (optional)
+    location:
+      region: cuboid
+      min: 0, 12, 9
+      max: 0, 12, 19
+    destination:
+      region: circle
+      origin: 0, 113, 9
+      yaw: 12
+      pitch: 25
+
+presents:
+  - location: x, y, z
+    slug: present-id # Once this is set, don't change
+    family: christmas-2001-day-2 # Group or family that this present should be considered a part of.
+
+
+pads:
+  - location:
+      region: cuboid
+      min: 0, 12, 9
+      max: 0, 12, 19
+    velocity: 0, 0.3, 0
+
+inventory:
+  server-menu:
+    enabled: true
+    slot: 1
+  backpack:
+    enabled: true
+    slot: 8
+  store:
+    enabled: true
+    slot: 3
+  book:
+    enabled: false
+    slot: 0
+    name: Server Book
+    author: Author
+    pages:
+    - '^aPage 1'
+    - '^cPage 2'
+  armor:
+    helmet: air
+    chestplate: air
+    leggings: air
+    boots: air

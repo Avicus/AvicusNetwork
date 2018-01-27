@@ -1,0 +1,4 @@
+name: Magma
+main: net.avicus.magma.Magma
+version: ${project.version}
+author: Avicus Network

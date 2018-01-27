@@ -1,0 +1,9 @@
+buycraft:
+  enabled: true
+  api-key: secret
+  pool-size: 4
+  period: 10000
+
+leaderboards:
+  enabled: true
+  xp: true

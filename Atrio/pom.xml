@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.avicus</groupId>
+    <artifactId>avicus-network</artifactId>
+    <version>1.8-SNAPSHOT</version>
+  </parent>
+  <artifactId>atrio</artifactId>
+  <properties>
+    <plugin.name>Atrio</plugin.name>
+    <plugin.mainClass>net.avicus.atrio.AtrioPlugin</plugin.mainClass>
+    <project.description>A nifty little lobby plugin.</project.description>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <dependencies>
+    <!-- Magnet -->
+    <dependency>
+      <groupId>net.avicus</groupId>
+      <artifactId>magnet</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <!-- Database -->
+    <dependency>
+      <groupId>net.avicus</groupId>
+      <artifactId>hook-bukkit</artifactId>
+      <version>${project.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.avicus</groupId>
+      <artifactId>magma-bukkit</artifactId>
+      <version>${project.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- Utilities -->
+    <dependency>
+      <groupId>net.avicus</groupId>
+      <artifactId>compendium-bukkit</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <!-- Tracking -->
+    <dependency>
+      <groupId>tc.oc</groupId>
+      <artifactId>tracker</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <sourceDirectory>${basedir}/src/main/java/</sourceDirectory>
+    <resources>
+      <resource>
+        <targetPath>.</targetPath>
+        <filtering>true</filtering>
+        <directory>${basedir}/src/main/resources/</directory>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>pl.project13.maven</groupId>
+        <artifactId>git-commit-id-plugin</artifactId>
+        <version>2.2.0</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>revision</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <failOnNoGitDirectory>true</failOnNoGitDirectory>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

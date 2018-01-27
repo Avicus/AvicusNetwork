@@ -1,0 +1,7 @@
+name: Magma
+main: net.avicus.magma.Magma
+version: ${project.version}-${git.commit.id.abbrev}
+authors:
+- Avicus Network
+depend:
+- Compendium
