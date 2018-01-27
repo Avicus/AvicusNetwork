@@ -16,7 +16,6 @@
     <module>Atrio</module>
     <module>Hook</module>
     <module>Mars</module>
-    <module>Warden</module>
   </modules>
   <scm>
     <connection>scm:git://github.com/Avicus/AvicusNetwork.git</connection>
