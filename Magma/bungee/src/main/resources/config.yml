@@ -1,0 +1,15 @@
+database:
+  hostname: 'localhost'
+  database: 'magma'
+  auth:
+    username: 'cats'
+    password: 'kittens'
+api:
+  url: http://localhost:3000/api
+  key: xxxxxxxxxxxx
+redis:
+  hostname: 'localhost'
+  database: 0
+  auth:
+    enabled: false
+    password: 'kittens'

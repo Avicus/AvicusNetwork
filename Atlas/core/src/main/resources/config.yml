@@ -1,0 +1,23 @@
+max-group-imbalance: 0.20
+libraries:
+- path: maps
+  ignored-directories:
+    - Dev
+    - Storage
+- github: true
+  path: Avicus/atlas-maps
+rotation:
+  path: plugins/Atlas/rotation.xml
+  restart-on-end: false
+  randomize: false
+  auto-start: true
+delete-matches: true
+scrimmage: false
+github:
+  auth: false
+  username: username
+  token: your token # https://github.com/settings/tokens
+website:
+  base: https://alm-was.here
+  # {0} = map slug
+  map: maps/map/{0}/

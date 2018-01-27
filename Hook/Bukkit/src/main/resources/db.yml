@@ -1,0 +1,12 @@
+mysql:
+  host: localhost
+  username: username
+  password: password
+  database: hook
+
+redis:
+  host: localhost
+  database: 0
+  auth:
+    enabled: false
+    password: password

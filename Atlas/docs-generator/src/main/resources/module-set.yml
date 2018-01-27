@@ -1,0 +1,3 @@
+main: net.avicus.atlas.sets.generator.Main
+name: "Documentation Generator"
+depend: []

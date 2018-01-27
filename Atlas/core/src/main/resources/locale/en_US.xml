@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<locale country="us" lang="en">
+  <console>
+    <boot>Atlas version {0} has started up.</boot>
+    <shutdown>Atlas version {0} is shutting down.</shutdown>
+  </console>
+  <error>
+    <invalid-arguments>Invalid arguments provided.</invalid-arguments>
+    <no-permission>You don't have permission.</no-permission>
+    <error-occurred>An error has occurred.</error-occurred>
+    <match-missing>A match is not in progress.</match-missing>
+    <invalid-page>Invalid page provided.</invalid-page>
+    <command-not-enabled>You may not use that command at this time.</command-not-enabled>
+    <chat-global-disabled>Global chat is disabled for this map.</chat-global-disabled>
+    <chat-team-disabled>Team chat is disabled for this map.</chat-team-disabled>
+    <cannot-tutorial>You must leave the match in order to view the tutorial.</cannot-tutorial>
+    <cannot-join-overfill>No players can join beyond the overfill limit.</cannot-join-overfill>
+    <cannot-join-full>You must have a premium rank to join full matches.</cannot-join-full>
+    <cannot-join-imbalance>Joining that team may create an unfair advantage, please join a different
+      one.
+    </cannot-join-imbalance>
+    <cannot-pick-team>You must have a premium rank to pick your team.</cannot-pick-team>
+    <cannot-join-ongoing>You cannot join until the following match.</cannot-join-ongoing>
+    <cannot-join-cycling>You cannot join until the next match has loaded.</cannot-join-cycling>
+    <already-team>You are already on {0}.</already-team>
+    <already-spectator>You are already a spectator.</already-spectator>
+    <already-playing>You are already playing on a team, use /leave to spectate.</already-playing>
+    <team-not-found>No teams matched query.</team-not-found>
+    <team-invaid>The supplied team is not a valid input for this command.</team-invaid>
+    <objective-damage>You may not damage that objective.</objective-damage>
+    <objective-damage-own>You may not damage your own objective.</objective-damage-own>
+    <objective-repair-enemy>You may not repair an enemy objective.</objective-repair-enemy>
+    <objective-bad-repair>You cannot use that item to repair the objective.</objective-bad-repair>
+    <objective-cannot-repair>That objective cannot be repaired.</objective-cannot-repair>
+    <objective-placed-wool>That wool has already been captured.</objective-placed-wool>
+    <objective-bad-wool>You must capture the correct wool.</objective-bad-wool>
+    <objective-break-post>You may not damage flag posts.</objective-break-post>
+    <objective-other-wool>You cannot capture wool for another team.</objective-other-wool>
+    <cannot-craft>You cannot craft {0}.</cannot-craft>
+    <enter-base>You are not allowed to enter {0}'s base.</enter-base>
+    <damage-base>You may not damage {0} within their base.</damage-base>
+    <cannot-build>You are not allowed to build there.</cannot-build>
+    <build-playable>You are not allowed to build outside of the map.</build-playable>
+    <cooldown>You must wait to use this again.</cooldown>
+    <kits-not-enabled>Kits are disabled on this map.</kits-not-enabled>
+    <kits-not-enabled-player>You are not allowed to use kits at this time.</kits-not-enabled-player>
+    <no-states>No states left in this match.</no-states>
+    <not-playing>The match is not in a playing phase.</not-playing>
+    <not-starting>The match is not in a starting phase.</not-starting>
+    <no-matches>No matches left in the rotation.</no-matches>
+    <cycle-failed>Unable to cycle to {0}.</cycle-failed>
+    <cycle-while-playing>A cycle cannot be initiated during playtime, use -f to end the match.
+    </cycle-while-playing>
+    <bad-slot>Invalid slot provided.</bad-slot>
+    <rot-failed>A countdown is in progress that prevents this rotation change. Use -f to override.
+    </rot-failed>
+    <no-library>Unable to find map library at {0}.</no-library>
+    <cannot-read>Unable to read file or directory {0}.</cannot-read>
+    <no-rotation>Unable to find rotation file at {0}.</no-rotation>
+    <map-not-found>No maps matched {0}.</map-not-found>
+    <parsing-failed>Failed to parse map {0}.</parsing-failed>
+    <no-maps>No maps left in rotation.</no-maps>
+    <accept-resource-pack>You must accept our custom resource pack in order to play on this map.
+      Click here to
+      download it!
+    </accept-resource-pack>
+    <no-resource-pack>This map does not have a custom resource pack available.</no-resource-pack>
+    <resource-pack-declined>You have declined to use our custom resource pack.
+    </resource-pack-declined>
+    <kit-not-found>No kits matched query.</kit-not-found>
+    <no-kit>No kit selected. Use "/kits" to find a kit.</no-kit>
+    <cannot-rename>This group may not be renamed at this time.</cannot-rename>
+  </error>
+  <generic>
+    <version>This server is currently running Atlas {0}.</version>
+    <libraries-reloaded>Libraries reloaded!</libraries-reloaded>
+    <chat-global-enabled>You are now talking in global chat.</chat-global-enabled>
+    <chat-team-enabled>You are now talking in team chat.</chat-team-enabled>
+    <more-players-needed>More players ({0}) are required for the match to start.
+    </more-players-needed>
+    <waiting-for-more>Waiting for more players to start the match.</waiting-for-more>
+    <balance-needed>Teams must be balanced properly for the match to start.</balance-needed>
+    <state-change>Match state changed from {0} to {1}.</state-change>
+    <joined>You have joined {0}.</joined>
+    <no-lives>You have run out of lives.</no-lives>
+    <lives>You have {0} life remaining.</lives>
+    <lives-plural>You have {0} lives remaining.</lives-plural>
+    <death>You died!</death>
+    <respawn>You can respawn in {0} seconds.</respawn>
+    <auto-respawn>Respawning in {0} seconds.</auto-respawn>
+    <punch-respawn>Punch to respawn.</punch-respawn>
+    <objective-damaged>{0} was damaged by {1}!</objective-damaged>
+    <objective-repaired>{0} was repaired by {1}!</objective-repaired>
+    <objective-completed-by>{0} was completed by {1}!</objective-completed-by>
+    <objective-completed>{0} was completed!</objective-completed>
+    <leakable-leaked-by>{0} was leaked by {1}!</leakable-leaked-by>
+    <leakable-leaked>{0} has leaked!</leakable-leaked>
+    <objective-captured>{0} was captured by {1}!</objective-captured>
+    <objective-placed>{0} was placed by {1}!</objective-placed>
+    <objective-touched>{0} was touched by {1}!</objective-touched>
+    <objective-scored>{0} point has been scored by {1}!</objective-scored>
+    <objective-scored-plural>{0} points have been scored by {1}!</objective-scored-plural>
+    <objective-taken>{0} was taken by {1}!</objective-taken>
+    <objective-pickup>{0} was picked up by {1}!</objective-pickup>
+    <objective-respawn>{0} will respawn in {1} second.</objective-respawn>
+    <objective-respawn-plural>{0} will respawn in {1} seconds.</objective-respawn-plural>
+    <objective-recover>{0} will be recovered in {1} second.</objective-recover>
+    <objective-recover-plural>{0} will be recovered in {1} seconds.</objective-recover-plural>
+    <objective-recovered>{0} has been recovered.</objective-recovered>
+    <objective-respawned>{0} has respawned.</objective-respawned>
+    <objective-dropped>{0} was dropped!</objective-dropped>
+    <walls>
+      <fall>
+        <will>The walls will fall in {0}</will>
+        <fell>The walls have fallen!</fell>
+      </fall>
+    </walls>
+    <kit-selected>You have selected {0}. You will receive the kit upon respawning.</kit-selected>
+    <dump>Atlas was dumped successfully to {0}.</dump>
+    <resource-pack-accepted>You have accepted our custom resource pack.</resource-pack-accepted>
+    <next-map>Next Map: {0} {1} by {2}</next-map>
+    <rot-next>Set the next map to {0}.</rot-next>
+    <rot-insert>Inserted {0} at slot {1}.</rot-insert>
+    <rot-append>Appended {0} to the rotation.</rot-append>
+    <rot-remove>Removed {0} from slot {1}.</rot-remove>
+    <rot-set>Set the current rotation to {0}.</rot-set>
+    <group-renamed>Group renamed successfully.</group-renamed>
+    <countdown>
+      <auto-starting>
+        <name>Auto Starting</name>
+      </auto-starting>
+      <starting>
+        <name>Match Start</name>
+      </starting>
+      <cycling>
+        <name>Cycling</name>
+      </cycling>
+      <end>
+        <name>Match End</name>
+      </end>
+      <chest-regenerate>
+        <name>Chest Regenerate</name>
+      </chest-regenerate>
+      <phase-apply>
+        <name>Phase Application</name>
+      </phase-apply>
+      <flag-recover>
+        <name>Flag Recovery</name>
+      </flag-recover>
+    </countdown>
+    <remote-match-waiting>A match on {0} is waiting for {1} more player - click here to join!
+    </remote-match-waiting>
+    <remote-match-waiting-plural>A match on {0} is waiting for {1} more players - click here to
+      join!
+    </remote-match-waiting-plural>
+    <remote-match>A match on {0} has space for {1} more player - click here to join!</remote-match>
+    <remote-match-plural>A match on {0} has space for {1} more players - click here to join!
+    </remote-match-plural>
+    <local-match>You are spectating this match. Type "/join" to participate, or find another server
+      with the server
+      menu.
+    </local-match>
+    <sent-by-restart>You have been transferred to {0} because the server you were on restarted. You
+      can disable this
+      functionality by changing the SendToHubOnRestart setting.
+    </sent-by-restart>
+  </generic>
+  <match>
+    <starting>The match is starting in {0} second.</starting>
+    <starting-plural>The match is starting in {0} seconds.</starting-plural>
+    <started>The match has started!</started>
+    <time-remaining>Time Remaining: {0}</time-remaining>
+    <ended>The match has ended!</ended>
+    <cycling>Cycling to {0} in {1} second.</cycling>
+    <cycling-plural>Cycling to {0} in {1} seconds.</cycling-plural>
+    <cycled>Cycled to {0}!</cycled>
+  </match>
+  <ui>
+    <join-team>Join {0}</join-team>
+    <teleport-device>Teleport Device</teleport-device>
+    <teleport-device-text>Left-click to teleport, right-click to go through walls.
+    </teleport-device-text>
+    <players>Players</players>
+    <spectators>Spectators</spectators>
+    <hills>Hills</hills>
+    <monuments>Monuments</monuments>
+    <leakables>Cores</leakables>
+    <points>Points</points>
+    <wool>Wool</wool>
+    <colored-wool>{0} Wool</colored-wool>
+    <flags>Flags</flags>
+    <walls>Walls</walls>
+    <entities>Entities</entities>
+    <colored-flag>{0} Flag</colored-flag>
+    <objectives>Objectives</objectives>
+    <rotation>Rotation ({0}/{1})</rotation>
+    <maps>Maps ({0}/{1})</maps>
+    <match>Match on {0}</match>
+    <by>{0} by {1}</by>
+    <authors>Authors</authors>
+    <contributors>Contributors</contributors>
+    <tips>Tips</tips>
+    <currently-playing>Currently Playing {0} {1} by {2}</currently-playing>
+    <wins>{0} Wins!</wins>
+    <welcome>
+      <line-1>Welcome to {0} {1}!</line-1>
+      <line-2>This map was made by {0}, and it is a {1} map.</line-2>
+    </welcome>
+    <team-lost>The team you were on lost. ☹</team-lost>
+    <team-won>The team you were on won! ☻</team-won>
+    <winners>Winners</winners>
+    <tie>The match has tied!</tie>
+    <important>* * * {0} * * *</important>
+    <player-located>Player located: {0}</player-located>
+    <location-located>Location targeted: {0}</location-located>
+    <compass>Compass</compass>
+    <food-level>Food level: {0}/{1}</food-level>
+    <health>Health: {0}/{1}</health>
+    <players-remaining>{0} player remaining.</players-remaining>
+    <players-remaining-plural>{0} players remaining.</players-remaining-plural>
+    <num-players>{0} player</num-players>
+    <num-players-plural>{0} players</num-players-plural>
+    <team-menu>Team Menu</team-menu>
+    <auto-join>Auto Join</auto-join>
+    <auto-join-text>Join the team with the fewest players.</auto-join-text>
+    <play>Play!</play>
+    <spec-join-next>Use /join after the match cycles to play in the next match!</spec-join-next>
+    <current-kit>Current Kit: {0}</current-kit>
+    <kits>Kits</kits>
+    <kit-menu>Kit Menu</kit-menu>
+    <shop>
+      <menu>Open Shop</menu>
+      <points>{0} Points</points>
+      <fail>You may not open the shop at this time.</fail>
+      <prestige-required>Prestige {0} Required for Purchase</prestige-required>
+      <purchase>
+        <fail>You cannot purchase this item as the current time.</fail>
+        <success>Successfully purchased {0}!</success>
+      </purchase>
+    </shop>
+    <view-map-on-website>Click to view this map on the website.</view-map-on-website>
+    <broadcast>
+      <type>
+        <default>*</default>
+        <tip>Tip</tip>
+        <alert>Alert</alert>
+      </type>
+    </broadcast>
+    <tutorial>
+      <force>
+        <time>You have been forced to view the map tutorial because you have less than 5 hours
+          of <playtime></playtime>.
+        </time>
+        <setting>You are viewing the tutorial because you have the ShowTutorial setting enabled.
+        </setting>
+      </force>
+    </tutorial>
+    <mvp>
+      <title>Match MVP: {0}</title>
+      <not-online>This person left before the end of the match and won't get rewards :(.
+      </not-online>
+      <tag-1>What a legend!</tag-1>
+      <tag-2>Better hope you're on their team!</tag-2>
+      <tag-3>Man, they sure do have some rhythm!</tag-3>
+      <tag-4>Auto-Clicker: ENABLED</tag-4>
+      <tag-5>Press F to pay respects.</tag-5>
+      <tag-6>.legit</tag-6>
+      <tag-7>Now go clean the sweat off of your keyboard!</tag-7>
+      <tag-8>(╯°□°）╯︵ ┻━┻</tag-8>
+    </mvp>
+    <round>Round: {0}</round>
+    <arcade>AviCade</arcade>
+    <carts>
+      <spawned>Carts have been spawned!</spawned>
+      <pick>Find a cart to sit in before you are eliminated!</pick>
+      <final>All players not in carts will be eliminated in 10 seconds!</final>
+      <eliminated>You have been eliminated because you were not in a cart!</eliminated>
+    </carts>
+  </ui>
+  <flag-color>
+    <white>White Flag</white>
+    <orange>Orange Flag</orange>
+    <magenta>Magenta Flag</magenta>
+    <light-blue>Light Blue Flag</light-blue>
+    <yellow>Yellow Flag</yellow>
+    <lime>Lime Flag</lime>
+    <pink>Pink Flag</pink>
+    <gray>Gray Flag</gray>
+    <silver>Silver Flag</silver>
+    <cyan>Cyan Flag</cyan>
+    <purple>Purple Flag</purple>
+    <blue>Blue Flag</blue>
+    <brown>Brown Flag</brown>
+    <green>Green Flag</green>
+    <red>Red Flag</red>
+    <black>Black Flag</black>
+  </flag-color>
+  <wool-color>
+    <white>White Wool</white>
+    <orange>Orange Wool</orange>
+    <magenta>Magenta Wool</magenta>
+    <light-blue>Light Blue Wool</light-blue>
+    <yellow>Yellow Wool</yellow>
+    <lime>Lime Wool</lime>
+    <pink>Pink Wool</pink>
+    <gray>Gray Wool</gray>
+    <silver>Silver Wool</silver>
+    <cyan>Cyan Wool</cyan>
+    <purple>Purple Wool</purple>
+    <blue>Blue Wool</blue>
+    <brown>Brown Wool</brown>
+    <green>Green Wool</green>
+    <red>Red Wool</red>
+    <black>Black Wool</black>
+  </wool-color>
+  <settings>
+    <spectator-view>SpectatorView</spectator-view>
+    <spectator-view-summary>Toggle viewing spectators while you are a spectator.
+    </spectator-view-summary>
+    <hub-restart>SendToHubOnRestart</hub-restart>
+    <hub-restart-summary>If you should be sent to the hub on restart or sent to another available
+      server.
+    </hub-restart-summary>
+    <show-tutorial>ShowTutorial</show-tutorial>
+    <show-tutorial-summary>Toggle showing a tutorial at the beginning of a match.
+    </show-tutorial-summary>
+  </settings>
+  <death>
+    <blocks>({0} blocks)</blocks>
+    <died>{0} died</died>
+    <by-mob>{0} was slain by {1}</by-mob>
+    <by-player-mob>{0} was slain by {1}'s {2}</by-player-mob>
+    <by-player-anvil>{0} was squashed by {1}'s anvil</by-player-anvil>
+    <by-anvil>{0} was squashed by an anvil</by-anvil>
+    <by-block>{0} was squashed by a block</by-block>
+    <by-player-tnt>{0} was blown up by {1}'s TNT</by-player-tnt>
+    <by-explosive>{0} was blown up</by-explosive>
+    <by-void>{0} fell into the void</by-void>
+    <by-player-void>{0} was sent into the void by {1}</by-player-void>
+    <by-projectile>{0} was sniped</by-projectile>
+    <by-player-projectile>{0} was sniped by {1}'s {2} ({3} blocks)</by-player-projectile>
+    <by-lava>{0} tried to swim in lava</by-lava>
+    <by-melee-fists>{0} was punched to death by {1}</by-melee-fists>
+    <by-melee>{0} was slain by {1}'s {2}</by-melee>
+    <by-fall>{0} hit the ground too hard ({1} blocks)</by-fall>
+    <hit-floor-void>{0} was knocked out of the world by {1}</hit-floor-void>
+    <hit-floor-fall>{0} was knocked off a high place by {1}</hit-floor-fall>
+    <hit-ladder-void>{0} was knocked off a ladder and into the void by {1}</hit-ladder-void>
+    <hit-ladder-fall>{0} was knocked from a ladder onto the ground by {1}</hit-ladder-fall>
+    <hit-water-void>{0} was knocked out of water into the void by {1}</hit-water-void>
+    <hit-water-fall>{0} was knocked out of water onto the ground by {1}</hit-water-fall>
+    <shot-floor-void>{0} was shot out of the world by {1}</shot-floor-void>
+    <shot-floor-fall>{0} was shot off a high place by {1}</shot-floor-fall>
+    <shot-ladder-void>{0} was shot off a ladder into the void by {1}</shot-ladder-void>
+    <shot-ladder-fall>{0} was shot from a ladder onto the ground by {1}</shot-ladder-fall>
+    <shot-water-void>{0} was shot out of water into the void by {1}</shot-water-void>
+    <shot-water-fall>{0} was shot out of water onto the ground by {1}</shot-water-fall>
+    <spleef-floor-void>{0} was spleefed out of the world by {1}</spleef-floor-void>
+    <spleef-floor-fall>{0} was spleefed off a high place by {1}</spleef-floor-fall>
+    <spleef-by-player>{0} was spleefed by {1}</spleef-by-player>
+  </death>
+  <vote>
+    <title>Vote for the Next Map</title>
+    <disabled>Voting is disabled.</disabled>
+    <set>Successfully set vote options to {0}</set>
+    <delay>A vote for the next map will start during the next cycle.</delay>
+    <cancelled>The vote for the next map has been cancelled.</cancelled>
+    <cancel-none>There was no queued vote to cancel.</cancel-none>
+    <start>A vote for the next map has started.</start>
+    <invalid>Invalid option.</invalid>
+    <success>You've successfully voted for {0}.</success>
+    <countdown>
+      <time>Vote Time Remaining: {0}</time>
+    </countdown>
+    <votes>Votes</votes>
+    <won>{0} won the next map vote!</won>
+    <none>There were no votes cast.</none>
+  </vote>
+  <commands>
+    <generic>
+      <ping>
+        <self>Your ping is {0}.</self>
+        <other>{0}'s ping is {1}.</other>
+      </ping>
+    </generic>
+    <group>
+      <max>
+        <success>The max player count has been set to {0} (overfill: {1}) for {2}.</success>
+      </max>
+    </group>
+  </commands>
+  <gametype>
+    <name>
+      <plural>Game Types</plural>
+      <singular>Game Type</singular>
+    </name>
+    <ctw>
+      <name>Capture the Wool</name>
+    </ctw>
+    <dtc>
+      <name>Destroy the Core</name>
+    </dtc>
+    <dtm>
+      <name>Destroy the Monument</name>
+    </dtm>
+    <elimination>
+      <name>Elimination</name>
+    </elimination>
+    <hill>
+      <name>King of the Hill</name>
+    </hill>
+    <lcs>
+      <name>Last Competitor Standing</name>
+    </lcs>
+    <lts>
+      <name>Last Team Standing</name>
+    </lts>
+    <score>
+      <name>Highest Score</name>
+    </score>
+    <walls>
+      <name>Walls</name>
+    </walls>
+  </gametype>
+  <error>
+    <unknown>
+      <player>Could not find a player named '{0}'.</player>
+    </unknown>
+    <permission>
+      <modtime>You are not authorized to modify the time for this action.</modtime>
+    </permission>
+  </error>
+  <module>
+    <observer>
+      <menu>
+        <title>Observer Options</title>
+        <command>You can open the observer options menu by running the '{0}' command.</command>
+        <current>Current</current>
+        <item>
+          <gamemode>
+            <name>Game Mode</name>
+            <description>Toggle between the adventure and spectator gamemodes.</description>
+          </gamemode>
+          <nightvision>
+            <name>Night Vision</name>
+            <description>Toggle if you'd like to have a night vision potion effect applied.
+            </description>
+          </nightvision>
+        </item>
+        <error>
+          <open>
+            <participant>You cannot open the observer options menu while participating in the match.
+            </participant>
+          </open>
+        </error>
+      </menu>
+    </observer>
+  </module>
+  <network>
+    <protocol>
+      <unsupported>
+        <gamemode>
+          <ctf>
+            <seven>You are unable to participate in this Capture the Flag match when using a 1.7
+              client.
+            </seven>
+          </ctf>
+        </gamemode>
+      </unsupported>
+    </protocol>
+  </network>
+  <setting>
+    <deathmessage>
+      <name>DeathMessages</name>
+      <description>Toggle which death messages you see</description>
+    </deathmessage>
+  </setting>
+  <type>
+    <boolean>
+      <true>enabled</true>
+      <false>disabled</false>
+    </boolean>
+  </type>
+  <visual>
+    <effect>
+      <blood>
+        <setting>
+          <name>Blood</name>
+          <description>See blood when players get damaged</description>
+        </setting>
+      </blood>
+    </effect>
+  </visual>
+  <stats>
+    <facts>
+      <random>Random Match Fact:</random>
+      <all>Match Facts</all>
+      <command>For a full list of facts from the match, use /facts</command>
+      <error>
+        <after>You may only view facts after the match has ended.</after>
+        <none>No facts could be generated from this match.</none>
+        <disabled>Stats were not enabled for this match.</disabled>
+      </error>
+      <fall>
+        <text>{0} fell from the highest altitude by falling {1} blocks.</text>
+        <tagline>
+          <tag1>SPLAT!</tag1>
+          <tag2>WOW! That must have hurt!</tag2>
+          <tag3>Watch where you're going next time!</tag3>
+        </tagline>
+      </fall>
+      <kills>
+        <most>
+          <text>{0} got the most kills this match with a total of {1} kills.</text>
+          <tagline>
+            <tag1>What a killing machine!</tag1>
+            <tag2>Get em!</tag2>
+            <tag3>Sign this player up for my team!</tag3>
+            <tag4>Don't get on their bad side!</tag4>
+          </tagline>
+        </most>
+        <weapon>
+          <most>The {0} was the most used weapon in this match, with {1} kills.</most>
+        </weapon>
+        <assists>
+          <highest>{0} was the most helpful person this match, with {1} kill assists.</highest>
+          <tagline>
+            <tag1>How helpful!</tag1>
+            <tag2>What a friend!</tag2>
+            <tag3>Your such a nice person, have a cookie.</tag3>
+          </tagline>
+        </assists>
+      </kills>
+      <snipe>
+        <text>{0} got the longest bow shot this match with a distance of {1} blocks.</text>
+        <tagline>
+          <tag1>What a shot!</tag1>
+          <tag2>360 no scope!</tag2>
+          <tag3>A shot for the ages!</tag3>
+          <tag4>MOM! GET THE CAMERA!</tag4>
+        </tagline>
+      </snipe>
+    </facts>
+    <recap>
+      <match>Match Recap</match>
+      <life>Life Recap</life>
+    </recap>
+    <damage>
+      <kills>
+        <kills>Kills</kills>
+        <cause>
+          <weapon>Your {0} was used the most to kill players.</weapon>
+          <bow>Your longest bow shot was {0} blocks.</bow>
+        </cause>
+        <most>You killed {0} the most with a total of {1} kills.</most>
+      </kills>
+      <deaths>
+        <category>
+          <player>Deaths From Players</player>
+          <natural>Deaths From Natural Causes</natural>
+          <self>Deaths From Self</self>
+        </category>
+        <cause>
+          <weapon>You were killed by {0}s the most.</weapon>
+          <bow>Your were shot from as far as {0} blocks away.</bow>
+          <fall>
+            <most>You fell as far as {0} blocks.</most>
+            <total>You fell a total of {0} blocks.</total>
+          </fall>
+        </cause>
+      </deaths>
+      <assist>
+        <assists>Kill Assists</assists>
+        <weapon>You assisted with your {0} the most.</weapon>
+      </assist>
+    </damage>
+    <objectives>
+      <summary>Objective Interaction Summary</summary>
+      <destroyables>
+        <damaged>Damaged {0}</damaged>
+        <damagedplural>Damaged {0} {1} times</damagedplural>
+        <repaired>Repaired {0}</repaired>
+        <repairedplural>Repaired {0} {1} times</repairedplural>
+      </destroyables>
+      <leakables>
+        <leaked>Leaked {0}</leaked>
+      </leakables>
+      <monuments>
+        <destroyed>Destroyed {0}</destroyed>
+      </monuments>
+      <flags>
+        <captured>Captured {0}</captured>
+        <capturedplural>Captured {0} {1} times</capturedplural>
+        <dropped>Dropped {0}</dropped>
+        <droppedplural>Dropped {0} {1} times</droppedplural>
+        <picked>Picked up {0}</picked>
+        <pickedplural>Picked up {0} {1} times</pickedplural>
+      </flags>
+      <hills>
+        <capture>Captured {0}</capture>
+        <captureplural>Captured {0} {1} times</captureplural>
+        <captureassist>Assisted in the capturing of {0}</captureassist>
+        <captureassistplural>Assisted in the capturing of {0} {1} times</captureassistplural>
+      </hills>
+      <points>
+        <earnedplural>Scored {1} points</earnedplural>
+        <earned>Scored a point</earned>
+      </points>
+      <wools>
+        <placed>Placed {0}</placed>
+        <placedplural>Placed {0} wools</placedplural>
+        <touchedplural>Touched {0} {1} times</touchedplural>
+        <touched>Touched {0}</touched>
+      </wools>
+    </objectives>
+  </stats>
+</locale>

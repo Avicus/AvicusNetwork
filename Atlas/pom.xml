@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.avicus</groupId>
+    <artifactId>avicus-network</artifactId>
+    <version>1.8-SNAPSHOT</version>
+  </parent>
+  <artifactId>atlas</artifactId>
+  <packaging>pom</packaging>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <modules>
+    <module>arcade</module>
+    <module>core</module>
+    <module>competitive-objectives</module>
+    <module>docs-generator</module>
+    <module>walls</module>
+  </modules>
+  <dependencies>
+    <!-- Server -->
+    <dependency>
+      <groupId>net.avicus</groupId>
+      <artifactId>magnet</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.avicus</groupId>
+      <artifactId>magnet-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <!-- Database -->
+    <dependency>
+      <groupId>net.avicus</groupId>
+      <artifactId>magma-bukkit</artifactId>
+      <version>${project.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- Utilities -->
+    <dependency>
+      <groupId>net.avicus</groupId>
+      <artifactId>compendium-bukkit</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.keenant</groupId>
+      <artifactId>tabbed</artifactId>
+    </dependency>
+    <!-- Tracking -->
+    <dependency>
+      <groupId>tc.oc</groupId>
+      <artifactId>tracker</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.avicus</groupId>
+      <artifactId>grave</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <!-- WE -->
+    <dependency>
+      <groupId>com.sk89q.worldedit</groupId>
+      <artifactId>worldedit-core</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.sk89q.worldedit</groupId>
+      <artifactId>worldedit-bukkit</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <!-- Packets -->
+    <dependency>
+      <groupId>us.myles</groupId>
+      <artifactId>viaversion</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.comphenix.protocol</groupId>
+      <artifactId>ProtocolLib</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <!-- Tutorial -->
+    <dependency>
+      <groupId>net.avicus</groupId>
+      <artifactId>tutorial</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <!-- XML -->
+    <dependency>
+      <groupId>org.jdom</groupId>
+      <artifactId>jdom2</artifactId>
+      <version>2.0.6</version>
+    </dependency>
+    <!-- Disguises -->
+    <dependency>
+      <groupId>LibsDisguises</groupId>
+      <artifactId>LibsDisguises</artifactId>
+    </dependency>
+  </dependencies>
+</project>

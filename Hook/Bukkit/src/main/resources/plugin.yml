@@ -1,0 +1,10 @@
+name: Hook
+main: net.avicus.hook.HookPlugin
+version: ${project.version}-${git.commit.id.abbrev}
+authors:
+- Avicus Network
+depend:
+- Compendium
+- Magma
+softdepend:
+- Atlas

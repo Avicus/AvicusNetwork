@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<locale country="es" lang="es">
+  <errors>
+    <no-punishments>No se encontraron infracciones.</no-punishments>
+    <clean-history>Este usuario no tiene ninguna infracción.</clean-history>
+    <no-players>No se han encontrado jugadores.</no-players>
+    <no-servers>No se han encontrado servidores.</no-servers>
+    <no-servers-group>Ningún servidor en ese grupo está actualmente disponible.</no-servers-group>
+    <server-offline>Incapaz de conectar a el servidor offline, {0}.</server-offline>
+    <join-server>No tienes permiso para entrar a este servidor.</join-server>
+    <no-permission-premium>Tienes que ser un usuario premium para utilizar ese comando.
+    </no-permission-premium>
+    <no-permission-stats-history>Tienes que ser un usuario premium para tener estadísticas de hace
+      más de un día.
+    </no-permission-stats-history>
+    <error-occurred>Se ha producido un error: {0}</error-occurred>
+    <no-reply>Nadie a quien responder.</no-reply>
+    <no-atlas>You must be on a game server to use this!</no-atlas>
+    <already-friends>Ya eres amigo de {0}.</already-friends>
+    <already-requested-friends>Ya pediste ser amigo de {0}.
+    </already-requested-friends>
+    <not-friends>No eres amigo de {0}.</not-friends>
+    <friend-yourself>No puedes hacerte amigo de ti mismo.</friend-yourself>
+    <no-unread-alerts>No tienes alertas sin leer. Usa "-r" para mostrar alertas que ya leíste.
+    </no-unread-alerts>
+    <no-alerts>No tienes alertas.</no-alerts>
+    <channel-permission>No puedes mandar mensajes en ese canal.</channel-permission>
+    <track-in-progress>Ya hay un disco sonando.</track-in-progress>
+    <cannot-afford>No te alcanza para eso, necesitas {0} créditos.</cannot-afford>
+    <unmet-requirements>Necesitas {0} para comprar ese gadget.</unmet-requirements>
+    <cannot-use>No puedes utilizar este gadget en partidas.</cannot-use>
+    <auth-not-found>Ese token de autentificación no coincide con ningún registro de cliente
+      pendiente.
+    </auth-not-found>
+    <no-friends>No tienes amigos.</no-friends>
+    <no-such-user>No se ha encontrado ningún jugador llamado '{0}'.</no-such-user>
+    <gadgets>
+      <set-next>
+        <queued>A setnext request has already been queued! Please wait until the next map to make a
+          request.
+        </queued>
+        <playing>You can't set the currently playing map again!</playing>
+        <error>The map you chose could not be loaded! Please choose a different one.</error>
+        <restarting>You cannot set a map because the server will restart soon.</restarting>
+      </set-next>
+    </gadgets>
+  </errors>
+  <generic>
+    <teleported>Has sido teletransportado a {0}.</teleported>
+    <credits>Tienes {0} créditos.</credits>
+    <appealed>Has apelado la infracción #{0}.</appealed>
+    <appealed-deleted>Has eliminado la infracción #{0}.</appealed-deleted>
+    <stats-since>Estadísticas desde {0}: {1}</stats-since>
+    <joined-server>{0} se ha unido a {1}.</joined-server>
+    <left-server>{0} ha abandonado {1}.</left-server>
+    <switched-servers>{0} ha cambiado de {1} a {2}</switched-servers>
+    <cancelled-friend>Has cancelado tu solicitud para {0}.</cancelled-friend>
+    <requested-friend>Has pedido ser amigo de {0}.</requested-friend>
+    <accepted-friend>Ahora eres amigo de {0}.</accepted-friend>
+    <removed-friend>Has eliminado a {0} como amigo.</removed-friend>
+    <unread-alerts>Tienes alertas sin leer! Haz "/alerts" para verlas!</unread-alerts>
+    <deleted-alert>Alerta eliminada exitosamente.</deleted-alert>
+    <retrieving-servers>Obteniendo información actualizada del servidor, por favor espera.
+    </retrieving-servers>
+    <connecting-server>Conectándote a {0}.</connecting-server>
+    <track-playing>¡{0} ha empezado a reproducir un disco!</track-playing>
+    <message-from>(De {0}): {1}</message-from>
+    <message-to>(Para {0}): {1}</message-to>
+    <gadget-purchased>Haz comprado {0} por {1} créditos.</gadget-purchased>
+    <permissible-toggled>Toggled server permissible status to: {0}</permissible-toggled>
+    <resetting-stats>Reseteando estadísticas... Por favor espera...</resetting-stats>
+    <stats-reset-cancelled>Haz cancelado el reseteo de tus estadísticas.</stats-reset-cancelled>
+    <stats-reset>Tus estadísticas han sido reseteadas!</stats-reset>
+    <registered>Te haz autenticado correctamente como {0}.</registered>
+    <crate-reward>A {0} has been rewarded to {1}!</crate-reward>
+  </generic>
+  <ui>
+    <enabled>Activado</enabled>
+    <disabled>Desactivado</disabled>
+    <alerts>Alertas</alerts>
+    <open>Abrir</open>
+    <delete>Borrar</delete>
+    <friends-online>{0} Amigo conectado ({1}/{2})</friends-online>
+    <friends-online-plural>{0} Amigos conectados ({1}/{2})</friends-online-plural>
+    <click-me>Haz click para continuar</click-me>
+    <click-to-connect>Click para Conectarte</click-to-connect>
+    <usages>{0}/{1} usos</usages>
+    <left-click-join>Click izquierdo para encontrar una partida!</left-click-join>
+    <right-click-view>Click derecho para ver todos los servidores</right-click-view>
+    <kills>Asesinatos: {0}</kills>
+    <deaths>Muertes: {0}</deaths>
+    <kd>K/D: {0}</kd>
+    <currently-on>{0} está conectado jugando {1}.</currently-on>
+    <last-seen>{0} fue visto por última vez {1}.
+    </last-seen> <!-- funkystudios was last seen 5 seconds ago. -->
+    <not-online>{0} no está conectado.</not-online>
+    <online-users>Usuarios Conectados {0}: {1}</online-users>
+    <online-staff>Staff en línea</online-staff>
+    <player-history>Historial de infracciones de {0}</player-history>
+    <server-menu>Menú de servidores</server-menu>
+    <crate-reveal>Abrir Caja</crate-reveal>
+    <gadget-store>Tienda de Gadgets</gadget-store>
+    <backpack-use>Click izquierdo para usar este item.</backpack-use>
+    <backpack-trash>Click izquierdo para descartar este item.</backpack-trash>
+    <trash-bin>Papelera</trash-bin>
+    <trash-info>Click the trash bin, then click a gadget that you wish to permanently remove from
+      your backpack.
+    </trash-info>
+    <badge>Insignia: {0}</badge>
+    <morph>{0} Forma</morph>
+    <moph-active>Estás camuflado como {0}!</moph-active>
+    <moph-off>Ya no estas disfrazado de un {0}.</moph-off>
+    <sound>{0} sonido: {1}</sound>
+    <gun>{0} Gun</gun>
+    <nyan>Nyan Cat</nyan>
+    <blaster>{0} Credits Credit Blaster</blaster>
+    <track>Disco: {0}</track>
+    <click-track>¡Reproduce este disco para el servidor!</click-track>
+    <credit-bomb>Bomba de Créditos ({0} créditos)</credit-bomb>
+    <back>Atrás</back>
+    <prev-page>Página Anterior</prev-page>
+    <next-page>Página Siguiente</next-page>
+    <confirm>Confirmar</confirm>
+    <cancel>Cancelar</cancel>
+    <confirm-cancel>Confirmar o cancelar operación</confirm-cancel>
+    <set-next>Next Map Selector</set-next>
+    <start-vote>Start Map Vote</start-vote>
+    <set-success>Set the next map to {0}!</set-success>
+    <reward>
+      <monument-destroyed>¡Has destruido un monumento!</monument-destroyed>
+      <monument-damaged>You damaged a monument!</monument-damaged>
+      <flag-captured>¡Capturaste una bandera!</flag-captured>
+      <wool-place>¡Colocaste una lana!</wool-place>
+      <wool-pickup>Has recogido una lana!</wool-pickup>
+      <leakable-leak>You leaked a leakable!</leakable-leak>
+      <scorebox-enter>You entered a scorebox!</scorebox-enter>
+      <hill-capture>You helped capture a hill!</hill-capture>
+      <kill-player>¡Asesinaste a un jugador!</kill-player>
+      <win>¡Has ganado la partida!</win>
+      <participation>Has participado en una partida.</participation>
+      <rate>Has clasificado un mapa ({0} {1}).</rate>
+      <item>You picked up a credit item!</item>
+    </reward>
+    <click-map>Click to set next</click-map>
+    <name-history>Historial de nombres de {0}</name-history>
+    <stats-reset>¿Resetear tus estadísticas?</stats-reset>
+    <afk>
+      <line-1>You have been kicked for being AFK for too long.</line-1>
+      <line-2>Find us online at {0}!</line-2>
+    </afk>
+    <achievement>{0} has unlocked the {1} achievement!</achievement>
+  </ui>
+  <punishment>
+    <!-- funkystudios » Permanently Banned » KyloCode » Advertising -->
+    <!-- funkystudios » Temporarily Banned (2 days) » KyloCode » Advertising -->
+    <broadcast>{0} » {1} » {2} » {3}</broadcast>
+    <broadcast-time>{0} » {1} ({2}) » {3} » {4}</broadcast-time>
+    <appeal>Visita {0} para apelarlo.</appeal>
+    <warned>Advertido</warned>
+    <kicked>Expulsado</kicked>
+    <tempbanned>Baneado temporalmente</tempbanned>
+    <banned>Baneado permanentemente</banned>
+    <web-banned>Permanently Website Banned</web-banned>
+    <web-tempbanned>Temporarily Website Banned</web-tempbanned>
+    <tm-banned>Tournament Banned</tm-banned>
+    <discord-warned>Warned (on Discord)</discord-warned>
+    <discord-kicked>Kicked from Discord</discord-kicked>
+    <discord-tempbanned>Temporarily Discord Banned</discord-tempbanned>
+    <discord-banned>Permanently Discord Banned</discord-banned>
+    <success>Castigado al jugador exitosamente.</success>
+    <ip-ban>Tu dirección IP ha sido bloqueada de nuestros servidores!</ip-ban>
+  </punishment>
+  <settings>
+    <punishment-alert>AlertaDeInfracciones</punishment-alert>
+    <punishment-alert-summary>Alerta de infracciones mostradas hacia ti.</punishment-alert-summary>
+    <alert-notify>AlertaDeNotificacion</alert-notify>
+    <alert-notify-summary>Obtén notificaciones de alertas nuevas de la página web.
+    </alert-notify-summary>
+    <show-trails>EnseñarTrails</show-trails>
+    <show-trails-summary>Ver los efectos de partículas de los jugadores.</show-trails-summary>
+    <show-arrow-trails>ShowArrowTrails</show-arrow-trails>
+    <show-arrow-trails-summary>Show arrow trail particle effects.</show-arrow-trails-summary>
+    <private-messages>MensajesPrivados</private-messages>
+    <private-messages-summary>Configurar los mensajes privados que recibes.
+    </private-messages-summary>
+    <achievements>ShowAchievements</achievements>
+    <achievements-summary>Configure rather or not you see other users' achievement messages.
+    </achievements-summary>
+  </settings>
+  <map-ratings>
+    <message>Valora por este mapa clickeando: {0} {1} {2} {3} {4}</message>
+    <button-hover>Haz click para valorar este mapa {0}.</button-hover>
+    <out-of-range>Valoración invalida. Los votos van de 1 a 5.</out-of-range>
+    <success>Valoración de {0} para {1} {2} guardado correctamente.</success>
+    <previous>Tu opinion de {0} para {1} {2} no ha cambiado.</previous>
+    <success-book>You may provide additional feedback for this map by filling out the provided
+      book.
+    </success-book>
+    <feedback>
+      <book-title>Comentarios para {0} de {1}</book-title>
+      <success>Comentarios para {1} de {0} guardados correctamente.</success>
+    </feedback>
+    <summary>
+      <overall>{0} {1} ratings: {2}/{3}/{4}/{5}/{6} ({7})</overall>
+      <rating-of>puntuaciones para {0}</rating-of>
+    </summary>
+    <not-yet>
+      <started>No puedes valorar este mapa antes de que la partida comience.</started>
+      <joined>No puedes calificar este mapa sin entrar a la partida.</joined>
+    </not-yet>
+  </map-ratings>
+  <rtp>
+    <server>
+      <connect>Conectarse a {0}</connect>
+      <connecting>Conectándote a {0}</connecting>
+    </server>
+    <player>
+      <teleport>
+        <local>Teletransportarse a {0}</local>
+        <remote>Teletransporte a {0} en {1}</remote>
+        <fail>
+          <participating>No te puedes teletransportar mientras estas en una partida.</participating>
+        </fail>
+      </teleport>
+      <teleporting>
+        <local>Teletransportandote a {0}</local>
+        <remote>Teletransportandote a {0} en {1}</remote>
+      </teleporting>
+    </player>
+  </rtp>
+</locale>

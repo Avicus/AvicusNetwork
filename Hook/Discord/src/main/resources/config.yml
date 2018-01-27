@@ -1,0 +1,15 @@
+guild: "86530360246038528"
+token: MjgyMjk5NzI1MTM3NTc1OTM2.C7DeQQ.WtBGY5IBcJQ6O48DwnPh4GA9hcQ
+status: "293500713500409857"
+
+debug: false
+
+commands: true
+
+prestige-poll: ""
+
+forum-polls:
+  - channel: "293500713500409857"
+    id: 1
+  - channel: "293500713500409857"
+    id: 2

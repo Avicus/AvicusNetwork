@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.avicus</groupId>
+    <artifactId>magma</artifactId>
+    <version>1.8-SNAPSHOT</version>
+  </parent>
+  <artifactId>magma-core</artifactId>
+  <dependencies>
+    <!-- APIs -->
+    <dependency>
+      <groupId>net.avicus</groupId>
+      <artifactId>minecraft-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>biz.paluch.redis</groupId>
+      <artifactId>lettuce</artifactId>
+      <classifier>shaded</classifier>
+    </dependency>
+    <dependency>
+      <groupId>net.avicus</groupId>
+      <artifactId>quest</artifactId>
+    </dependency>
+    <!-- Utilities -->
+    <dependency>
+      <groupId>net.avicus</groupId>
+      <artifactId>compendium-core</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>joda-time</groupId>
+      <artifactId>joda-time</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.javalite</groupId>
+      <artifactId>javalite-common</artifactId>
+      <version>1.4.11</version>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+    <!-- API Connection -->
+    <dependency>
+      <groupId>com.shopify.graphql.support</groupId>
+      <artifactId>support</artifactId>
+      <version>0.1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.5.3</version>
+    </dependency>
+  </dependencies>
+</project>

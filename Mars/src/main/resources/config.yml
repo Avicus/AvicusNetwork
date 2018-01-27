@@ -1,0 +1,5 @@
+tournament:
+  id: 0
+  enabled: false
+scrimmage:
+  enabled: false

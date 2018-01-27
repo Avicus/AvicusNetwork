@@ -1,0 +1,12 @@
+mysql:
+  host: localhost
+  username: user
+  password: pass
+  database: avicus
+
+redis:
+  host: localhost
+  database: 1
+  auth:
+    enabled: false
+    password: password

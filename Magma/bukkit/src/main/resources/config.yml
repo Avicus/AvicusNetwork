@@ -1,0 +1,42 @@
+database:
+  hostname: 'localhost'
+  database: 'magma'
+  auth:
+    username: 'cats'
+    password: 'kittens'
+api:
+  url: http://localhost:3000/api
+  key: xxxxxxxxxxxx
+redis:
+  hostname: 'localhost'
+  database: 0
+  auth:
+    enabled: false
+    password: 'kittens'
+alerts:
+  enabled: true # If users should receive messages in game when they have new web alerts
+  poll: 10 # Time (in seconds) to poll the DB for new alerts
+channels:
+  enabled: true
+  reports:
+    enabled: true
+    # The time, in seconds, a player must wait between reports.
+    cooldown: 15
+  staff:
+    enabled: true
+freeze:
+  enabled: true
+  radius:
+    extinguish: 15
+    tnt: 15
+server:
+  gui:
+    rows: 4
+    slots:
+    - index: 0
+      server: DTM01
+    - index: 1
+      group: group-slug
+  quick-play:
+    # If this server should send and receive alerts about matches with space for players
+    enabled: true

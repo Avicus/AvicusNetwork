@@ -1,0 +1,6 @@
+hs_err*
+*.idea
+*.iml
+*.log
+target
+dependency-reduced-pom.xml

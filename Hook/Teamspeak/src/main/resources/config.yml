@@ -1,0 +1,54 @@
+connection:
+  host: localhost
+  port: 10011
+  username: username
+  password: password
+  server-id: 1
+  nickname: Bot
+groups:
+  enabled: true
+clients:
+  enabled: true
+  unregistered-delay: 120 # 2 Mins
+temp-channels:
+  enabled: false
+  root-id:
+  creation-help:
+    - You
+    - made
+    - a
+    - channel
+  initial-success: YAY
+  extension-success: EXTENDED!
+  pricing:
+    initial:
+      - rank-id:
+        delete-delay:
+        cost:
+        cooldown:
+      - rank-id:
+        delete-delay:
+        cost:
+        cooldown:
+    extensions:
+      - rank-id:
+        cost:
+        time:
+      - rank-id:
+        cost:
+        time:
+messages:
+  enabled: true
+  welcome:
+    - "Welcome"
+    - "to"
+    - "Teamspeak"
+  register:
+    - "You"
+    - "need"
+    - "to"
+    - "register"
+  registered:
+    - "You"
+    - "have"
+    - "registered"

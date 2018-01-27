@@ -1,0 +1,100 @@
+#####################
+#### Hook Config ####
+#####################
+
+# If the server should be used for backend operations such as transaction processing and K/D calculations.
+# Only one server on the network should have this enabled.
+backend: false
+
+server:
+  session-logging:
+    enabled: true
+    padding: 25 # Time (in seconds) before a session is marked as ended after a player leaves a server.
+
+tracking:
+  objectives: true # Store objective completions
+  deaths: true # Store kills/deaths for stats
+
+crate-rewards: true
+
+credits:
+  initial-balance: 0 # Initial balance to give to new users
+  rewards:
+    enabled: true # If users should get rewards for completing tasks in matches
+    monument:
+      destroy: 15
+      damage: 3 # Per-block for multi-block monuments
+    flag:
+      capture: 10
+      save: 5
+    match:
+      kill-player: 3
+      win-minimum: 6
+      win-per-minute: 2 # x/minute if you win
+      lose-minimum: 2
+      lose-per-minute: 1 # x/minute if you lose
+    wool:
+      place: 13
+      pickup: 5
+    leakable:
+      leak: 15
+
+experience:
+  initial-balance: 60 # Initial balance to give to new users
+  rewards:
+    enabled: true # If users should get rewards for completing tasks in matches
+    monument:
+      destroy: 25
+      damage: 15 # Per-block for multi-block monuments
+    flag:
+      capture: 25
+      save: 15
+    match:
+      kill-player: 5
+      win-minimum: 15
+      win-per-minute: 4 # x/minute if you win
+      lose-minimum: 5
+      lose-per-minute: 2 # x/minute if you lose
+    wool:
+      place: 25
+      pickup: 15
+    leakable:
+      leak: 26
+    capture-point:
+      capture: 20
+    scorebox:
+      enter: 5
+
+announcements:
+  enabled: true
+  delay: 45 # Delay (in seconds) between messages
+
+friends:
+  redis: true # If users should get alerts when friends join servers
+
+punishments:
+  enabled: true
+  redis: true # If punishments should be sent to the whole network
+
+freeze:
+  enabled: true
+  tnt-radius: 15 # Radius to defuse TNT lit by the person being frozen
+  extinguish-radius: 15 # Radius to extinguish fire lit by the person being frozen
+
+chat:
+  strip-color: true # Remove color codes from chat sent by users
+
+server-menu: # Supports both individual servers and groups
+  rows: 1 # Rows in the menu inventory
+  slots: # Slots start from 0.
+  - index: 2
+    group: Development
+  - index: 7
+    server: Lobby1
+
+shutdown-on-empty: false # If the server should shut down when there are no players online
+
+map-ratings:
+  enabled: true
+  book-enabled: true # If users should get a book to write feedback in
+  message-delay: 4 # Time (in seconds) after the match ends before displaying the rating message
