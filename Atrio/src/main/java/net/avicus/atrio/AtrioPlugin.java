@@ -111,7 +111,7 @@ public class AtrioPlugin extends JavaPlugin {
 
       world.setTime(18000);
 
-      res = ChatColor.AQUA + "Happy " + ChatColor.GOLD + "Ney " + ChatColor.BLUE + " Years"
+      res = ChatColor.AQUA + "Happy " + ChatColor.GOLD + "New " + ChatColor.BLUE + " Years"
           + ChatColor.RED + "!";
 
       new FireworkSpawnTask(colors, new Color[]{}, FireworkEffect.Type.BALL_LARGE).repeat(40, 15);
