@@ -3,7 +3,7 @@ spawn:
   location:
     region: block
     location: 0, 0, 0
-    velocity: 0, 0, 0
+  velocity: 0, 0, 0
 signs:
   - server: Name
     location: 0, 1, 0
