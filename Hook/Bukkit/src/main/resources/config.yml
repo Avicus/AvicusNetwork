@@ -15,6 +15,9 @@ tracking:
   objectives: true # Store objective completions
   deaths: true # Store kills/deaths for stats
 
+achievements:
+  enabled: true
+
 crate-rewards: true
 
 credits:
