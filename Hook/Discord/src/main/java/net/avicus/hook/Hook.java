@@ -172,7 +172,7 @@ public class Hook {
     commands.getCommands().put("unregister", new UnRegisterCommand());
     commands.getCommands().put("register", new RegisterCommand());
     commands.getCommands().put("warn", new PunishmentCommands.Warn());
-    commands.getCommands().put("kick", new PunishmentCommans.Kick());
+    commands.getCommands().put("kick", new PunishmentCommands.Kick());
     commands.getCommands().put("tempban", new PunishmentCommands.TempBan());
     commands.getCommands().put("ban", new PunishmentCommands.Ban());
   }
