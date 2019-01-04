@@ -15,7 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.Period;
 
-public class PunishmentCommads {
+public class PunishmentCommands {
 
   private static Optional<User> checkPermissions(DiscordCommand.CommandContext context) {
     Optional<User> registered = context.getHook().getUserManagementService()
