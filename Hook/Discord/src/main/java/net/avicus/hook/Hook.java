@@ -14,7 +14,7 @@ import net.avicus.hook.commands.AltCheckCommand;
 import net.avicus.hook.commands.Commands;
 import net.avicus.hook.commands.CountCommand;
 import net.avicus.hook.commands.PollCommand;
-import net.avicus.hook.commands.PunishmentCommads;
+import net.avicus.hook.commands.PunishmentCommands;
 import net.avicus.hook.commands.RegisterCommand;
 import net.avicus.hook.commands.ReportCommand;
 import net.avicus.hook.commands.UnRegisterCommand;
@@ -171,10 +171,10 @@ public class Hook {
     commands.getCommands().put("poll", new PollCommand());
     commands.getCommands().put("unregister", new UnRegisterCommand());
     commands.getCommands().put("register", new RegisterCommand());
-    commands.getCommands().put("warn", new PunishmentCommads.Warn());
-    commands.getCommands().put("kick", new PunishmentCommads.Kick());
-    commands.getCommands().put("tempban", new PunishmentCommads.TempBan());
-    commands.getCommands().put("ban", new PunishmentCommads.Ban());
+    commands.getCommands().put("warn", new PunishmentCommands.Warn());
+    commands.getCommands().put("kick", new PunishmentCommans.Kick());
+    commands.getCommands().put("tempban", new PunishmentCommands.TempBan());
+    commands.getCommands().put("ban", new PunishmentCommands.Ban());
   }
 
   private void connectToAPI() {
