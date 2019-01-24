@@ -13,16 +13,12 @@ import net.avicus.compendium.config.ConfigFile;
 import net.avicus.hook.DbConfig;
 import net.avicus.hook.HookConfig;
 import net.avicus.hook.HookPlugin;
-import net.avicus.hook.backend.buycraft.BuycraftDispatcher;
-import net.avicus.hook.backend.buycraft.BuycraftTask;
 import net.avicus.hook.backend.leaderboard.LeaderboardTask;
 import net.avicus.hook.backend.leaderboard.XPLeaderboardTask;
 import net.avicus.hook.backend.votes.Votes;
 import net.avicus.magma.Magma;
 import net.avicus.magma.database.Database;
 import net.avicus.quest.database.DatabaseConfig;
-import net.buycraft.plugin.platform.standalone.runner.StandaloneBuycraftRunnerBuilder;
-import net.buycraft.plugin.platform.standalone.runner.StandaloneUtilities;
 import org.bukkit.Bukkit;
 
 public class Backend {
@@ -85,31 +81,6 @@ public class Backend {
       XPLeaderboardTask task = new XPLeaderboardTask(database);
       task.start();
       runningTasks.add(task);
-    }
-
-    // Buycraft
-    if (BackendConfig.Buycraft.isEnabled()) {
-      this.log.info("Enabling Buycraft");
-      Database database = connectDatabase(DbConfig.MySQLConfig.create());
-
-      // Handles incoming commands
-      BuycraftDispatcher dispatcher = new BuycraftDispatcher(database);
-
-      // Performs command fetching
-      StandaloneBuycraftRunnerBuilder builder = StandaloneBuycraftRunnerBuilder.builder()
-          .apiKey(BackendConfig.Buycraft.getApiKey())
-          .determiner(StandaloneUtilities.ALWAYS_OFFLINE_PLAYER_DETERMINER)
-          .dispatcher(dispatcher)
-          .executorService(Executors.newScheduledThreadPool(BackendConfig.Buycraft.getPoolSize()))
-          .logger(this.log)
-          .build();
-
-      BuycraftTask task = new BuycraftTask(builder);
-
-      long period = BackendConfig.Buycraft.getPeriod();
-
-      Timer timer = new Timer();
-      timer.scheduleAtFixedRate(task, 0, period);
     }
 
     // VOTES!

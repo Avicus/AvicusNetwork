@@ -52,11 +52,6 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>net.buycraft</groupId>
-      <artifactId>buycraftx-common</artifactId>
-      <version>10.2.2</version>
-    </dependency>
-    <dependency>
       <groupId>com.vexsoftware</groupId>
       <artifactId>nuvotifier-universal</artifactId>
       <version>2.3.3</version>
@@ -99,7 +94,6 @@
     <dependency>
       <groupId>com.comphenix.protocol</groupId>
       <artifactId>ProtocolLib</artifactId>
-      <version>4.3.0</version>
       <scope>provided</scope>
       <exclusions>
         <exclusion>
