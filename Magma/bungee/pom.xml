@@ -37,7 +37,6 @@
     <dependency>
       <groupId>com.sk89q</groupId>
       <artifactId>command-framework-bungee</artifactId>
-      <version>0.6-SNAPSHOT</version>
     </dependency>
   </dependencies>
   <build>
