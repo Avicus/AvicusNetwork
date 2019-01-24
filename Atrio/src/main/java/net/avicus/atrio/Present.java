@@ -1,6 +1,6 @@
 package net.avicus.atrio;
 
-import javafx.util.Pair;
+import org.apache.commons.lang3.tuple.Pair;
 import lombok.Data;
 import net.avicus.hook.utils.HookTask;
 import net.avicus.hook.utils.ParticleEffect;
