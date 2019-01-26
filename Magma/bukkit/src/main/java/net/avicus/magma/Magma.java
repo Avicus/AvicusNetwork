@@ -8,6 +8,7 @@ import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 import lombok.Getter;
 import net.avicus.compendium.AvicusCommandsManager;
 import net.avicus.compendium.commands.AvicusCommandsRegistration;
@@ -44,13 +45,19 @@ import net.avicus.magma.network.server.Servers;
 import net.avicus.magma.network.user.Users;
 import net.avicus.magma.redis.Redis;
 import net.avicus.magma.restart.RestartMessageHandler;
+import net.avicus.magma.util.MagmaTask;
 import net.avicus.magma.util.properties.BlockPropStore;
 import net.avicus.quest.database.DatabaseConfig;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.Configuration;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.event.Listener;
 import org.joda.time.Instant;
 
 /**
@@ -78,6 +85,7 @@ public final class Magma extends JavaPlugin {
   private ModuleManager mm;
   @Getter
   private PrestigeSeason currentSeason;
+  private AtomicBoolean ready = new AtomicBoolean(false);
 
   public Magma() {
     magma = this;
@@ -100,6 +108,15 @@ public final class Magma extends JavaPlugin {
 
   @Override
   public void onEnable() {
+    Bukkit.getPluginManager().registerEvents(new Listener() {
+      @EventHandler(priority = EventPriority.LOWEST)
+      public void onPlayerLogin(PlayerLoginEvent event) {
+        if (ready.get())
+          return;
+        String error = ChatColor.RED + "The server has not loaded, please rejoin in a moment.";
+        event.disallow(PlayerLoginEvent.Result.KICK_OTHER, error);
+      }
+    }, this);
     this.preloadClasses();
 
     this.saveDefaultConfig();
@@ -134,6 +151,8 @@ public final class Magma extends JavaPlugin {
 
     getRedis().register(new RestartMessageHandler());
     Users.init(registrar);
+
+    MagmaTask.of(() -> ready.set(true)).later(40);
   }
 
   private void registerModules() {
