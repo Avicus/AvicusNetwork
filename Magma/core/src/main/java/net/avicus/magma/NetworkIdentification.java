@@ -9,6 +9,6 @@ package net.avicus.magma;
  */
 public class NetworkIdentification {
 
-  public static String NAME = "Your Cool Network";
-  public static String URL = "some.cool.site";
+  public static String NAME = "The Avicus Network";
+  public static String URL = "avicus.net";
 }
