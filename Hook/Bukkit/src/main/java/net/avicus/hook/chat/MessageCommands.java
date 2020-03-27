@@ -26,7 +26,6 @@ public class MessageCommands implements CommandModule {
   @Command(aliases = {"message",
       "msg"}, min = 2, desc = "Privately message a player.", usage = "<player> <message...>")
   public static void message(CommandContext cmd, CommandSender sender) {
-
     String query = cmd.getString(0);
     String body = cmd.getJoinedStrings(1);
 

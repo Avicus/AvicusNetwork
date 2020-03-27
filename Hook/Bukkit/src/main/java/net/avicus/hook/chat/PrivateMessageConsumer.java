@@ -139,7 +139,7 @@ public class PrivateMessageConsumer extends AsyncRedisHandler<PrivateMessage> {
         to.sendMessage(Messages.GENERIC_MESSAGE_FROM.with(ChatColor.GRAY, fromName, body));
         if (to instanceof Player) {
           SoundEvent call = Events
-              .call(new SoundEvent((Player) to, SoundType.NONE, SoundLocation.PRIVATE_MESSAGE));
+              .call(new SoundEvent((Player) to, SoundType.SNARE, SoundLocation.PRIVATE_MESSAGE));
           call.getSound().play((Player) to, 1F);
         }
       }
