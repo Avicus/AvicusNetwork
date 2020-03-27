@@ -7,9 +7,12 @@ database:
 api:
   url: http://localhost:3000/api
   key: xxxxxxxxxxxx
+  mock: true
 redis:
   hostname: 'localhost'
   database: 0
   auth:
     enabled: false
     password: 'kittens'
+
+none-online-message: "&7No servers online right now"

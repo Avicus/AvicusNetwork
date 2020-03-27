@@ -17,10 +17,13 @@ import net.avicus.magma.database.Database;
 import net.avicus.magma.network.NetworkConstants;
 import net.avicus.magma.redis.Redis;
 import net.avicus.quest.database.DatabaseConfig;
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ProxyServer;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.PluginMessageEvent;
+import net.md_5.bungee.api.event.PreLoginEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.api.plugin.PluginManager;
@@ -40,6 +43,8 @@ public final class Magma extends Plugin implements Listener {
   private Redis redis;
   @Getter
   private API api;
+
+  private AnyOnlineCheckTask anyOnlineCheckTask = new AnyOnlineCheckTask(this);
 
   public Magma() {
     magma = this;
@@ -119,6 +124,22 @@ public final class Magma extends Plugin implements Listener {
     manager.registerListener(this, new KickListener(this));
     manager.registerListener(this, new MotdListener(this, this.database).start());
     manager.registerListener(this, new StatusCheckTask(this, this.database).start());
+
+    anyOnlineCheckTask.start();
+  }
+
+  @EventHandler
+  public void kickIfNoneOnline(final PreLoginEvent event) {
+    if (!anyOnlineCheckTask.anyOnline) {
+      event.setCancelReason(
+          TextComponent.fromLegacyText(
+              ChatColor.translateAlternateColorCodes(
+                  '&',
+                  getConfiguration().getString("none-online-message"))
+          )
+      );
+      event.setCancelled(true);
+    }
   }
 
   @EventHandler
