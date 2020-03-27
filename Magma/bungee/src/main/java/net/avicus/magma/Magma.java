@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import lombok.Getter;
-import net.avicus.magma.api.APIClient;
+import net.avicus.magma.api.API;
 import net.avicus.magma.command.AbortCmd;
 import net.avicus.magma.database.Database;
 import net.avicus.magma.network.NetworkConstants;
@@ -39,7 +39,7 @@ public final class Magma extends Plugin implements Listener {
   @Getter
   private Redis redis;
   @Getter
-  private APIClient apiClient;
+  private API api;
 
   public Magma() {
     magma = this;
@@ -77,8 +77,8 @@ public final class Magma extends Plugin implements Listener {
 
     getLogger().info("Connecting to API...");
     try {
-      this.apiClient = new APIClient(this.configuration.getString("api.url"),
-          this.configuration.getString("api.key"));
+      this.api = new API(this.configuration.getString("api.url"),
+          this.configuration.getString("api.key"), this.configuration.getBoolean("api.mock"));
     } catch (Exception e) {
       getLogger().severe("Failed to connect to API!");
       e.printStackTrace();

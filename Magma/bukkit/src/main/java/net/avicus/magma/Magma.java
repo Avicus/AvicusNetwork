@@ -195,7 +195,7 @@ public final class Magma extends JavaPlugin {
 
     getLogger().info("Connecting to API...");
     try {
-      this.apiClient = new API(new APIClient(MagmaConfig.API.getUrl(), MagmaConfig.API.getKey()));
+      this.apiClient = new API(MagmaConfig.API.getUrl(), MagmaConfig.API.getKey(), MagmaConfig.API.isMock());
     } catch (Exception e) {
       getLogger().severe("Failed to connect to API!");
       e.printStackTrace();
