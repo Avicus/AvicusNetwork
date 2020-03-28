@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.ToString;
 import net.avicus.atlas.Atlas;
+import net.avicus.atlas.AtlasConfig;
 import net.avicus.atlas.event.match.MatchCloseEvent;
 import net.avicus.atlas.event.match.MatchLoadEvent;
 import net.avicus.atlas.event.match.MatchOpenEvent;
@@ -106,9 +107,10 @@ public class Match {
   }
 
   public void warnDeprecation(String message, Version changed) {
-    Atlas.get().getMapErrorLogger().info(
-        "DEPRECATION NOTICE: " + message + " Changed in: " + changed.toString() + " Current: " + map
-            .getSpecification().toString());
+    if (AtlasConfig.isSendDeprecationWarnings())
+      Atlas.get().getMapErrorLogger().info(
+          "DEPRECATION NOTICE: " + message + " Changed in: " + changed.toString() + " Current: " + map
+              .getSpecification().toString());
   }
 
   public World getWorld() {

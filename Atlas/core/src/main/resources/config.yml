@@ -21,3 +21,5 @@ website:
   base: https://alm-was.here
   # {0} = map slug
   map: maps/map/{0}/
+
+send-deprecation-warnings: true

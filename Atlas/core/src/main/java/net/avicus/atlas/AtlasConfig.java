@@ -74,4 +74,8 @@ public class AtlasConfig {
       return base + map.replace("{0}", slug);
     }
   }
+
+  @Getter
+  @ConfigKey(key = "send-deprecation-warnings")
+  private static boolean sendDeprecationWarnings;
 }
