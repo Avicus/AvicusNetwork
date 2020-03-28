@@ -57,6 +57,7 @@ import net.avicus.atlas.util.AtlasBridge;
 import net.avicus.atlas.util.Events;
 import net.avicus.atlas.util.Messages;
 import net.avicus.atlas.util.Translations;
+import net.avicus.compendium.AvicusBukkitCommandManager;
 import net.avicus.compendium.AvicusCommandsManager;
 import net.avicus.compendium.commands.AvicusCommandsRegistration;
 import net.avicus.compendium.commands.exception.AbstractTranslatableCommandException;
@@ -149,7 +150,7 @@ public class Atlas extends JavaPlugin {
     this.mapManager.loadLibraries(AtlasConfig.getLibraries());
     this.matchFactory = new MatchFactory();
 
-    this.commandManager = new AvicusCommandsManager();
+    this.commandManager = new AvicusBukkitCommandManager();
     this.registrar = new AvicusCommandsRegistration(this, this.commandManager);
 
     this.loader = new SetLoader(new File(this.getDataFolder(), "module-sets"));

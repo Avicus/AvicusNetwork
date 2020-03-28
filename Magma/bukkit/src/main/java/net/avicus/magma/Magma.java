@@ -10,6 +10,7 @@ import java.net.UnknownHostException;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 import lombok.Getter;
+import net.avicus.compendium.AvicusBukkitCommandManager;
 import net.avicus.compendium.AvicusCommandsManager;
 import net.avicus.compendium.commands.AvicusCommandsRegistration;
 import net.avicus.compendium.commands.exception.AbstractTranslatableCommandException;
@@ -135,7 +136,7 @@ public final class Magma extends JavaPlugin {
 
     this.loadLocalServer();
 
-    this.commands = new AvicusCommandsManager();
+    this.commands = new AvicusBukkitCommandManager();
     final AvicusCommandsRegistration registrar = new AvicusCommandsRegistration(this,
         this.commands);
     this.mm = new ModuleManager(this.getServer().getPluginManager(), this, registrar);

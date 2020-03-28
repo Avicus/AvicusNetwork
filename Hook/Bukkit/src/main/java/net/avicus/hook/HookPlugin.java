@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import lombok.Getter;
+import net.avicus.compendium.AvicusBukkitCommandManager;
 import net.avicus.compendium.AvicusCommandsManager;
 import net.avicus.compendium.commands.AvicusCommandsRegistration;
 import net.avicus.compendium.commands.exception.AbstractTranslatableCommandException;
@@ -119,7 +120,7 @@ public class HookPlugin extends JavaPlugin {
     }
 
     // Commands
-    this.commands = new AvicusCommandsManager();
+    this.commands = new AvicusBukkitCommandManager();
 
     AvicusCommandsRegistration cmds = new AvicusCommandsRegistration(this, this.commands);
     cmds.register(OnlineCommand.class);
