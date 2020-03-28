@@ -48,6 +48,12 @@ public class PlayerChangeGroupEvent extends PlayerEvent implements Cancellable {
   private boolean teleportTriggered;
 
   /**
+   * If this change was forced by someone with special permissions
+   */
+  @Getter
+  private boolean force;
+
+  /**
    * Constructor.
    *
    * @param player player that is changing groups
@@ -55,14 +61,16 @@ public class PlayerChangeGroupEvent extends PlayerEvent implements Cancellable {
    * @param group group the player is transitioning to
    * @param triggerSpawn if the player should be (re)spawned in this group's spawn location
    * @param triggerTeleport if the player should be teleported to this group's spawn location
+   * @param force if this change was forced by someone with special permissions
    */
   public PlayerChangeGroupEvent(Player player, Optional<Group> groupFrom, Group group,
-      boolean triggerSpawn, boolean triggerTeleport) {
+      boolean triggerSpawn, boolean triggerTeleport, boolean force) {
     super(player);
     this.groupFrom = groupFrom;
     this.group = group;
     this.spawnTriggered = triggerSpawn;
     this.teleportTriggered = triggerTeleport;
+    this.force = force;
   }
 
   /**

@@ -6,6 +6,8 @@ import com.sk89q.minecraft.util.commands.CommandException;
 import com.sk89q.minecraft.util.commands.CommandPermissions;
 import com.sk89q.minecraft.util.commands.NestedCommand;
 import java.util.List;
+import java.util.Optional;
+import javax.annotation.Nullable;
 import net.avicus.atlas.Atlas;
 import net.avicus.atlas.command.exception.CommandMatchException;
 import net.avicus.atlas.event.group.GroupMaxPlayerCountChangeEvent;
@@ -19,8 +21,12 @@ import net.avicus.atlas.util.Messages;
 import net.avicus.atlas.util.Translations;
 import net.avicus.compendium.TextStyle;
 import net.avicus.compendium.locale.text.LocalizedNumber;
+import net.avicus.compendium.locale.text.UnlocalizedText;
+import net.avicus.magma.util.MagmaTranslations;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class GroupCommands {
 
@@ -92,6 +98,38 @@ public class GroupCommands {
           group.getName().toText(group.getChatColor())));
       Events.call(new GroupMaxPlayerCountChangeEvent(group));
     }
+  }
+
+  @Command(aliases = "force", desc = "Force a player onto a team", usage = "<player> <id>", min = 2, max = 2)
+  @CommandPermissions("atlas.groups.force")
+  public static void force(CommandContext cmd, CommandSender sender) throws CommandException {
+    final Match match = Atlas.getMatch();
+    if (match == null) {
+      throw new CommandMatchException();
+    }
+
+    @Nullable Player target = Bukkit.getPlayer(cmd.getString(0));
+    if (target == null) {
+      sender.sendMessage(MagmaTranslations.ERROR_UNKNOWN_PLAYER
+          .with(ChatColor.RED, new UnlocalizedText(cmd.getString(0))));
+      return;
+    }
+
+    final GroupsModule groups = match.getRequiredModule(GroupsModule.class);
+    final List<Group> search = groups.search(sender, cmd.getString(1));
+    if (search.isEmpty()) {
+      sender.sendMessage(Messages.ERROR_TEAM_NOT_FOUND.with(org.bukkit.ChatColor.RED));
+      return;
+    }
+
+    groups.changeGroup(target,
+        Optional.of(groups.getGroup(target)),
+        search.get(0),
+        true,
+        true,
+        true,
+        true
+    );
   }
 
   public static class GroupParentCommand {

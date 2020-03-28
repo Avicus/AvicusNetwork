@@ -278,10 +278,15 @@ public abstract class GroupsModule extends BridgeableModule<ModuleBridge<GroupsM
 
   public Optional<Group> changeGroup(Player player, Optional<Group> oldGroup, Group newGroup,
       boolean triggerSpawn, boolean triggerTeleport, boolean callEvent) {
+    return changeGroup(player, oldGroup, newGroup, triggerSpawn, triggerTeleport, callEvent, false);
+  }
+
+  public Optional<Group> changeGroup(Player player, Optional<Group> oldGroup, Group newGroup,
+      boolean triggerSpawn, boolean triggerTeleport, boolean callEvent, boolean force) {
     Optional<Competitor> oldCompetitor = getCompetitorOf(player);
 
     PlayerChangeGroupEvent call = new PlayerChangeGroupEvent(player, oldGroup, newGroup,
-        triggerSpawn, triggerTeleport);
+        triggerSpawn, triggerTeleport, force);
 
     if (callEvent) {
       oldGroup.ifPresent((group) -> {
