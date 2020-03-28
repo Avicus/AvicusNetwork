@@ -79,9 +79,9 @@ public class CartsModule extends ArcadeGame {
   @EventHandler(priority = EventPriority.LOW)
   public void onEnter(VehicleEnterEvent event) {
     if (event.getVehicle().getType() == EntityType.MINECART) {
-      this.inCarts.add((Player) event.getActor());
+      this.inCarts.add((Player) event.getEntered());
       this.emptyCarts.remove(event.getVehicle());
-      log(event.getActor().getName() + " entered a cart.");
+      log(event.getEntered().getName() + " entered a cart.");
       updateSideBar();
     }
   }

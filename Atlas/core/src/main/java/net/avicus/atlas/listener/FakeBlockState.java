@@ -142,11 +142,6 @@ public class FakeBlockState implements BlockState {
   }
 
   @Override
-  public MetadataValue getMetadata(String s, Plugin plugin) {
-    return this.parent.getMetadata(s, plugin);
-  }
-
-  @Override
   public List<MetadataValue> getMetadata(String s) {
     return this.parent.getMetadata(s);
   }

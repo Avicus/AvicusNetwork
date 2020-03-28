@@ -15,4 +15,4 @@ redis:
     enabled: false
     password: 'kittens'
 
-none-online-message: "&7No servers online right now"
+none-online-message: "&aHey there! If you haven't noticed, &bThe Avicus Network &ais temporarily &6BACK OPEN&a!\n\nWe aren't currently accepting players right now, though.\nCheck out &9avicus.net &afor event times"
