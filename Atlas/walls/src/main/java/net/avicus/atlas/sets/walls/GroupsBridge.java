@@ -7,6 +7,7 @@ import net.avicus.atlas.module.groups.GroupsModule;
 import net.avicus.atlas.module.groups.ffa.FFAModule;
 import net.avicus.atlas.module.groups.ffa.FFATeam;
 import net.avicus.atlas.module.groups.menu.GroupMenuListener;
+import net.avicus.atlas.module.groups.teams.TeamsModule;
 import net.avicus.atlas.module.states.StatesModule;
 import net.avicus.atlas.util.Events;
 import org.bukkit.event.EventHandler;
@@ -17,6 +18,14 @@ public class GroupsBridge implements ModuleBridge<GroupsModule>, Listener {
   private final GroupsModule module;
   private final StatesModule statesModule;
   private final GroupMenuListener listener;
+
+  public GroupsBridge(TeamsModule module) {
+    this((GroupsModule) module);
+  }
+
+  public GroupsBridge(FFAModule module) {
+    this((GroupsModule) module);
+  }
 
   public GroupsBridge(GroupsModule module) {
     this.module = module;
