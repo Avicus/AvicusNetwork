@@ -8,7 +8,7 @@ import net.avicus.compendium.menu.inventory.ClickableInventoryMenuItem;
 import net.avicus.compendium.menu.inventory.InventoryMenuItem;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -31,7 +31,7 @@ public class KitMenuItem implements ClickableInventoryMenuItem, InventoryMenuIte
   }
 
   @Override
-  public void onClick(ClickType type) {
+  public void onClick(InventoryClickEvent event) {
     this.module.setUpcomingKit(this.player, this.kit);
     this.kit.displaySelectedMessage(this.player);
   }

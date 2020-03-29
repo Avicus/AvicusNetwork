@@ -20,6 +20,7 @@ import net.avicus.magma.util.MagmaTranslations;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -135,7 +136,8 @@ public class ServerGroupItem implements InventoryMenuItem, IndexedMenuItem,
   }
 
   @Override
-  public void onClick(ClickType type) {
+  public void onClick(InventoryClickEvent event) {
+    ClickType type = event.getClick();
     if (type.isLeftClick()) {
       Server server = leftClickServer().orElse(null);
 

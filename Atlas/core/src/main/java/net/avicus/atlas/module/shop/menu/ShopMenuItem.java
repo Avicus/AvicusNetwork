@@ -22,7 +22,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -73,7 +73,7 @@ public class ShopMenuItem implements ClickableInventoryMenuItem, InventoryMenuIt
   }
 
   @Override
-  public void onClick(ClickType type) {
+  public void onClick(InventoryClickEvent event) {
     Pair<Boolean, Boolean> purchase = canPurchase();
     if (purchase.getLeft() && purchase.getRight()) {
       CheckContext context = new CheckContext(this.shop.getMatch());

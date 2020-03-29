@@ -15,7 +15,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.SkullType;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -105,7 +105,7 @@ public class ServerItem implements InventoryMenuItem, IndexedMenuItem, Clickable
   }
 
   @Override
-  public void onClick(ClickType type) {
+  public void onClick(InventoryClickEvent event) {
     Servers.connect(this.player, this.server, false, true);
   }
 

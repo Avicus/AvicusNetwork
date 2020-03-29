@@ -21,6 +21,7 @@ import net.avicus.magma.network.user.Users;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -59,7 +60,8 @@ public class GadgetItem extends StaticInventoryMenuItem implements ClickableInve
   }
 
   @Override
-  public void onClick(ClickType type) {
+  public void onClick(InventoryClickEvent event) {
+    ClickType type = event.getClick();
     User user = Users.user(this.player);
     Locale locale = this.player.getLocale();
 

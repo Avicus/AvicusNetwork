@@ -5,6 +5,8 @@ import net.avicus.compendium.menu.IndexedMenuItem;
 import net.avicus.compendium.menu.inventory.ClickableInventoryMenuItem;
 import net.avicus.compendium.menu.inventory.InventoryMenuItem;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
 
 public abstract class ObserverMenuItem implements ClickableInventoryMenuItem, IndexedMenuItem,
     InventoryMenuItem {
@@ -29,6 +31,13 @@ public abstract class ObserverMenuItem implements ClickableInventoryMenuItem, In
   @Override
   public void onUpdate() {
   }
+
+  @Override
+  public void onClick(InventoryClickEvent event) {
+    onClick(event.getClick());
+  }
+
+  public abstract void onClick(ClickType type);
 
   @Override
   public int getIndex() {

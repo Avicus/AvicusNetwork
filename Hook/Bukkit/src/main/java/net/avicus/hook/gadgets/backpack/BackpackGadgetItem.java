@@ -12,7 +12,7 @@ import net.avicus.hook.utils.Messages;
 import net.avicus.magma.module.gadgets.GadgetContext;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -57,7 +57,7 @@ public class BackpackGadgetItem extends StaticInventoryMenuItem implements
   }
 
   @Override
-  public void onClick(ClickType type) {
+  public void onClick(InventoryClickEvent event) {
     if (this.menu.isTrashEnabled()) {
       new ConfirmationDialog(this.player, () -> {
         this.gadget.getManager().getGadgets().deleteBackpackGadget(this.gadget);

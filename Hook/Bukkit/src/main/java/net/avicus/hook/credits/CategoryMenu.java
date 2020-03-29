@@ -13,7 +13,7 @@ import net.avicus.magma.module.gadgets.Gadget;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -54,7 +54,7 @@ public abstract class CategoryMenu extends InventoryMenu implements InventoryMen
   }
 
   @Override
-  public void onClick(ClickType type) {
+  public void onClick(InventoryClickEvent event) {
     this.open();
   }
 
@@ -94,7 +94,7 @@ public abstract class CategoryMenu extends InventoryMenu implements InventoryMen
     }
 
     @Override
-    public void onClick(ClickType type) {
+    public void onClick(InventoryClickEvent event) {
       this.store.open();
     }
 

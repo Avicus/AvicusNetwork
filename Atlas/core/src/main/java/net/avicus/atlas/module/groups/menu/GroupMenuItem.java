@@ -18,7 +18,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
@@ -93,7 +93,7 @@ public class GroupMenuItem implements InventoryMenuItem, ClickableInventoryMenuI
   }
 
   @Override
-  public void onClick(ClickType type) {
+  public void onClick(InventoryClickEvent event) {
     GroupsModule groups = this.match.getRequiredModule(GroupsModule.class);
     Group previousGroup = groups.getGroup(this.player);
 

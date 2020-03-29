@@ -24,7 +24,7 @@ import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -44,7 +44,7 @@ public class MapItem extends StaticInventoryMenuItem implements ClickableInvento
   }
 
   @Override
-  public void onClick(ClickType type) {
+  public void onClick(InventoryClickEvent event) {
     if (!Events.call(new CheckPrerequisitesEvent("gadget.set-next", this.map, this.player))
         .isCancelled()) {
       Rotation rotation = Atlas.get().getMatchManager().getRotation();

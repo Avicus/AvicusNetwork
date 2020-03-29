@@ -13,7 +13,7 @@ import net.avicus.compendium.menu.inventory.StaticInventoryMenuItem;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -95,7 +95,7 @@ public class ConfirmationDialog extends InventoryMenu {
     }
 
     @Override
-    public void onClick(ClickType type) {
+    public void onClick(InventoryClickEvent event) {
       close();
 
       if (this.confirm) {

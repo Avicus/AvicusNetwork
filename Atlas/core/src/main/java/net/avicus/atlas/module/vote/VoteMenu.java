@@ -25,7 +25,7 @@ import org.bukkit.Material;
 import org.bukkit.SkullType;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -116,7 +116,7 @@ public class VoteMenu extends InventoryMenu implements Runnable {
     }
 
     @Override
-    public void onClick(ClickType type) {
+    public void onClick(InventoryClickEvent event) {
       this.module.cast(this.player, this.map);
     }
 

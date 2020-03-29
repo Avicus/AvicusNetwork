@@ -8,7 +8,7 @@ import net.avicus.magma.util.MagmaTranslations;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -60,7 +60,7 @@ public class PageItem extends StaticInventoryMenuItem implements IndexedMenuItem
   }
 
   @Override
-  public void onClick(ClickType type) {
+  public void onClick(InventoryClickEvent event) {
     if (this.direction) {
       this.menu.nextPage();
     } else {

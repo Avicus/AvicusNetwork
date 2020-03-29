@@ -13,7 +13,7 @@ import org.apache.commons.lang3.text.WordUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -58,7 +58,7 @@ public class BackpackTrashItem implements InventoryMenuItem, ClickableInventoryM
   }
 
   @Override
-  public void onClick(ClickType type) {
+  public void onClick(InventoryClickEvent event) {
     this.menu.setTrashEnabled(!this.menu.isTrashEnabled());
     this.menu.update(true);
   }
