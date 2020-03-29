@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 import java.lang.reflect.Method;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +38,8 @@ import org.apache.commons.lang3.tuple.Pair;
 public class ShopsFactory implements ModuleFactory<ShopModule> {
 
   public final static List<FeatureDocumentationBuilder> FEATURES = Lists.newArrayList();
-  public final static Table<Object, String, Method> parseMethods = HashBasedTable.create();
+  public final static Table<Object, Method, Collection<String>> NAMED_PARSERS = HashBasedTable
+      .create();
   private final static Map<String, Pair<Attribute, Object>> SHARED_SHOP_ITEM_ATTR = Maps
       .newHashMap();
 
@@ -62,7 +64,7 @@ public class ShopsFactory implements ModuleFactory<ShopModule> {
   }
 
   public ShopsFactory() {
-    parseMethods.row(this).putAll(NamedParsers.methods(ShopsFactory.class));
+    NAMED_PARSERS.row(this).putAll(NamedParsers.methods(ShopsFactory.class));
   }
 
   @Override
@@ -148,7 +150,7 @@ public class ShopsFactory implements ModuleFactory<ShopModule> {
 
   private ShopItem parseItem(Match match, XmlElement element) {
     return NamedParsers
-        .invokeMethod(parseMethods, element, "Unknown item type.", new Object[]{match, element});
+        .invokeMethod(NAMED_PARSERS, element, "Unknown item type.", new Object[]{match, element});
   }
 
   @NamedParser("item")

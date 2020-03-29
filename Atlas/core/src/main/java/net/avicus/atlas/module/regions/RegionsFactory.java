@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Table;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import net.avicus.atlas.SpecificationVersionHistory;
@@ -57,12 +58,13 @@ import org.bukkit.util.Vector;
 @ModuleFactorySort(ModuleFactorySort.Order.EARLY)
 public class RegionsFactory implements ModuleFactory<Module> {
 
-  public final static Table<Object, String, Method> parseMethods = HashBasedTable.create();
+  public final static Table<Object, Method, Collection<String>> NAMED_PARSERS = HashBasedTable
+      .create();
 
   public final static List<FeatureDocumentation> FEATURES = Lists.newArrayList();
 
   public RegionsFactory() {
-    parseMethods.row(this).putAll(NamedParsers.methods(RegionsFactory.class));
+    NAMED_PARSERS.row(this).putAll(NamedParsers.methods(RegionsFactory.class));
   }
 
   @Override
@@ -328,12 +330,12 @@ public class RegionsFactory implements ModuleFactory<Module> {
     }
 
     return NamedParsers
-        .invokeMethod(parseMethods, element, "Unknown region type.", new Object[]{match, element});
+        .invokeMethod(NAMED_PARSERS, element, "Unknown region type.", new Object[]{match, element});
   }
 
   public Region parseRegion(Match match, XmlElement element) {
     return NamedParsers
-        .invokeMethod(parseMethods, element, "Unknown region type.", new Object[]{match, element});
+        .invokeMethod(NAMED_PARSERS, element, "Unknown region type.", new Object[]{match, element});
   }
 
   @NamedParser("region")

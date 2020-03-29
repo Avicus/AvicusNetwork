@@ -4,6 +4,7 @@ import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Table;
 import java.lang.reflect.Method;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -95,7 +96,8 @@ import org.joda.time.Duration;
 @ModuleFactorySort(ModuleFactorySort.Order.FIRST)
 public class ChecksFactory implements ModuleFactory<Module> {
 
-  public final static Table<Object, String, Method> NAMED_PARSERS = HashBasedTable.create();
+  public final static Table<Object, Method, Collection<String>> NAMED_PARSERS = HashBasedTable
+      .create();
   public final static Set<FeatureDocumentation> FEATURES = Sets.newHashSet();
 
   static {

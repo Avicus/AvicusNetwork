@@ -1,8 +1,12 @@
 package net.avicus.atlas.util.xml.named;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import com.google.common.collect.Table;
 import java.lang.reflect.Method;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.annotation.Nullable;
 import lombok.AccessLevel;
@@ -13,34 +17,33 @@ import net.avicus.atlas.util.xml.XmlException;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class NamedParsers {
 
-  public static Map<String, Method> methods(final Class<?> clazz) {
-    final Map<String, Method> result = new HashMap<>();
+  public static Map<Method, Collection<String>> methods(final Class<?> clazz) {
+    final Multimap<Method, String> result = HashMultimap.create();
     for (final Method method : clazz.getDeclaredMethods()) {
       @Nullable final NamedParser parser = method.getAnnotation(NamedParser.class);
       if (parser != null) {
         method.setAccessible(true);
         for (String name : parser.value()) {
-          Method old;
-          if ((old = result.put(name, method)) != null) {
+          if (result.containsValue(name)) {
             throw new IllegalStateException(String
-                .format("Attempted to replace %s parser %s with %s", clazz.getName(), old.getName(),
-                    method.getName()));
+                .format("Attempted to register %s identifier twice in %s", name, clazz.getName()));
           }
+          result.put(method, name);
         }
       }
     }
-    return result;
+    return result.asMap();
   }
 
-  public static <T> T invokeMethod(Table<Object, String, Method> parsers, XmlElement element,
+  public static <T> T invokeMethod(Table<Object, Method, Collection<String>> parsers, XmlElement element,
       String notFoundMessage, Object[] methodArgs) throws XmlException {
-    for (Table.Cell<Object, String, Method> cell : parsers.cellSet()) {
-      if (!cell.getColumnKey().equals(element.getName())) {
+    for (Table.Cell<Object, Method, Collection<String>> cell : parsers.cellSet()) {
+      if (!cell.getValue().contains(element.getName())) {
         continue;
       }
 
       try {
-        return (T) cell.getValue().invoke(cell.getRowKey(), methodArgs);
+        return (T) cell.getColumnKey().invoke(cell.getRowKey(), methodArgs);
       } catch (Exception e) {
         if (e.getCause() != null) {
           if (e.getCause() instanceof XmlException) {

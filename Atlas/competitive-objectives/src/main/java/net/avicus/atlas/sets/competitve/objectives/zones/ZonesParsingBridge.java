@@ -32,7 +32,7 @@ import org.joda.time.Duration;
 public class ZonesParsingBridge {
 
   public void buildBridge() {
-    ZonesFactory.METHODS.row(this).putAll(NamedParsers.methods(ZonesParsingBridge.class));
+    ZonesFactory.NAMED_PARSERS.row(this).putAll(NamedParsers.methods(ZonesParsingBridge.class));
 
     ZonesFactory.FEATURES.add(FeatureDocumentation.builder()
         .name("Flag Post")

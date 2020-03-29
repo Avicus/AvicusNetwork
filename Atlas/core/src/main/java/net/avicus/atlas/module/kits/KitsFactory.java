@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Table;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -36,7 +37,8 @@ import org.bukkit.potion.PotionEffectType;
 
 public class KitsFactory implements ModuleFactory<KitsModule> {
 
-  public final static Table<Object, String, Method> NAMED_PARSERS = HashBasedTable.create();
+  public final static Table<Object, Method, Collection<String>> NAMED_PARSERS = HashBasedTable
+      .create();
 
   public final static List<FeatureDocumentation> FEATURES = Lists.newArrayList();
 

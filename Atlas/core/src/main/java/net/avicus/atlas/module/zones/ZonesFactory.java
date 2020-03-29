@@ -6,6 +6,7 @@ import com.google.common.collect.Table;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import net.avicus.atlas.SpecificationVersionHistory;
@@ -51,12 +52,13 @@ import org.joda.time.Duration;
 
 public class ZonesFactory implements ModuleFactory<ZonesModule> {
 
-  public static final Table<Object, String, Method> METHODS = HashBasedTable.create();
+  public final static Table<Object, Method, Collection<String>> NAMED_PARSERS = HashBasedTable
+      .create();
 
   public static final List<FeatureDocumentation> FEATURES = Lists.newArrayList();
 
   public ZonesFactory() {
-    METHODS.row(this).putAll(NamedParsers.methods(ZonesFactory.class));
+    NAMED_PARSERS.row(this).putAll(NamedParsers.methods(ZonesFactory.class));
   }
 
   @Override
@@ -349,15 +351,17 @@ public class ZonesFactory implements ModuleFactory<ZonesModule> {
       res.add(new FilteredLiquidZone(match, region, message, waterRule, lavaRule));
     }
 
-    METHODS.cellSet().forEach((c) -> {
-      if (element.hasChild(c.getColumnKey())) {
-        try {
-          res.add((Zone) c.getValue()
-              .invoke(c.getRowKey(), match, element,
-                  element.getRequiredChild(c.getColumnKey()),
-                  region, message));
-        } catch (IllegalAccessException | InvocationTargetException e) {
-          e.printStackTrace();
+    NAMED_PARSERS.cellSet().forEach((c) -> {
+      for (String matcher : c.getValue()) {
+        if (element.hasChild(matcher)) {
+          try {
+            res.add((Zone) c.getColumnKey()
+                .invoke(c.getRowKey(), match, element,
+                    element.getRequiredChild(matcher),
+                    region, message));
+          } catch (IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+          }
         }
       }
     });

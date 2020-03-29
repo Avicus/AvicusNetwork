@@ -91,7 +91,8 @@ import org.joda.time.Seconds;
 @ModuleFactorySort(ModuleFactorySort.Order.EARLY) // Doesn't rely on anything
 public class LoadoutsFactory implements ModuleFactory<Module> {
 
-  public final static Table<Object, String, Method> NAMED_PARSERS = HashBasedTable.create();
+  public final static Table<Object, Method, Collection<String>> NAMED_PARSERS = HashBasedTable
+      .create();
   public final static List<FeatureDocumentation> FEATURES = Lists.newArrayList();
   private final static Collection<Material> COLORABLE = Arrays.asList(
       Material.WOOL,
@@ -700,10 +701,17 @@ public class LoadoutsFactory implements ModuleFactory<Module> {
 
     List<Loadout> parsed = new ArrayList<>();
 
-    for (Table.Cell<Object, String, Method> parser : NAMED_PARSERS.cellSet()) {
-      if (element.hasChild(parser.getColumnKey())) {
+    for (Table.Cell<Object, Method, Collection<String>> parser : NAMED_PARSERS.cellSet()) {
+      boolean anyMatch = false;
+      for (String matcher : parser.getValue()) {
+        if (element.hasChild(matcher)) {
+          anyMatch = true;
+          break;
+        }
+      }
+      if (anyMatch) {
         try {
-          parsed.add((Loadout) parser.getValue()
+          parsed.add((Loadout) parser.getColumnKey()
               .invoke(parser.getRowKey(), match, element, force, parent));
         } catch (Exception e) {
           if (e.getCause() != null) {
