@@ -7,6 +7,7 @@ import net.avicus.atlas.event.player.PlayerSpawnBeginEvent;
 import net.avicus.atlas.event.world.BlockChangeByPlayerEvent;
 import net.avicus.atlas.event.world.EntityChangeEvent;
 import net.avicus.atlas.util.VersionUtil;
+import net.avicus.compendium.menu.inventory.InventoryMenuAdapter;
 import net.avicus.grave.event.PlayerDeathEvent;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -20,6 +21,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerDropItemEvent;
@@ -186,7 +188,7 @@ public class ObserverListener implements Listener {
   @EventHandler
   public void onInventoryClick(InventoryClickEvent event) {
     if (event.getWhoClicked() instanceof Player && notPlaying(event.getWhoClicked())) {
-      if (event.getInventory().getType() != InventoryType.PLAYER) {
+      if (event.getInventory().getType() != InventoryType.PLAYER && !(event.getInventory().getHolder() instanceof InventoryMenuAdapter)) {
         event.setCancelled(true);
       }
     }
@@ -232,6 +234,14 @@ public class ObserverListener implements Listener {
   public void onEntityCombustEvent(EntityCombustByBlockEvent event) {
     if (event.getEntity() instanceof Player && notPlaying(event.getEntity())) {
       event.getEntity().setFireTicks(0);
+    }
+  }
+
+  @EventHandler
+  public void onLaunch(ProjectileLaunchEvent event) {
+    if (event.getEntity().getShooter() instanceof Player && notPlaying(
+        (Entity) event.getEntity().getShooter())) {
+      event.setCancelled(true);
     }
   }
 }
