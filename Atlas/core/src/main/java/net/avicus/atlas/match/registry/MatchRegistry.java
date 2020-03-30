@@ -11,9 +11,9 @@ import net.avicus.atlas.match.Match;
 /**
  * Registers an ID to elements of the map.
  */
+@Getter
 public class MatchRegistry {
 
-  @Getter
   private final Match match;
   private final Map<String, RegisterableObject> objects;
 
