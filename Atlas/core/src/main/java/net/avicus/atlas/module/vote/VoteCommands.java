@@ -16,6 +16,8 @@ import net.avicus.compendium.StringUtil;
 import net.avicus.compendium.commands.exception.MustBePlayerCommandException;
 import net.avicus.compendium.commands.exception.TranslatableCommandErrorException;
 import net.avicus.compendium.locale.text.UnlocalizedText;
+import net.avicus.magma.channel.staff.StaffChannels;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -68,13 +70,17 @@ public final class VoteCommands {
       final VoteModule module = module();
       module.start(VoteModule.parse(SPLITTER.splitToList(args.getJoinedStrings(0))),
           args.hasFlag('t') ? args.getFlag('t') : null, args.hasFlag('c'));
-      source.sendMessage(Messages.VOTE_SET.with(ChatColor.GRAY, new UnlocalizedText(StringUtil
+      String mapNames = StringUtil
           .listToEnglishCompound(
               module.getOptions().values().stream().map(match -> match.getMap().getName())
                   .collect(Collectors.toList()), ChatColor.DARK_AQUA.toString(),
-              ChatColor.GRAY.toString()))));
+              ChatColor.GRAY.toString());
+      source.sendMessage(Messages.VOTE_SET.with(ChatColor.GRAY, new UnlocalizedText(mapNames)));
       if (args.hasFlag('c')) {
+        StaffChannels.MAPDEV_CHANNEL.simpleLocalSend(null, new TextComponent(source.getName() + " queued a vote for " + ChatColor.stripColor(mapNames)));
         source.sendMessage(Messages.VOTE_DELAY.with(ChatColor.GREEN));
+      } else {
+        StaffChannels.MAPDEV_CHANNEL.simpleLocalSend(null, new TextComponent(source.getName() + " started a vote for " + ChatColor.stripColor(mapNames)));
       }
     }
 
