@@ -21,6 +21,7 @@ import net.avicus.atlas.module.Module;
 import net.avicus.atlas.module.ModuleBridge;
 import net.avicus.atlas.module.checks.CheckResult;
 import net.avicus.atlas.module.checks.StaticResultCheck;
+import net.avicus.atlas.module.elimination.EliminationModule;
 import net.avicus.atlas.module.groups.Competitor;
 import net.avicus.atlas.module.groups.GroupsModule;
 import net.avicus.atlas.module.objectives.GlobalObjective;
@@ -86,10 +87,6 @@ public class ResultsModule extends BridgeableModule<ModuleBridge<ResultsModule>>
       return;
     }
 
-    if (!this.match.hasModule(ObjectivesModule.class)) {
-      return;
-    }
-
     List<Competitor> winners = new ArrayList<>();
 
     GroupsModule groups = this.match.getRequiredModule(GroupsModule.class);
@@ -97,31 +94,51 @@ public class ResultsModule extends BridgeableModule<ModuleBridge<ResultsModule>>
     int completed = 0;
     Set<Objective> needed = Sets.newHashSet();
 
-    List<Objective> objectives = match.getRequiredModule(ObjectivesModule.class).getObjectives();
-
     List<CompetitorCompletionState> states = new ArrayList<>();
 
-    for (Objective objective : objectives) {
-      if (objective instanceof GlobalObjective && ((GlobalObjective) objective).isCompleted()) {
-        completed++;
-      }
-    }
-
-    for (Competitor competitor : groups.getCompetitors()) {
-      CompetitorCompletionState completionState = new CompetitorCompletionState(match, competitor);
-      states.add(completionState);
-      if (completionState.shouldWin()) {
-        winners.add(competitor);
-      }
+    if (this.match.hasModule(ObjectivesModule.class)) {
+      List<Objective> objectives = match.getRequiredModule(ObjectivesModule.class).getObjectives();
 
       for (Objective objective : objectives) {
-        if (!(objective instanceof GlobalObjective) && objective.canComplete(competitor)
-            && objective.isCompleted(competitor)) {
+        if (objective instanceof GlobalObjective && ((GlobalObjective) objective).isCompleted()) {
           completed++;
         }
       }
 
-      needed.addAll(completionState.getNeededObjectives());
+      for (Competitor competitor : groups.getCompetitors()) {
+        CompetitorCompletionState completionState = new CompetitorCompletionState(match, competitor);
+        states.add(completionState);
+        if (completionState.shouldWin()) {
+          winners.add(competitor);
+        }
+
+        for (Objective objective : objectives) {
+          if (!(objective instanceof GlobalObjective) && objective.canComplete(competitor)
+              && objective.isCompleted(competitor)) {
+            completed++;
+          }
+        }
+
+        needed.addAll(completionState.getNeededObjectives());
+      }
+    } else {
+      completed = -1;
+    }
+
+    if (match.hasModule(EliminationModule.class)) {
+      int compsWithPeople = 0;
+      Competitor winner = null;
+      for (Competitor competitor : groups.getCompetitors()) {
+        if (competitor.getPlayers().size() > 0) {
+          winner = competitor;
+          compsWithPeople++;
+        }
+      }
+
+      if (compsWithPeople == 1) {
+        winners.clear();
+        winners.add(winner);
+      }
     }
 
     if (winners.isEmpty()) {

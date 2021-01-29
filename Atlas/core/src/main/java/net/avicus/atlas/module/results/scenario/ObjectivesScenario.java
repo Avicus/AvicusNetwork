@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import lombok.ToString;
 import net.avicus.atlas.match.Match;
 import net.avicus.atlas.module.checks.Check;
+import net.avicus.atlas.module.elimination.EliminationModule;
 import net.avicus.atlas.module.groups.Competitor;
 import net.avicus.atlas.module.groups.GroupsModule;
 import net.avicus.atlas.module.objectives.IntegerObjective;
@@ -38,20 +39,25 @@ public class ObjectivesScenario extends EndScenario {
 
       int score = 0;
       scores.get(0).add(competitor);
-      // Objectives that this competitor can complete
-      List<IntegerObjective> completable = match.getRequiredModule(ObjectivesModule.class)
-          .getObjectivesByType(IntegerObjective.class)
-          .stream()
-          .map((o) -> (IntegerObjective) o)
-          .filter(objective -> objective.canComplete(competitor))
-          .collect(Collectors.toList());
 
-      if (completable.isEmpty()) {
-        continue;
-      }
+      if (match.hasModule(EliminationModule.class)) {
+        score = competitor.getPlayers().size();
+      } else {
+        // Objectives that this competitor can complete
+        List<IntegerObjective> completable = match.getRequiredModule(ObjectivesModule.class)
+            .getObjectivesByType(IntegerObjective.class)
+            .stream()
+            .map((o) -> (IntegerObjective) o)
+            .filter(objective -> objective.canComplete(competitor))
+            .collect(Collectors.toList());
 
-      for (IntegerObjective objective : completable) {
-        score += objective.getPoints(competitor);
+        if (completable.isEmpty()) {
+          continue;
+        }
+
+        for (IntegerObjective objective : completable) {
+          score += objective.getPoints(competitor);
+        }
       }
 
       if (score != 0) {
