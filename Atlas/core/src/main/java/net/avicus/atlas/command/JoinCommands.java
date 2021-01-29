@@ -14,6 +14,7 @@ import net.avicus.atlas.match.Match;
 import net.avicus.atlas.module.groups.Group;
 import net.avicus.atlas.module.groups.GroupsModule;
 import net.avicus.atlas.module.groups.Spectators;
+import net.avicus.atlas.module.groups.ffa.FFAModule;
 import net.avicus.atlas.module.states.StatesModule;
 import net.avicus.atlas.util.Messages;
 import net.avicus.compendium.commands.exception.MustBePlayerCommandException;
@@ -46,6 +47,11 @@ public class JoinCommands {
 
     if (cmd.argsLength() == 0) {
       List<Group> minTeams = new ArrayList<>();
+
+      if (match.hasModule(FFAModule.class) && !from.isSpectator()) {
+        sender.sendMessage(Messages.ERROR_ALREADY_PLAYING.with(ChatColor.RED));
+        return;
+      }
 
       for (Group test : groups.getGroups()) {
         if (test.isSpectator()) {

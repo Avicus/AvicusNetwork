@@ -10,6 +10,7 @@ import net.avicus.atlas.module.groups.teams.TeamsModule;
 import net.avicus.atlas.module.states.StatesModule;
 import net.avicus.atlas.util.AtlasTask;
 import net.avicus.atlas.util.Events;
+import net.avicus.atlas.util.Messages;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -66,7 +67,10 @@ public class GroupsBridge {
     private void join(Player p) {
       FFATeam team = this.ffa.getTeam();
       if (!team.isFull(p)) {
-        this.ffa.changeGroup(p, this.ffa.getTeam(), false, false);
+        this.ffa.changeGroup(p, team, false, false);
+        p.sendMessage(
+            Messages.GENERIC_JOINED
+                .with(team.getName().toText(team.getChatColor())));
       }
     }
 
