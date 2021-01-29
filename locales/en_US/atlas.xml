@@ -474,6 +474,10 @@
       <name>DeathMessages</name>
       <description>Toggle which death messages you see</description>
     </deathmessage>
+    <voteshow>
+      <name>ShowVoteMenu</name>
+      <description>Toggle if the vote menu should show up automatically after the match ends</description>
+    </voteshow>
   </setting>
   <type>
     <boolean>
