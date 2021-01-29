@@ -9,6 +9,10 @@ import net.avicus.compendium.config.inject.ConfigPath;
 public class AtlasConfig {
 
   @Getter
+  @ConfigKey(key = "locales-path")
+  public static String localesPath;
+
+  @Getter
   @ConfigKey
   private static List<Config> libraries;
 

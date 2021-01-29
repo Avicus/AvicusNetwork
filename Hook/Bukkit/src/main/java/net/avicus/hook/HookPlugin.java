@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import lombok.Getter;
+import net.avicus.atlas.AtlasConfig;
 import net.avicus.compendium.AvicusBukkitCommandManager;
 import net.avicus.compendium.AvicusCommandsManager;
 import net.avicus.compendium.commands.AvicusCommandsRegistration;
@@ -21,6 +22,7 @@ import net.avicus.compendium.config.Config;
 import net.avicus.compendium.config.ConfigFile;
 import net.avicus.compendium.locale.LocaleBundle;
 import net.avicus.compendium.locale.LocaleStrings;
+import net.avicus.compendium.locale.TranslationProvider;
 import net.avicus.compendium.locale.text.UnlocalizedText;
 import net.avicus.hook.achievements.Achievements;
 import net.avicus.hook.afk.AFKKickTask;
@@ -108,11 +110,7 @@ public class HookPlugin extends JavaPlugin {
     }
 
     try {
-      List<LocaleStrings> strings = new ArrayList<>();
-      strings.add(LocaleStrings.fromXml(getResource("locales/en_US.xml")));
-      strings.add(LocaleStrings.fromXml(getResource("locales/es_ES.xml")));
-
-      this.localeBundle = new LocaleBundle(strings, strings.get(0));
+      this.localeBundle = TranslationProvider.loadBundle(HookConfig.localesPath, "en_US", "es_ES");
     } catch (Exception e) {
       e.printStackTrace();
       setEnabled(false);

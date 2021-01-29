@@ -42,7 +42,6 @@
     <dependency>
       <groupId>net.avicus</groupId>
       <artifactId>compendium-bukkit</artifactId>
-      <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>

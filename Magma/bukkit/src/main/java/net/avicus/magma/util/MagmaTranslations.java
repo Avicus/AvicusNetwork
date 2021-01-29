@@ -1,13 +1,15 @@
 package net.avicus.magma.util;
 
-import static net.avicus.magma.util.TranslationProvider.$NULL$;
+import static net.avicus.compendium.locale.TranslationProvider.$NULL$;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import net.avicus.compendium.locale.LocaleBundle;
+import net.avicus.compendium.locale.TranslationProvider;
 import net.avicus.compendium.locale.text.LocalizedFormat;
 import net.avicus.compendium.locale.text.LocalizedText;
 import net.avicus.magma.Magma;
+import net.avicus.magma.MagmaConfig;
 import org.bukkit.ChatColor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -101,7 +103,7 @@ public final class MagmaTranslations {
   private static final LocaleBundle BUNDLE;
 
   static {
-    BUNDLE = TranslationProvider.loadBundle(Magma.get());
+    BUNDLE = TranslationProvider.loadBundle(MagmaConfig.localesPath, "en_US");
     TranslationProvider.map(MagmaTranslations.class, BUNDLE);
   }
 

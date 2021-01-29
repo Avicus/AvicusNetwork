@@ -1,12 +1,14 @@
 package net.avicus.atlas.util;
 
-import static net.avicus.magma.util.TranslationProvider.$NULL$;
+
+import static net.avicus.compendium.locale.TranslationProvider.$NULL$;
 
 import net.avicus.atlas.Atlas;
+import net.avicus.atlas.AtlasConfig;
 import net.avicus.compendium.locale.LocaleBundle;
+import net.avicus.compendium.locale.TranslationProvider;
 import net.avicus.compendium.locale.text.LocalizedFormat;
 import net.avicus.compendium.locale.text.LocalizedText;
-import net.avicus.magma.util.TranslationProvider;
 import org.bukkit.ChatColor;
 
 public final class Translations {
@@ -113,7 +115,7 @@ public final class Translations {
   static final LocaleBundle BUNDLE;
 
   static {
-    BUNDLE = TranslationProvider.loadBundle(Atlas.get(), "en_US", "es_ES");
+    BUNDLE = TranslationProvider.loadBundle(AtlasConfig.localesPath, "en_US", "es_ES");
     TranslationProvider.map(Translations.class, BUNDLE);
   }
 

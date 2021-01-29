@@ -9,6 +9,10 @@ import org.joda.time.Duration;
 
 public final class MagmaConfig {
 
+  @Getter
+  @ConfigKey(key = "locales-path")
+  public static String localesPath;
+
   @ConfigPath("channels")
   public static final class Channel {
 

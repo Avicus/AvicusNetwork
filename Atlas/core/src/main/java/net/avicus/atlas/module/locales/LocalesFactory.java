@@ -2,6 +2,7 @@ package net.avicus.atlas.module.locales;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import net.avicus.atlas.documentation.FeatureDocumentation;
 import net.avicus.atlas.documentation.ModuleDocumentation;
@@ -94,7 +95,16 @@ public class LocalesFactory implements ModuleFactory<LocalesModule> {
 
     elements.forEach(element -> {
       for (XmlElement child : element.getChildren()) {
-        LocaleStrings strings = LocaleStrings.fromXml(child.getJdomElement());
+        String lang = child.getAttribute("lang").asRequiredString();
+        String country = child.getAttribute("country").asString().orElse(null);
+
+        Locale locale = new Locale(lang);
+        if (country != null) {
+          locale = new Locale(lang, country);
+        }
+
+        LocaleStrings strings = new LocaleStrings(locale);
+        strings.addAll(strings.fromXml(child.getJdomElement()));
         list.add(strings);
       }
     });
