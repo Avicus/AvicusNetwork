@@ -90,7 +90,7 @@ public class SpawnsFactory implements ModuleFactory<SpawnsModule> {
                 Attributes.idOf(false, "loadout", "Loadout to give the player when they spawn."))
             .attribute("check", Attributes.check(false, "before a player is allowed to spawn here"))
             .attribute("mode", new EnumAttribute(SelectionMode.class, false), SelectionMode.RANDOM)
-            .attribute("check-air", new GenericAttribute(Boolean.class, false,
+            .attribute("ensure-safe", new GenericAttribute(Boolean.class, false,
                     "If each location of the region should be checked to see if it is safe to spawn in."),
                 false)
             .subFeature(FeatureDocumentation.builder()
@@ -195,7 +195,7 @@ public class SpawnsFactory implements ModuleFactory<SpawnsModule> {
     SelectionMode mode = element.getAttribute("mode").asEnum(SelectionMode.class, true)
         .orElse(SelectionMode.RANDOM);
 
-    boolean checkAir = element.getAttribute("check-air").asBoolean().orElse(false);
+    boolean ensureSafe = element.getAttribute("ensure-safe").asBoolean().orElse(false);
 
     Spawn spawn;
 
@@ -209,11 +209,11 @@ public class SpawnsFactory implements ModuleFactory<SpawnsModule> {
 
     if (element.hasAttribute("look")) {
       Vector look = element.getAttribute("look").asRequiredVector();
-      spawn = new Spawn(group, regions, look, loadout, check, mode, checkAir);
+      spawn = new Spawn(group, regions, look, loadout, check, mode, ensureSafe);
     } else {
       float yaw = element.getAttribute("yaw").asNumber().orElse(0).floatValue();
       float pitch = element.getAttribute("pitch").asNumber().orElse(0).floatValue();
-      spawn = new Spawn(group, regions, yaw, pitch, loadout, check, mode, checkAir);
+      spawn = new Spawn(group, regions, yaw, pitch, loadout, check, mode, ensureSafe);
     }
 
     return spawn;
