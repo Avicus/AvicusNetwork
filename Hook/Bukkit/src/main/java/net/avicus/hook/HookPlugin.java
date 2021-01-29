@@ -110,7 +110,7 @@ public class HookPlugin extends JavaPlugin {
     }
 
     try {
-      this.localeBundle = TranslationProvider.loadBundle(HookConfig.localesPath, "en_US", "es_ES");
+      this.localeBundle = TranslationProvider.loadBundle(HookConfig.localesPath, "en_US");
     } catch (Exception e) {
       e.printStackTrace();
       setEnabled(false);
