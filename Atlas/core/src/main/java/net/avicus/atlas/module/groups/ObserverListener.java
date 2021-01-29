@@ -1,5 +1,7 @@
 package net.avicus.atlas.module.groups;
 
+import com.google.common.collect.Sets;
+import java.util.Set;
 import net.avicus.atlas.Atlas;
 import net.avicus.atlas.event.group.PlayerChangedGroupEvent;
 import net.avicus.atlas.event.match.MatchStateChangeEvent;
@@ -13,9 +15,11 @@ import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.entity.EntityCombustByBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -34,6 +38,9 @@ import org.bukkit.event.vehicle.VehicleExitEvent;
 import org.bukkit.inventory.PlayerInventory;
 
 public class ObserverListener implements Listener {
+
+  private static final Set<Material> TOOL_TYPES =
+      Sets.newHashSet(Material.COMPASS, Material.WOOD_AXE);
 
   private final GroupsModule module;
 
@@ -54,6 +61,10 @@ public class ObserverListener implements Listener {
       throw new RuntimeException("Can't check observer on non-player.");
     }
     return ((Player) entity).isOnline() && this.module.isObservingOrDead((Player) entity);
+  }
+
+  private boolean holdingTool(Player player) {
+    return player.getItemInHand() != null && TOOL_TYPES.contains(player.getItemInHand().getType());
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -89,7 +100,7 @@ public class ObserverListener implements Listener {
     }
 
     if (observing) {
-      event.getPlayer().setGameMode(GameMode.ADVENTURE);
+      event.getPlayer().setGameMode(GameMode.SURVIVAL);
 
       event.getPlayer().setAllowFlight(true);
       event.getPlayer().setFlying(true);
@@ -111,8 +122,12 @@ public class ObserverListener implements Listener {
 
   @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
   public void onPlayerInteract(final PlayerInteractEvent event) {
-    if (notPlaying(event.getPlayer())) {
+    if (notPlaying(event.getPlayer()) && !holdingTool(event.getPlayer())) {
       event.setCancelled(true);
+      event.setUseItemInHand(Event.Result.DENY);
+      event.setUseInteractedBlock(Event.Result.DENY);
+      // Right clicking armor
+      event.getPlayer().updateInventory();
     }
   }
 
@@ -169,9 +184,16 @@ public class ObserverListener implements Listener {
     }
   }
 
-  @EventHandler
+  @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
   public void onBlockChange(BlockChangeByPlayerEvent event) {
-    if (notPlaying(event.getPlayer())) {
+    if (notPlaying(event.getPlayer()) && !holdingTool(event.getPlayer())) {
+      event.setCancelled(true);
+    }
+  }
+
+  @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+  public void onBlockChange(BlockDamageEvent event) {
+    if (notPlaying(event.getPlayer()) && !holdingTool(event.getPlayer())) {
       event.setCancelled(true);
     }
   }

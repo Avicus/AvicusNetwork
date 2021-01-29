@@ -439,7 +439,7 @@
         <item>
           <gamemode>
             <name>Game Mode</name>
-            <description>Toggle between the adventure and spectator gamemodes.</description>
+            <description>Toggle between the survival and spectator gamemodes.</description>
           </gamemode>
           <nightvision>
             <name>Night Vision</name>
