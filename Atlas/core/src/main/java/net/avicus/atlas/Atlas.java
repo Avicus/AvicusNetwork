@@ -54,6 +54,7 @@ import net.avicus.atlas.module.kills.DeathMessage;
 import net.avicus.atlas.module.observer.ObserverCommands;
 import net.avicus.atlas.module.tutorial.TutorialModule;
 import net.avicus.atlas.module.vote.VoteCommands;
+import net.avicus.atlas.module.vote.VoteModule;
 import net.avicus.atlas.util.AtlasBridge;
 import net.avicus.atlas.util.Events;
 import net.avicus.atlas.util.Messages;
@@ -192,6 +193,7 @@ public class Atlas extends JavaPlugin {
 
     PlayerSettings.register(DeathMessage.SETTING);
     PlayerSettings.register(TutorialModule.SHOW_TUTORIAL_SETTING);
+    PlayerSettings.register(VoteModule.SETTING);
 
     // Components
     this.componentManager = new AtlasComponentManager(Bukkit.getPluginManager(), this, registrar);

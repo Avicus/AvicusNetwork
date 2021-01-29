@@ -23,8 +23,12 @@ import net.avicus.atlas.module.Module;
 import net.avicus.atlas.module.ModuleBuildException;
 import net.avicus.atlas.util.Events;
 import net.avicus.atlas.util.Messages;
+import net.avicus.atlas.util.Translations;
 import net.avicus.compendium.countdown.CountdownManager;
 import net.avicus.compendium.plugin.CompendiumPlugin;
+import net.avicus.compendium.settings.PlayerSettings;
+import net.avicus.compendium.settings.Setting;
+import net.avicus.compendium.settings.types.SettingTypes;
 import net.avicus.compendium.utils.Strings;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -37,6 +41,14 @@ import org.joda.time.Seconds;
 
 @ToString(exclude = "match")
 public final class VoteModule implements Module {
+
+  public static final Setting<Boolean> SETTING = new Setting<>(
+      "show-vote-menu",
+      SettingTypes.BOOLEAN,
+      true,
+      Translations.SETTING_VOTESHOW_NAME.with(),
+      Translations.SETTING_VOTESHOW_DESCRIPTION.with()
+  );
 
   final Match match;
   private final Map<Integer, Match> options = Maps.newHashMap();
@@ -132,8 +144,12 @@ public final class VoteModule implements Module {
       }
       if (stack != null) {
         player.getInventory().addItem(stack);
+        if (PlayerSettings.get(player, SETTING)) {
+          VoteMenu.create(this, player).open();
+        }
       }
     }
+
     this.match.broadcast(Messages.VOTE_START.with(ChatColor.YELLOW));
   }
 
