@@ -280,8 +280,8 @@ public class PunishmentCommands {
           continue;
         }
 
-        UnlocalizedFormat format = new UnlocalizedFormat("{0} ({1})");
-        sender.sendMessage(format.with(Punishments.formatBroadcast(locale, punishment),
+        UnlocalizedFormat format = new UnlocalizedFormat("{0}: {1} ({2})");
+        sender.sendMessage(format.with(new LocalizedNumber(punishment.getId()), Punishments.formatBroadcast(locale, punishment),
             new LocalizedTime(punishment.getDate())));
       }
     }).nowAsync();
