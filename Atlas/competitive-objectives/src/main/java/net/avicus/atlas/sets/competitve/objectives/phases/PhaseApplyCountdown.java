@@ -2,6 +2,7 @@ package net.avicus.atlas.sets.competitve.objectives.phases;
 
 import java.util.List;
 import java.util.Optional;
+import lombok.Getter;
 import net.avicus.atlas.countdown.MatchCountdown;
 import net.avicus.atlas.match.Match;
 import net.avicus.atlas.module.locales.LocalesModule;
@@ -30,6 +31,7 @@ public class PhaseApplyCountdown extends MatchCountdown {
   /**
    * The phase that this countdown is attempting to apply.
    */
+  @Getter
   private final DestroyablePhase phase;
 
   private final List<DestroyableObjective> objectives;

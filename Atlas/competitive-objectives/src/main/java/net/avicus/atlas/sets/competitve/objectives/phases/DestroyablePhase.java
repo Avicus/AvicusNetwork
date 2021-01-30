@@ -1,5 +1,7 @@
 package net.avicus.atlas.sets.competitve.objectives.phases;
 
+import com.google.common.base.Objects;
+import com.google.common.collect.Lists;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -8,6 +10,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import net.avicus.atlas.match.Match;
 import net.avicus.atlas.match.registry.RegisterableObject;
@@ -15,6 +18,7 @@ import net.avicus.atlas.module.checks.Check;
 import net.avicus.atlas.module.checks.CheckContext;
 import net.avicus.atlas.module.locales.LocalizedXmlString;
 import net.avicus.atlas.sets.competitve.objectives.destroyable.DestroyableObjective;
+import net.avicus.compendium.StringUtil;
 import net.avicus.compendium.inventory.MultiMaterialMatcher;
 import net.avicus.compendium.inventory.SingleMaterialMatcher;
 import org.joda.time.Duration;
@@ -68,7 +72,8 @@ public class DestroyablePhase implements RegisterableObject<DestroyablePhase> {
    * Delay before the phase is applied.
    * (The countdown will be started at match start OR when the preceding phase is applied.)
    */
-  private final Duration delay;
+  @Setter
+  private Duration delay;
 
   /**
    * Check to be ran before the phase is applied.
@@ -85,11 +90,11 @@ public class DestroyablePhase implements RegisterableObject<DestroyablePhase> {
   /**
    * Phase that will be applied if the check fails and there are no retry attempts remaining.
    */
-  private final Optional<DestroyablePhase> failPhase;
+  private Optional<DestroyablePhase> failPhase;
   /**
    * Phase that will be applied if the check passes.
    */
-  private final Optional<DestroyablePhase> passPhase;
+  private Optional<DestroyablePhase> passPhase;
 
   private final HashMap<DestroyableObjective, AtomicInteger> failures = new HashMap<>();
 
@@ -234,5 +239,45 @@ public class DestroyablePhase implements RegisterableObject<DestroyablePhase> {
   @Override
   public DestroyablePhase getObject() {
     return this;
+  }
+
+  public List<String> describeReplacementStrategy() {
+    List<String> res = Lists.newArrayList();
+    getMaterials().forEach((find, replace) -> res.add("Replaces " +
+        StringUtil.listToEnglishCompound(
+            find.getMatchers().stream()
+                .map(SingleMaterialMatcher::describe)
+                .collect(Collectors.toList())
+        ) + " with " + replace.describe()));
+
+    return res;
+  }
+
+  public void removePhase(DestroyablePhase phase) {
+    if (this.passPhase.isPresent()) {
+      if (this.passPhase.get().equals(phase)) this.passPhase = Optional.empty();
+      else this.passPhase.get().removePhase(phase);
+    }
+    if (this.failPhase.isPresent()) {
+      if (this.failPhase.get().equals(phase)) this.failPhase = Optional.empty();
+      else this.failPhase.get().removePhase(phase);
+    }
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    DestroyablePhase that = (DestroyablePhase) o;
+    return Objects.equal(id, that.id);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(id);
   }
 }

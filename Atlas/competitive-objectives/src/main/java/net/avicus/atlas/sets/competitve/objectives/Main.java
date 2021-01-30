@@ -24,6 +24,7 @@ import net.avicus.atlas.sets.competitve.objectives.bridges.ObjectivesBridge;
 import net.avicus.atlas.sets.competitve.objectives.bridges.ResultsBridge;
 import net.avicus.atlas.sets.competitve.objectives.bridges.SBHook;
 import net.avicus.atlas.sets.competitve.objectives.bridges.StatsBridge;
+import net.avicus.atlas.sets.competitve.objectives.commands.PhaseCommands;
 import net.avicus.atlas.sets.competitve.objectives.destroyable.DestroyableFactory;
 import net.avicus.atlas.sets.competitve.objectives.destroyable.event.DestroyableDamageEvent;
 import net.avicus.atlas.sets.competitve.objectives.destroyable.event.DestroyableRepairEvent;
@@ -45,6 +46,7 @@ import net.avicus.atlas.sets.competitve.objectives.wool.event.WoolPickupEvent;
 import net.avicus.atlas.sets.competitve.objectives.wool.event.WoolPlaceEvent;
 import net.avicus.atlas.sets.competitve.objectives.zones.ZonesParsingBridge;
 import net.avicus.atlas.util.Events;
+import net.avicus.compendium.commands.AvicusCommandsRegistration;
 
 public class Main extends ModuleSet {
 
@@ -54,6 +56,8 @@ public class Main extends ModuleSet {
   private MatchFactory matchFactory;
   @Setter
   private Logger logger;
+  @Setter
+  AvicusCommandsRegistration registrar;
 
   @Override
   public void onEnable() {
@@ -90,6 +94,8 @@ public class Main extends ModuleSet {
     PointEarnConfig.CONFIGURABLES.add("hill-capture");
     PointEarnConfig.CONFIGURABLES.add("wool-pickup");
     PointEarnConfig.CONFIGURABLES.add("wool-place");
+
+    this.registrar.register(PhaseCommands.Super.class);
 
     this.logger.info("Enabled competitive objectives set.");
   }

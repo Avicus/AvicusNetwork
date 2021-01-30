@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import lombok.Getter;
+import lombok.Setter;
 import net.avicus.atlas.match.Match;
 import net.avicus.atlas.module.checks.Check;
 import net.avicus.atlas.module.checks.CheckContext;
@@ -63,7 +64,8 @@ public abstract class DestroyableObjective extends TouchableObjective implements
 
   private final boolean anyRepair;
 
-  private final Optional<DestroyablePhase> phase;
+  @Setter
+  private Optional<DestroyablePhase> phase;
 
   private double completionDouble;
   private HashMap<Block, MaterialData> originals;
