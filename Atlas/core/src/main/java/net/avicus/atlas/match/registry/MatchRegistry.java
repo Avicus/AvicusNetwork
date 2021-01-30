@@ -34,6 +34,21 @@ public class MatchRegistry {
     objects.forEach(this::add);
   }
 
+  public boolean has(String id) {
+    return this.objects.containsKey(id);
+  }
+
+  public boolean isOfType(String id, Class<?> clazz) {
+    @Nullable RegisterableObject found = this.objects.get(id);
+
+    if (found == null) {
+      throw new MatchRegistryException(
+          "Unable to find required " + clazz.getSimpleName() + " for id \"" + id + "\".");
+    }
+
+    return clazz.isAssignableFrom(found.getObject().getClass());
+  }
+
   @SuppressWarnings("unchecked")
   public <T> Optional<T> get(Class<T> type, String id, boolean required)
       throws MatchRegistryException {
