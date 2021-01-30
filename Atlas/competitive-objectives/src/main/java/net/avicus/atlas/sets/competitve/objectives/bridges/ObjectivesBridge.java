@@ -59,6 +59,10 @@ public class ObjectivesBridge extends ObjectivesModuleBridge implements Listener
   private Match match;
   private ObjectivesModule module;
 
+  // Phase caches
+  private final List<DestroyableObjective> objectivesWithPhases = new ArrayList<>();
+  private final Map<DestroyablePhase, List<DestroyableObjective>> phases = new HashMap<>();
+
   public ObjectivesBridge(ObjectivesModule module) {
     this.module = module;
     this.match = module.getMatch();
@@ -75,6 +79,7 @@ public class ObjectivesBridge extends ObjectivesModuleBridge implements Listener
     this.objectives.addAll(this.wools);
     this.objectives.addAll(this.flags);
     this.objectives.addAll(this.leakables);
+    populatePhaseCache();
   }
 
   @Override
@@ -142,31 +147,36 @@ public class ObjectivesBridge extends ObjectivesModuleBridge implements Listener
 
   }
 
+  public void populatePhaseCache() {
+    objectivesWithPhases.clear();
+    objectivesWithPhases.addAll(
+        this.getLeakables().stream().filter(objective -> objective.getPhase().isPresent())
+            .collect(Collectors.toList()));
+    objectivesWithPhases.addAll(
+        this.getMonuments().stream().filter(objective -> objective.getPhase().isPresent())
+            .collect(Collectors.toList()));
+
+    phases.clear();
+    objectivesWithPhases.forEach(objective -> {
+      DestroyablePhase phase = objective.getPhase().get();
+      phases.putIfAbsent(phase, new ArrayList<>());
+      phases.get(phase).add(objective);
+    });
+  }
+
+  public void startPhaseCountdowns(Match match) {
+    phases.forEach((phase, withPhase) -> {
+      PhaseApplyCountdown countdown = new PhaseApplyCountdown(match, phase.getDelay(),
+          phase, withPhase);
+      CompendiumPlugin.getInstance().getCountdownManager().start(countdown);
+    });
+  }
+
   @EventHandler
-  public void startPhaseCountdowns(MatchStateChangeEvent event) {
+  public void handlePhaseCountdowns(MatchStateChangeEvent event) {
     if (event.isChangeToPlaying() && event.getFrom().isPresent() && !event.getFrom().get()
         .isPlaying()) {
-      List<DestroyableObjective> objectivesWithPhases = new ArrayList<>();
-      objectivesWithPhases.addAll(
-          this.getLeakables().stream().filter(objective -> objective.getPhase().isPresent())
-              .collect(Collectors.toList()));
-      objectivesWithPhases.addAll(
-          this.getMonuments().stream().filter(objective -> objective.getPhase().isPresent())
-              .collect(Collectors.toList()));
-
-      Map<DestroyablePhase, List<DestroyableObjective>> phases = new HashMap<>();
-
-      objectivesWithPhases.forEach(objective -> {
-        DestroyablePhase phase = objective.getPhase().get();
-        phases.putIfAbsent(phase, new ArrayList<>());
-        phases.get(phase).add(objective);
-      });
-
-      phases.forEach((phase, withPhase) -> {
-        PhaseApplyCountdown countdown = new PhaseApplyCountdown(event.getMatch(), phase.getDelay(),
-            phase, withPhase);
-        CompendiumPlugin.getInstance().getCountdownManager().start(countdown);
-      });
+      startPhaseCountdowns(event.getMatch());
       return;
     }
     if (event.isChangeToNotPlaying() && event.getFrom().isPresent() && event.getFrom().get()
