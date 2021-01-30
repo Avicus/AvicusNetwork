@@ -25,6 +25,8 @@ import org.joda.time.Duration;
  */
 public class PhaseApplyCountdown extends MatchCountdown {
 
+  private static final Duration BOSS_SHOWN_AT = Duration.standardMinutes(5);
+
   /**
    * The phase that this countdown is attempting to apply.
    */
@@ -53,12 +55,13 @@ public class PhaseApplyCountdown extends MatchCountdown {
 
   @Override
   protected void onTick(Duration elapsedTime, Duration remainingTime) {
-    int sec = (int) remainingTime.getStandardSeconds();
-
     Localizable message = timeRemainingMessage(elapsedTime, remainingTime);
 
     // Boss bar
-    updateBossBar(message, elapsedTime);
+    if (remainingTime.isShorterThan(BOSS_SHOWN_AT)) updateBossBar(message, elapsedTime);
+    else clearBossBars();
+
+    int sec = (int) remainingTime.getStandardSeconds();
 
     // Periodic chat broadcast
     if (shouldBroadcast(sec)) {
