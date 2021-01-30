@@ -19,7 +19,6 @@ import net.avicus.compendium.utils.Strings;
 import net.avicus.hook.Hook;
 import net.avicus.hook.HookConfig;
 import net.avicus.hook.punishment.PunishmentHandler.PunishmentMessage;
-import net.avicus.hook.utils.Commands;
 import net.avicus.hook.utils.HookTask;
 import net.avicus.hook.utils.Messages;
 import net.avicus.magma.Magma;
@@ -28,6 +27,7 @@ import net.avicus.magma.database.model.impl.Punishment.Type;
 import net.avicus.magma.database.model.impl.ServerCategory;
 import net.avicus.magma.database.model.impl.User;
 import net.avicus.magma.network.user.Users;
+import net.avicus.magma.util.StringUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
@@ -153,7 +153,7 @@ public class PunishmentCommands {
       "m"}, desc = "Mute a player.", usage = "<player> <duration> <reason>", min = 3, flags = "ns")
   public static void mute(CommandContext context, CommandSender sender) throws CommandException {
     String username = context.getString(0);
-    Period period = Commands.parsePeriod(context.getString(1));
+    Period period = StringUtil.parsePeriod(context.getString(1));
     String reason = context.getJoinedStrings(2);
 
     Date expiry = new DateTime().plus(period).toDate();
@@ -193,7 +193,7 @@ public class PunishmentCommands {
         throw new CommandPermissionsException();
       }
 
-      Period period = Commands.parsePeriod(context.getFlag('t'));
+      Period period = StringUtil.parsePeriod(context.getFlag('t'));
 
       Date expiry = new DateTime().plus(period).toDate();
 
@@ -211,7 +211,7 @@ public class PunishmentCommands {
       "tb"}, desc = "Temporarily ban a player.", usage = "<player> <duration> <reason>", min = 3, flags = "ns")
   public static void tempban(CommandContext context, CommandSender sender) throws CommandException {
     String username = context.getString(0);
-    Period period = Commands.parsePeriod(context.getString(1));
+    Period period = StringUtil.parsePeriod(context.getString(1));
     String reason = context.getJoinedStrings(2);
 
     Date expiry = new DateTime().plus(period).toDate();

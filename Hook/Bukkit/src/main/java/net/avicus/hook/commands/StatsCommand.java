@@ -12,11 +12,11 @@ import net.avicus.compendium.locale.text.LocalizedTime;
 import net.avicus.compendium.locale.text.UnlocalizedFormat;
 import net.avicus.compendium.locale.text.UnlocalizedText;
 import net.avicus.hook.Hook;
-import net.avicus.hook.utils.Commands;
 import net.avicus.hook.utils.HookTask;
 import net.avicus.hook.utils.Messages;
 import net.avicus.magma.database.model.impl.User;
 import net.avicus.magma.network.user.Users;
+import net.avicus.magma.util.StringUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -37,7 +37,7 @@ public class StatsCommand {
     Period period;
 
     try {
-      period = Commands.parsePeriod(cmd.getString(0));
+      period = StringUtil.parsePeriod(cmd.getString(0));
     } catch (Exception e) {
       Localizable details = new UnlocalizedText("Time must be in 1m/1h/1d format.");
       player.sendMessage(Messages.ERROR_ERROR_OCCURRED.with(details));

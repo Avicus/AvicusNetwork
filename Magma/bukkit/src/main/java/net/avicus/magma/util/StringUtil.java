@@ -5,10 +5,27 @@ import org.apache.commons.lang.SystemUtils;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.joda.time.Period;
+import org.joda.time.format.PeriodFormatter;
+import org.joda.time.format.PeriodFormatterBuilder;
 
 public final class StringUtil {
 
   private StringUtil() {
+  }
+
+  private static final PeriodFormatter periodFormatter = new PeriodFormatterBuilder()
+      .appendYears().appendSuffix("y")
+      .appendMonths().appendSuffix("mo")
+      .appendDays().appendSuffix("d")
+      .appendHours().appendSuffix("h")
+      .appendMinutes().appendSuffix("m")
+      .appendSecondsWithOptionalMillis().appendSuffix("s")
+      .appendDays()
+      .toFormatter();
+
+  public static Period parsePeriod(String text) {
+    return periodFormatter.parsePeriod(text);
   }
 
   /**
