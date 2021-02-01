@@ -5,7 +5,9 @@ import com.sk89q.minecraft.util.commands.Command;
 import com.sk89q.minecraft.util.commands.CommandContext;
 import com.sk89q.minecraft.util.commands.CommandException;
 import com.sk89q.minecraft.util.commands.CommandPermissions;
+import com.sk89q.minecraft.util.commands.CommandUsageException;
 import com.sk89q.minecraft.util.commands.NestedCommand;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -15,7 +17,10 @@ import net.avicus.atlas.Atlas;
 import net.avicus.atlas.command.exception.CommandMatchException;
 import net.avicus.atlas.match.Match;
 import net.avicus.atlas.match.registry.MatchRegistry;
+import net.avicus.atlas.module.locales.LocalesModule;
+import net.avicus.atlas.module.locales.LocalizedXmlString;
 import net.avicus.atlas.module.objectives.ObjectivesModule;
+import net.avicus.atlas.module.states.StatesModule;
 import net.avicus.atlas.sets.competitve.objectives.bridges.ObjectivesBridge;
 import net.avicus.atlas.sets.competitve.objectives.destroyable.DestroyableObjective;
 import net.avicus.atlas.sets.competitve.objectives.phases.DestroyablePhase;
@@ -25,13 +30,17 @@ import net.avicus.compendium.commands.exception.MustBePlayerCommandException;
 import net.avicus.compendium.commands.exception.TranslatableCommandErrorException;
 import net.avicus.compendium.commands.exception.TranslatableCommandWarningException;
 import net.avicus.compendium.countdown.Countdown;
+import net.avicus.compendium.countdown.CountdownManager;
 import net.avicus.compendium.countdown.CountdownTask;
+import net.avicus.compendium.inventory.MultiMaterialMatcher;
+import net.avicus.compendium.inventory.SingleMaterialMatcher;
 import net.avicus.compendium.locale.text.UnlocalizedFormat;
 import net.avicus.compendium.locale.text.UnlocalizedText;
 import net.avicus.compendium.plugin.CompendiumPlugin;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.joda.time.Duration;
 import org.joda.time.Period;
@@ -108,7 +117,7 @@ public class PhaseCommands {
     return registry.get(DestroyablePhase.class, id, true).get();
   }
 
-  @Command(aliases = "remove", desc = "Remove a phase by ID", max = 1, min = 1)
+  @Command(aliases = "remove", desc = "Remove a phase by ID", max = 1, min = 1, usage = "<id>")
   @CommandPermissions("atlas.phases.manage")
   public static void remove(CommandContext args, CommandSender sender) throws CommandException {
     String id = args.getString(0);
@@ -132,7 +141,7 @@ public class PhaseCommands {
     sender.sendMessage(ChatColor.GREEN + "Phase removed");
   }
 
-  @Command(aliases = "modtime", desc = "Modify a phase's application time", max = 2, min = 2)
+  @Command(aliases = "modtime", desc = "Modify a phase's application time", max = 2, min = 2, usage = "<id> <time>")
   @CommandPermissions("atlas.phases.manage")
   public static void modtime(CommandContext args, CommandSender sender) throws CommandException {
     String id = args.getString(0);
@@ -153,6 +162,78 @@ public class PhaseCommands {
             ChatColor.GREEN + " to " +
             ChatColor.AQUA + StringUtil.secondsToClock((int) delay.getStandardSeconds())
     );
+  }
+
+  private static final String ADD_ARGS = "id|name|success message|delay|find|replace";
+
+  @Command(aliases = "add", desc = "Add a phase", usage = ADD_ARGS)
+  @CommandPermissions("atlas.phases.manage")
+  public static void add(CommandContext args, CommandSender sender) throws CommandException {
+    Match match = getMatch(sender);
+    ObjectivesBridge bridge = getBridge(sender);
+
+    String[] indArgs = args.getJoinedStrings(0).split("\\|");
+    if (indArgs.length != 6) throw new CommandUsageException("Wrong number of arguments", "/phases add " + ADD_ARGS);
+
+    try {
+      String id = indArgs[0];
+      String nameRaw = indArgs[1];
+      String successRaw = indArgs[2];
+      Duration delay = net.avicus.magma.util.StringUtil.parsePeriod(indArgs[3]).toStandardDuration();
+      String countdownRaw = "{phases.transition}";
+      String failRaw = "{phases.monument.fail}";
+      LocalizedXmlString name = match.getRequiredModule(LocalesModule.class).parse(nameRaw);
+      LocalizedXmlString countdown = match.getRequiredModule(LocalesModule.class).parse(countdownRaw);
+      LocalizedXmlString success = match.getRequiredModule(LocalesModule.class).parse(successRaw);
+      LocalizedXmlString fail = match.getRequiredModule(LocalesModule.class).parse(failRaw);
+
+      LinkedHashMap<MultiMaterialMatcher, SingleMaterialMatcher> materials = new LinkedHashMap<>();
+      materials.put(parseMultiMatcher(indArgs[4]), parseSingleMatcher(indArgs[5]));
+
+      DestroyablePhase phase = new DestroyablePhase(match, id, name, countdown, success, fail, materials, delay, Optional.empty(), 0,
+          Optional.empty(), Optional.empty(), Optional.empty());
+      match.getRegistry().add(phase);
+      CountdownManager manager = CompendiumPlugin.getInstance().getCountdownManager();
+      if (manager.isRunning(PhaseApplyCountdown.class)) {
+        manager.getCountdowns().keySet().stream().filter(c -> c instanceof PhaseApplyCountdown).forEach(c -> {
+          ((PhaseApplyCountdown)c).getPhase().addPhase(phase);
+        });
+        sender.sendMessage(ChatColor.GREEN + "Phase added to end of phase chain");
+      } else {
+        for (DestroyableObjective objective : bridge.getLeakables()) {
+          objective.setPhase(Optional.of(phase));
+        }
+        for (DestroyableObjective objective : bridge.getMonuments()) {
+          objective.setPhase(Optional.of(phase));
+        }
+        bridge.populatePhaseCache();
+        if (match.getRequiredModule(StatesModule.class).isPlaying())
+          bridge.startPhaseCountdowns(match);
+        sender.sendMessage(ChatColor.GREEN + "Phase added");
+      }
+    } catch (Exception e) {
+      // e.printStackTrace();
+      throw new TranslatableCommandErrorException(new UnlocalizedFormat("Failed to add phase: " + e.getMessage()));
+    }
+  }
+
+  private static MultiMaterialMatcher parseMultiMatcher(String raw) {
+    List<SingleMaterialMatcher> matchers = Lists.newArrayList();
+    for (String s : raw.split(",")) {
+      matchers.add(parseSingleMatcher(s));
+    }
+    return new MultiMaterialMatcher(matchers);
+  }
+
+  private static SingleMaterialMatcher parseSingleMatcher(String raw) {
+    String[] parts = raw.split(":");
+    Material material = Enum.valueOf(Material.class, parts[0].toUpperCase().replace(" ", "_").replace("-", "_"));
+    Optional<Byte> data = Optional.empty();
+    if (parts.length > 1) data = Optional.of(Byte.valueOf(parts[1]));
+
+    if (!material.isSolid()) throw new IllegalArgumentException("Materials must be solid");
+
+    return new SingleMaterialMatcher(material, data);
   }
 
   public static class Super {

@@ -264,6 +264,12 @@ public class DestroyablePhase implements RegisterableObject<DestroyablePhase> {
     }
   }
 
+  public void addPhase(DestroyablePhase phase) {
+    if (this.passPhase.isPresent()) {
+      this.passPhase.get().addPhase(phase);
+    } else this.passPhase = Optional.of(phase);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
