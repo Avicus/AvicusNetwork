@@ -22,11 +22,17 @@ import net.avicus.atlas.module.groups.GroupsModule;
 import net.avicus.atlas.module.objectives.StagnatedCompletionObjective;
 import net.avicus.atlas.module.objectives.TouchableDistanceMetrics;
 import net.avicus.atlas.module.objectives.TouchableObjective;
+import net.avicus.atlas.runtimeconfig.fields.ConfigurableField;
+import net.avicus.atlas.runtimeconfig.fields.OptionalField;
+import net.avicus.atlas.runtimeconfig.fields.RegisteredObjectField;
+import net.avicus.atlas.runtimeconfig.fields.SimpleFields.BooleanField;
+import net.avicus.atlas.runtimeconfig.fields.SimpleFields.IntField;
 import net.avicus.atlas.sets.competitve.objectives.phases.DestroyablePhase;
 import net.avicus.atlas.util.Players;
 import net.avicus.compendium.inventory.MultiMaterialMatcher;
 import net.avicus.compendium.inventory.SingleMaterialMatcher;
 import net.avicus.magma.util.region.BoundedRegion;
+import org.apache.commons.lang3.ArrayUtils;
 import org.bukkit.EntityEffect;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Location;
@@ -45,24 +51,24 @@ public abstract class DestroyableObjective extends TouchableObjective implements
 
   private final Match match;
 
-  private final BoundedRegion region;
-  private final Optional<Integer> points;
-  private final Optional<Integer> pointsPerBlock;
+  private BoundedRegion region;
+  private Optional<Integer> points;
+  private Optional<Integer> pointsPerBlock;
   private final MultiMaterialMatcher materials;
 
-  private final boolean destroyable;
-  private final boolean repairable;
-  private final boolean enforceAntiRepair;
+  private boolean destroyable;
+  private boolean repairable;
+  private boolean enforceAntiRepair;
   private final boolean fireworks;
 
-  private final Optional<Check> breakCheck;
-  private final Optional<Check> repairCheck;
+  private Optional<Check> breakCheck;
+  private Optional<Check> repairCheck;
 
   private final SingleMaterialMatcher completedState;
 
   private final double neededCompletion;
 
-  private final boolean anyRepair;
+  private boolean anyRepair;
 
   @Setter
   private Optional<DestroyablePhase> phase;
@@ -296,5 +302,20 @@ public abstract class DestroyableObjective extends TouchableObjective implements
 
   public boolean shouldEnforceRepairRules() {
     return this.isRepairable() || this.enforceAntiRepair;
+  }
+
+  @Override
+  public ConfigurableField[] getFields() {
+    return ArrayUtils.addAll(super.getFields(),
+        new RegisteredObjectField<>("Region", () -> this.region, (v) -> this.region = v, BoundedRegion.class),
+        new OptionalField<>("Completion Points", () -> this.points, (v) -> this.points = v, new IntField("points")),
+        new OptionalField<>("Points Per Block", () -> this.pointsPerBlock, (v) -> this.pointsPerBlock = v, new IntField("pointsper")),
+        new BooleanField("Destroyable With TNT", () -> this.destroyable, (v) -> this.destroyable = v),
+        new BooleanField("Repairable", () -> this.repairable, (v) -> this.repairable = v),
+        new BooleanField("Enforce Anti Repair", () -> this.enforceAntiRepair, (v) -> this.enforceAntiRepair = v),
+        new BooleanField("Repairable With Anything", () -> this.anyRepair, (v) -> this.anyRepair = v),
+        new OptionalField<>("Break Check", () -> this.breakCheck, (v) -> this.breakCheck = v, new RegisteredObjectField<>("check", Check.class)),
+        new OptionalField<>("Repair Check", () -> this.repairCheck, (v) -> this.repairCheck = v, new RegisteredObjectField<>("check", Check.class))
+    );
   }
 }

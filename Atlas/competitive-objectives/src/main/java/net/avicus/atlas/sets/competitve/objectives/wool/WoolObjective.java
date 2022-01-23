@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Nullable;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import net.avicus.atlas.match.Match;
 import net.avicus.atlas.module.groups.Competitor;
@@ -17,6 +18,13 @@ import net.avicus.atlas.module.locales.LocalizedXmlString;
 import net.avicus.atlas.module.objectives.GlobalObjective;
 import net.avicus.atlas.module.objectives.TouchableDistanceMetrics;
 import net.avicus.atlas.module.objectives.TouchableObjective;
+import net.avicus.atlas.runtimeconfig.fields.ConfigurableField;
+import net.avicus.atlas.runtimeconfig.fields.DurationField;
+import net.avicus.atlas.runtimeconfig.fields.EnumField;
+import net.avicus.atlas.runtimeconfig.fields.MaterialMatcherField.MatcherField;
+import net.avicus.atlas.runtimeconfig.fields.OptionalField;
+import net.avicus.atlas.runtimeconfig.fields.RegisteredObjectField;
+import net.avicus.atlas.runtimeconfig.fields.SimpleFields.BooleanField;
 import net.avicus.atlas.util.Messages;
 import net.avicus.atlas.util.Players;
 import net.avicus.compendium.TextStyle;
@@ -28,6 +36,7 @@ import net.avicus.compendium.locale.text.LocalizedText;
 import net.avicus.compendium.locale.text.UnlocalizedText;
 import net.avicus.compendium.utils.Strings;
 import net.avicus.magma.util.region.BoundedRegion;
+import org.apache.commons.lang3.ArrayUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
 import org.bukkit.FireworkEffect;
@@ -48,18 +57,19 @@ import org.joda.time.Duration;
 public class WoolObjective extends TouchableObjective implements GlobalObjective {
 
   private final Match match;
-  private final LocalizedXmlString name;
+  @Setter
+  private LocalizedXmlString name;
   private final Optional<Team> team;
-  private final DyeColor color;
-  private final Optional<BoundedRegion> source;
-  private final BoundedRegion destination;
-  private final boolean pickup;
-  private final boolean refill;
+  private DyeColor color;
+  private Optional<BoundedRegion> source;
+  private BoundedRegion destination;
+  private boolean pickup;
+  private boolean refill;
   private final int maxRefill;
-  private final Optional<Duration> refillDelay;
-  private final boolean craftable;
+  private Optional<Duration> refillDelay;
+  private boolean craftable;
   private final boolean fireworks;
-  private final MaterialMatcher matcher;
+  private MaterialMatcher matcher;
 
   private final Map<Block, Map<Integer, ItemStack>> refills;
   private boolean placed;
@@ -234,5 +244,19 @@ public class WoolObjective extends TouchableObjective implements GlobalObjective
   @Override
   public LocalizableFormat getTouchMessage() {
     return Messages.GENERIC_OBJECTIVE_TOUCHED;
+  }
+
+  @Override
+  public ConfigurableField[] getFields() {
+    return ArrayUtils.addAll(super.getFields(),
+        new EnumField<>("Color", () -> this.color, (v) -> this.color = v, DyeColor.class),
+        new OptionalField<>("Source", () -> this.source, (v) -> this.source = v, new RegisteredObjectField<>("source", BoundedRegion.class)),
+        new RegisteredObjectField<>("Destination", () -> this.destination, (v) -> this.destination = v, BoundedRegion.class),
+        new BooleanField("Pickupable", () -> this.pickup, (v) -> this.pickup = v),
+        new BooleanField("Source Auto Refill", () -> this.refill, (v) -> this.refill = v),
+        new OptionalField<>("Refill Delay", () -> this.refillDelay, (v) -> this.refillDelay = v, new DurationField("delay")),
+        new BooleanField("Craftable", () -> this.craftable, (v) -> this.craftable = v),
+        new MatcherField("Wool Type", () -> this.matcher, (v) -> this.matcher = v)
+    );
   }
 }

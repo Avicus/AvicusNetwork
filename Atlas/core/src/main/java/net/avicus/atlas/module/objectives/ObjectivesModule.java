@@ -18,13 +18,16 @@ import net.avicus.atlas.module.objectives.entity.EntityListener;
 import net.avicus.atlas.module.objectives.entity.EntityObjective;
 import net.avicus.atlas.module.objectives.score.ScoreListener;
 import net.avicus.atlas.module.objectives.score.ScoreObjective;
+import net.avicus.atlas.runtimeconfig.RuntimeConfigurable;
 import net.avicus.atlas.util.Events;
 import net.avicus.compendium.number.NumberAction;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
 @ToString(exclude = "match")
-public class ObjectivesModule extends BridgeableModule<ObjectivesModuleBridge> implements Module {
+public class ObjectivesModule extends BridgeableModule<ObjectivesModuleBridge> implements Module,
+    RuntimeConfigurable {
 
   @Getter
   private final Match match;
@@ -109,5 +112,15 @@ public class ObjectivesModule extends BridgeableModule<ObjectivesModuleBridge> i
     getScores().stream()
         .filter(score -> score.canComplete(competitor))
         .forEach(score -> score.modify(competitor, reward, action, actor));
+  }
+
+  @Override
+  public String getDescription(CommandSender viewer) {
+    return "Objectives";
+  }
+
+  @Override
+  public List<RuntimeConfigurable> getChildren() {
+    return getObjectives().stream().map(o -> (RuntimeConfigurable)o).collect(Collectors.toList());
   }
 }

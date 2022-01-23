@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.ToString;
 import net.avicus.atlas.match.Match;
@@ -17,20 +18,27 @@ import net.avicus.atlas.module.groups.Competitor;
 import net.avicus.atlas.module.groups.Group;
 import net.avicus.atlas.module.groups.GroupsModule;
 import net.avicus.atlas.module.loadouts.Loadout;
+import net.avicus.atlas.runtimeconfig.RuntimeConfigurable;
+import net.avicus.atlas.runtimeconfig.fields.AngleProviderField;
+import net.avicus.atlas.runtimeconfig.fields.ConfigurableField;
+import net.avicus.atlas.runtimeconfig.fields.EnumField;
+import net.avicus.atlas.runtimeconfig.fields.SimpleFields.BooleanField;
 import net.avicus.compendium.points.AngleProvider;
 import net.avicus.compendium.points.StaticAngleProvider;
 import net.avicus.compendium.points.TargetPitchProvider;
 import net.avicus.compendium.points.TargetYawProvider;
 import net.avicus.magma.channel.staff.StaffChannels;
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 @ToString
-public class Spawn {
+public class Spawn implements RuntimeConfigurable {
 
   private static final Random RANDOM = new Random();
   @Getter
@@ -41,11 +49,11 @@ public class Spawn {
   private final Optional<Loadout> loadout;
   @Getter
   private final Optional<Check> check;
-  private final AngleProvider yaw;
-  private final AngleProvider pitch;
-  private final SelectionMode selectionMode;
+  private AngleProvider yaw;
+  private AngleProvider pitch;
+  private SelectionMode selectionMode;
   @Getter
-  private final boolean ensureSafe;
+  private boolean ensureSafe;
 
   public Spawn(Optional<Group> group, List<SpawnRegion> regions, float yaw, float pitch,
       Optional<Loadout> loadout, Optional<Check> check, SelectionMode selectionMode,
@@ -233,5 +241,26 @@ public class Spawn {
   public Location selectLocation(Match match, Player player) {
     return selectLocation(match, player, this.regions, this.selectionMode, this.yaw, this.pitch,
         this.ensureSafe);
+  }
+
+  @Override
+  public ConfigurableField[] getFields() {
+    return new ConfigurableField[]{
+        new AngleProviderField("Yaw", () -> this.yaw, (v) -> this.yaw = v),
+        new AngleProviderField("Pitch", () -> this.pitch, (v) -> this.pitch = v),
+        new EnumField<>("Selection Mode", () -> this.selectionMode, (v) -> this.selectionMode = v, SelectionMode.class),
+        new BooleanField("Ensure Safe", () -> this.ensureSafe, (v) -> this.ensureSafe = v)
+    };
+  }
+
+  @Override
+  public String getDescription(CommandSender viewer) {
+    return this.group.map(g -> g.getChatColor() + g.getName().translateDefault() + ChatColor.RESET + "'s ")
+        .orElse("") + "Spawn";
+  }
+
+  @Override
+  public List<RuntimeConfigurable> getChildren() {
+    return this.regions.stream().map(r -> (RuntimeConfigurable)r).collect(Collectors.toList());
   }
 }

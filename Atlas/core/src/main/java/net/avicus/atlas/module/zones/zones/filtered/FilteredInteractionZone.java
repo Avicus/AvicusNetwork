@@ -13,7 +13,12 @@ import net.avicus.atlas.module.checks.variable.MaterialVariable;
 import net.avicus.atlas.module.checks.variable.PlayerVariable;
 import net.avicus.atlas.module.zones.Zone;
 import net.avicus.atlas.module.zones.ZoneMessage;
+import net.avicus.atlas.runtimeconfig.fields.ConfigurableField;
+import net.avicus.atlas.runtimeconfig.fields.OptionalField;
+import net.avicus.atlas.runtimeconfig.fields.RegisteredObjectField;
 import net.avicus.magma.util.region.Region;
+import org.apache.commons.lang3.ArrayUtils;
+import org.bukkit.command.CommandSender;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -26,10 +31,10 @@ import org.bukkit.event.player.PlayerBucketFillEvent;
 @ToString(callSuper = true)
 public class FilteredInteractionZone extends Zone {
 
-  private final Optional<Check> modify;
-  private final Optional<Check> blockPlace;
-  private final Optional<Check> blockBreak;
-  private final Optional<Check> use;
+  private Optional<Check> modify;
+  private Optional<Check> blockPlace;
+  private Optional<Check> blockBreak;
+  private Optional<Check> use;
 
   public FilteredInteractionZone(Match match, Region region, Optional<ZoneMessage> message,
       Optional<Check> modify, Optional<Check> blockPlace, Optional<Check> blockBreak,
@@ -145,5 +150,20 @@ public class FilteredInteractionZone extends Zone {
     context.add(new LocationVariable(event.getBlockClicked().getLocation()));
     context.add(new PlayerVariable(event.getPlayer()));
     return check.test(context).passes();
+  }
+
+  @Override
+  public ConfigurableField[] getFields() {
+    return ArrayUtils.addAll(super.getFields(),
+        new OptionalField<>("Modify", () -> this.modify, (v) -> this.modify = v, new RegisteredObjectField<>("modify", Check.class)),
+        new OptionalField<>("Block Place", () -> this.blockPlace, (v) -> this.blockPlace = v, new RegisteredObjectField<>("place", Check.class)),
+        new OptionalField<>("Block Break", () -> this.blockBreak, (v) -> this.blockBreak = v, new RegisteredObjectField<>("break", Check.class)),
+        new OptionalField<>("Use", () -> this.use, (v) -> this.use = v, new RegisteredObjectField<>("use", Check.class))
+    );
+  }
+
+  @Override
+  public String getDescription(CommandSender viewer) {
+    return "Filtered Interaction" + super.getDescription(viewer);
   }
 }

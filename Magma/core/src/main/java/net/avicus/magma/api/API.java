@@ -3,9 +3,9 @@ package net.avicus.magma.api;
 import java.io.IOException;
 import lombok.Getter;
 import net.avicus.magma.api.service.AlertsService;
-import net.avicus.magma.api.service.connected.ConnectedPresentsService;
-import net.avicus.magma.api.service.connected.ConnectedAlertsService;
 import net.avicus.magma.api.service.PresentsService;
+import net.avicus.magma.api.service.connected.ConnectedAlertsService;
+import net.avicus.magma.api.service.connected.ConnectedPresentsService;
 import net.avicus.magma.api.service.mock.MockAlertsService;
 import net.avicus.magma.api.service.mock.MockPresentsService;
 

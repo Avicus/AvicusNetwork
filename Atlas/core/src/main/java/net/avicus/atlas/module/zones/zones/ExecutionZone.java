@@ -15,6 +15,7 @@ import net.avicus.atlas.module.zones.Zone;
 import net.avicus.atlas.module.zones.ZoneMessage;
 import net.avicus.magma.util.region.Region;
 import org.bukkit.Location;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
@@ -162,5 +163,10 @@ public class ExecutionZone extends Zone {
     }
 
     toExecute.ifPresent(w -> w.ifPresent(e -> e.executeChecked(context)));
+  }
+
+  @Override
+  public String getDescription(CommandSender viewer) {
+    return "Execution Zone" + super.getDescription(viewer);
   }
 }

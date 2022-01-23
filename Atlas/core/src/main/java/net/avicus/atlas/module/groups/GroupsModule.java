@@ -25,6 +25,7 @@ import net.avicus.atlas.module.Module;
 import net.avicus.atlas.module.ModuleBridge;
 import net.avicus.atlas.module.locales.LocalizedXmlString;
 import net.avicus.atlas.module.spawns.SpawnsModule;
+import net.avicus.atlas.runtimeconfig.RuntimeConfigurable;
 import net.avicus.atlas.util.Events;
 import net.avicus.atlas.util.color.TeamColor;
 import org.bukkit.Bukkit;
@@ -34,7 +35,7 @@ import org.bukkit.event.Listener;
 
 @ToString(exclude = "match")
 public abstract class GroupsModule extends BridgeableModule<ModuleBridge<GroupsModule>> implements
-    Module {
+    Module, RuntimeConfigurable {
 
   @Getter
   private final Match match;
@@ -411,5 +412,15 @@ public abstract class GroupsModule extends BridgeableModule<ModuleBridge<GroupsM
 
   public boolean isSpectator(Player player) {
     return getGroup(player).isSpectator();
+  }
+
+  @Override
+  public String getDescription(CommandSender viewer) {
+    return "Groups";
+  }
+
+  @Override
+  public List<RuntimeConfigurable> getChildren() {
+    return getGroups().stream().map(g -> (RuntimeConfigurable)g).collect(Collectors.toList());
   }
 }

@@ -26,6 +26,13 @@ import net.avicus.atlas.module.objectives.locatable.LocatableObjective;
 import net.avicus.atlas.module.objectives.score.ScoreObjective;
 import net.avicus.atlas.module.shop.PlayerEarnPointEvent;
 import net.avicus.atlas.module.zones.ZonesModule;
+import net.avicus.atlas.runtimeconfig.fields.ConfigurableField;
+import net.avicus.atlas.runtimeconfig.fields.DurationField;
+import net.avicus.atlas.runtimeconfig.fields.EnumField;
+import net.avicus.atlas.runtimeconfig.fields.OptionalField;
+import net.avicus.atlas.runtimeconfig.fields.RegisteredObjectField;
+import net.avicus.atlas.runtimeconfig.fields.SimpleFields.BooleanField;
+import net.avicus.atlas.runtimeconfig.fields.SimpleFields.IntField;
 import net.avicus.atlas.sets.competitve.objectives.flag.events.FlagDropEvent;
 import net.avicus.atlas.sets.competitve.objectives.flag.events.FlagPickupEvent;
 import net.avicus.atlas.sets.competitve.objectives.flag.events.FlagStealEvent;
@@ -44,6 +51,7 @@ import net.avicus.compendium.plugin.CompendiumPlugin;
 import net.avicus.compendium.utils.Strings;
 import net.avicus.magma.util.distance.DistanceCalculationMetric;
 import net.avicus.magma.util.region.BoundedRegion;
+import org.apache.commons.lang3.ArrayUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
 import org.bukkit.Location;
@@ -74,18 +82,19 @@ public class FlagObjective extends LocatableObjective implements GlobalObjective
   private final Optional<Team> owner;
   private final Optional<DyeColor> color;
   private final Optional<ScopableItemStack> banner;
-  private final Optional<Check> carryCheck;
-  private final Duration recoverTime;
+  private Optional<Check> carryCheck;
+  private Duration recoverTime;
   private final boolean highlightHolder;
   private final Optional<Duration> highlightDelay;  // Only delays when flag is not on post/ground.
-  private final boolean permanent;
-  private final int carryingPoints;
-  private final Optional<Duration> carryingPointsDelay;
-  private final Optional<Duration> carryingPointsGrowth;
-  private final FlagPickupMethod pickupMethod;
+  private boolean permanent;
+  private int carryingPoints;
+  private Optional<Duration> carryingPointsDelay;
+  private Optional<Duration> carryingPointsGrowth;
+  private FlagPickupMethod pickupMethod;
 
   private final CountdownManager cm = CompendiumPlugin.getInstance().getCountdownManager();
   private final List<NetZone> nets;
+  @Setter
   private LocalizedXmlString name;
   private DyeColor baseColor;
   private List<Pattern> patterns;
@@ -512,5 +521,18 @@ public class FlagObjective extends LocatableObjective implements GlobalObjective
     } else {
       return super.stringifyDistance(ref, viewer, sub);
     }
+  }
+
+  @Override
+  public ConfigurableField[] getFields() {
+    return ArrayUtils.addAll(super.getFields(),
+        new OptionalField<>("Carry Check", () -> this.carryCheck, (v) -> this.carryCheck = v, new RegisteredObjectField<>("check", Check.class)),
+        new DurationField("Recover Time", () -> this.recoverTime, (v) -> this.recoverTime = v),
+        new BooleanField("Permanent", () -> this.permanent, (v) -> this.permanent = v),
+        new IntField("Carry Points", () -> this.carryingPoints, (v) -> this.carryingPoints = v),
+        new OptionalField<>("Carrying Points Delay", () -> this.carryingPointsDelay, (v) -> carryingPointsDelay = v, new DurationField("carrypoints")),
+        new OptionalField<>("Carrying Points Growth", () -> this.carryingPointsGrowth, (v) -> carryingPointsGrowth = v, new DurationField("carrypointsg")),
+        new EnumField<>("Pickup Method", () -> this.pickupMethod, (v) -> this.pickupMethod = v, FlagPickupMethod.class)
+    );
   }
 }

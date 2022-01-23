@@ -17,6 +17,11 @@ import net.avicus.atlas.module.objectives.ObjectivesModule;
 import net.avicus.atlas.module.shop.PlayerEarnPointEvent;
 import net.avicus.atlas.module.zones.Zone;
 import net.avicus.atlas.module.zones.ZoneMessage;
+import net.avicus.atlas.runtimeconfig.fields.ConfigurableField;
+import net.avicus.atlas.runtimeconfig.fields.DurationField;
+import net.avicus.atlas.runtimeconfig.fields.OptionalField;
+import net.avicus.atlas.runtimeconfig.fields.RegisteredObjectField;
+import net.avicus.atlas.runtimeconfig.fields.SimpleFields.IntField;
 import net.avicus.atlas.sets.competitve.objectives.flag.FlagCountdown;
 import net.avicus.atlas.sets.competitve.objectives.flag.FlagObjective;
 import net.avicus.atlas.sets.competitve.objectives.flag.events.FlagCaptureEvent;
@@ -26,6 +31,8 @@ import net.avicus.compendium.TextStyle;
 import net.avicus.compendium.locale.text.Localizable;
 import net.avicus.compendium.locale.text.UnlocalizedText;
 import net.avicus.magma.util.region.Region;
+import org.apache.commons.lang3.ArrayUtils;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.joda.time.Duration;
 
@@ -33,12 +40,12 @@ import org.joda.time.Duration;
 public class NetZone extends Zone {
 
   private final Optional<Team> owner;
-  private final Optional<Integer> points;
+  private Optional<Integer> points;
   private final Optional<WeakReference<PostZone>> post;
   private final Optional<List<WeakReference<FlagObjective>>> flags;
-  private final Optional<Check> captureCheck;
+  private Optional<Check> captureCheck;
   private final boolean respawnTogether;
-  private final Optional<Duration> respawnDelay;
+  private Optional<Duration> respawnDelay;
 
   private List<FlagObjective> respawnQueue = new ArrayList<>();
 
@@ -186,5 +193,19 @@ public class NetZone extends Zone {
     } else {
       return true;
     }
+  }
+
+  @Override
+  public ConfigurableField[] getFields() {
+    return ArrayUtils.addAll(super.getFields(),
+        new OptionalField<>("Points", () -> this.points, (v) -> this.points = v, new IntField("points")),
+        new OptionalField<>("Capture Check", () -> this.captureCheck, (v) -> this.captureCheck = v, new RegisteredObjectField<>("check", Check.class)),
+        new OptionalField<>("Respawn Delay", () -> this.respawnDelay, (v) -> this.respawnDelay = v, new DurationField("delay"))
+    );
+  }
+
+  @Override
+  public String getDescription(CommandSender viewer) {
+    return "Flag Net" + super.getDescription(viewer);
   }
 }

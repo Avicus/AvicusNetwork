@@ -1,18 +1,25 @@
 package net.avicus.atlas.module.projectiles;
 
+import com.google.common.collect.Maps;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import net.avicus.atlas.Atlas;
 import net.avicus.atlas.event.group.PlayerChangedGroupEvent;
 import net.avicus.atlas.match.Match;
 import net.avicus.atlas.module.Module;
+import net.avicus.atlas.runtimeconfig.RuntimeConfigurable;
 import net.avicus.atlas.util.AtlasTask;
 import net.avicus.atlas.util.Messages;
 import net.avicus.magma.item.ItemTag;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -33,7 +40,7 @@ import tc.oc.tracker.Trackers;
 import tc.oc.tracker.trackers.ExplosiveTracker;
 
 @ToString(exclude = "match")
-public class ProjectilesModule implements Module {
+public class ProjectilesModule implements Module, RuntimeConfigurable {
 
   public static final String DAMAGE_METADATA_TAG = "atlas.projectile-damage";
   public static final String UUID_METADATA_TAG = "atlas.projectile-shortuuid";
@@ -42,6 +49,8 @@ public class ProjectilesModule implements Module {
 
   private final Match match;
   private final List<CustomProjectile> projectiles;
+  @Getter
+  private Map<Material, CustomProjectile> defaultProjectiles = Maps.newHashMap();
 
   public ProjectilesModule(Match match) {
     this.match = match;
@@ -240,6 +249,16 @@ public class ProjectilesModule implements Module {
       return getProjectile(PROJECTILE_ID_TAG.get(itemStack));
     }
 
-    return Optional.empty();
+    return Optional.ofNullable(this.defaultProjectiles.get(itemStack.getType()));
+  }
+
+  @Override
+  public String getDescription(CommandSender viewer) {
+    return "Custom Projectiles";
+  }
+
+  @Override
+  public List<RuntimeConfigurable> getChildren() {
+    return this.projectiles.stream().map(p -> (RuntimeConfigurable)p).collect(Collectors.toList());
   }
 }

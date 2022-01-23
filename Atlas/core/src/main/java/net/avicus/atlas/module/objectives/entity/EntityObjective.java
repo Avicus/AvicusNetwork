@@ -11,6 +11,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import net.avicus.atlas.match.Match;
 import net.avicus.atlas.module.checks.Check;
@@ -33,7 +34,8 @@ public class EntityObjective extends LocatableObjective implements Objective {
 
   private final Match match;
 
-  private final LocalizedXmlString name;
+  @Setter
+  private LocalizedXmlString name;
   private final boolean show;
   private final Optional<Competitor> owner;
   private final Optional<Check> damageCheck;

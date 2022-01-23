@@ -3,6 +3,7 @@ package net.avicus.atlas.sets.competitve.objectives.hill;
 import com.google.common.collect.ArrayListMultimap;
 import java.util.Optional;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import net.avicus.atlas.match.Match;
 import net.avicus.atlas.module.checks.Check;
@@ -16,6 +17,13 @@ import net.avicus.atlas.module.objectives.GlobalObjective;
 import net.avicus.atlas.module.objectives.Objective;
 import net.avicus.atlas.module.objectives.ObjectivesModule;
 import net.avicus.atlas.module.shop.PlayerEarnPointEvent;
+import net.avicus.atlas.runtimeconfig.fields.ConfigurableField;
+import net.avicus.atlas.runtimeconfig.fields.DurationField;
+import net.avicus.atlas.runtimeconfig.fields.EnumField;
+import net.avicus.atlas.runtimeconfig.fields.OptionalField;
+import net.avicus.atlas.runtimeconfig.fields.RegisteredObjectField;
+import net.avicus.atlas.runtimeconfig.fields.SimpleFields.BooleanField;
+import net.avicus.atlas.runtimeconfig.fields.SimpleFields.IntField;
 import net.avicus.atlas.sets.competitve.objectives.hill.event.HillCaptureEvent;
 import net.avicus.atlas.sets.competitve.objectives.hill.event.HillCompletionChangeEvent;
 import net.avicus.atlas.sets.competitve.objectives.hill.event.HillOwnerChangeEvent;
@@ -29,6 +37,7 @@ import net.avicus.compendium.locale.text.LocalizedText;
 import net.avicus.magma.util.region.BoundedRegion;
 import net.avicus.magma.util.region.Region;
 import net.avicus.magma.util.region.special.SectorRegion;
+import org.apache.commons.lang3.ArrayUtils;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -55,27 +64,28 @@ public class HillObjective implements Objective, GlobalObjective {
   /**
    * Name of the hill.
    **/
-  private final LocalizedXmlString name;
+  @Setter
+  private LocalizedXmlString name;
   /**
    * Region the competitors must be standing in to capture this hill.
    **/
-  private final Region capture;
+  private Region capture;
   /**
    * Region that displays the progress of the hill.
    **/
-  private final BoundedRegion progress;
+  private BoundedRegion progress;
   /**
    * Rule used to determine who should capture when multiple competitors are on the hill.
    **/
-  private final HillCaptureRule captureRule;
+  private HillCaptureRule captureRule;
   /**
    * How long it takes this hill to go from neutral to completely captured.
    **/
-  private final Duration captureTime;
+  private Duration captureTime;
   /**
    * Check to be run before a competitor can begin capturing.
    **/
-  private final Optional<Check> captureCheck;
+  private Optional<Check> captureCheck;
   /**
    * Owner of the hill when the match starts.
    **/
@@ -83,11 +93,11 @@ public class HillObjective implements Objective, GlobalObjective {
   /**
    * Points the competitor will earn when standing on the captured hill.
    **/
-  private final Optional<Integer> points;
+  private Optional<Integer> points;
   /**
    * How much the points should be multiplied by based on control time.
    **/
-  private final Optional<Duration> pointsGrowth;
+  private Optional<Duration> pointsGrowth;
   /**
    * If fireworks should explode when the hill is captured.
    **/
@@ -95,11 +105,11 @@ public class HillObjective implements Objective, GlobalObjective {
   /**
    * If the hill can have only one owner in it's lifetime.
    **/
-  private final boolean permanent;
+  private boolean permanent;
   /**
    * If the hill should return to neutral if there are no competitors standing on it.
    **/
-  private final boolean depreciate;
+  private boolean depreciate;
   /**
    * Block types that are ignored in the progress region.
    **/
@@ -108,7 +118,7 @@ public class HillObjective implements Objective, GlobalObjective {
   /**
    * The rule that should be used to determine when points should be earned for the owning team.
    */
-  private final PointEarnRule earnRule;
+  private PointEarnRule earnRule;
 
   /**
    * Current owner.
@@ -530,5 +540,21 @@ public class HillObjective implements Objective, GlobalObjective {
   @Override
   public boolean isIncremental() {
     return true;
+  }
+
+  @Override
+  public ConfigurableField[] getFields() {
+    return ArrayUtils.addAll(Objective.super.getFields(),
+        new RegisteredObjectField<>("Capture Region", () -> this.capture, (v) -> this.capture = v, Region.class),
+        new RegisteredObjectField<>("Progress Region", () -> this.progress, (v) -> this.progress = v, BoundedRegion.class),
+        new EnumField<>("Capture Rule", () -> this.captureRule, (v) -> this.captureRule = v, HillCaptureRule.class),
+        new DurationField("Capture Time", () -> this.captureTime, (v) -> this.captureTime = v),
+        new OptionalField<>("Capture Check", () -> this.captureCheck, (v) -> this.captureCheck = v, new RegisteredObjectField<>("check", Check.class)),
+        new OptionalField<>("Points", () -> this.points, (v) -> this.points = v, new IntField("points")),
+        new OptionalField<>("Points Growth", () -> this.pointsGrowth, (v) -> pointsGrowth = v, new DurationField("pointsgrowth")),
+        new BooleanField("Permanent", () -> this.permanent, (v) -> this.permanent = v),
+        new BooleanField("Depreciate", () -> this.depreciate, (v) -> this.depreciate = v),
+        new EnumField<>("Points Earn Rule", () -> this.earnRule, (v) -> this.earnRule = v, PointEarnRule.class)
+    );
   }
 }

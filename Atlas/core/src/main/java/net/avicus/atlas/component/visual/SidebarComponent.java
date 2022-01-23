@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import lombok.Setter;
+import net.avicus.atlas.event.RefreshUIEvent;
 import net.avicus.atlas.event.group.GroupMaxPlayerCountChangeEvent;
 import net.avicus.atlas.event.group.GroupRenameEvent;
 import net.avicus.atlas.event.group.PlayerChangedGroupEvent;
@@ -289,6 +290,11 @@ public class SidebarComponent implements ListenerModule {
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
   public void pointEarn(final PointEarnEvent event) {
+    this.delayedUpdate();
+  }
+
+  @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+  public void onRefresh(final RefreshUIEvent event) {
     this.delayedUpdate();
   }
 

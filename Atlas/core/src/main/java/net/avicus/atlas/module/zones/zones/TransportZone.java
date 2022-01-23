@@ -10,11 +10,18 @@ import net.avicus.atlas.module.checks.variable.LocationVariable;
 import net.avicus.atlas.module.checks.variable.PlayerVariable;
 import net.avicus.atlas.module.zones.Zone;
 import net.avicus.atlas.module.zones.ZoneMessage;
+import net.avicus.atlas.runtimeconfig.fields.AngleProviderField;
+import net.avicus.atlas.runtimeconfig.fields.ConfigurableField;
+import net.avicus.atlas.runtimeconfig.fields.OptionalField;
+import net.avicus.atlas.runtimeconfig.fields.RegisteredObjectField;
+import net.avicus.atlas.runtimeconfig.fields.SimpleFields.BooleanField;
 import net.avicus.compendium.points.AngleProvider;
 import net.avicus.magma.util.region.BoundedRegion;
 import net.avicus.magma.util.region.Region;
+import org.apache.commons.lang3.ArrayUtils;
 import org.bukkit.Location;
 import org.bukkit.Sound;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -27,14 +34,14 @@ public class TransportZone extends Zone {
 
   private static final Random random = new Random();
 
-  private final BoundedRegion destination;
-  private final Optional<Check> check;
+  private BoundedRegion destination;
+  private Optional<Check> check;
   private final boolean sound;
   private final boolean resetVelocity;
-  private final boolean heal;
-  private final boolean feed;
-  private final Optional<AngleProvider> yaw;
-  private final Optional<AngleProvider> pitch;
+  private boolean heal;
+  private boolean feed;
+  private Optional<AngleProvider> yaw;
+  private Optional<AngleProvider> pitch;
 
   public TransportZone(Match match, Region region, Optional<ZoneMessage> message,
       BoundedRegion destination, Optional<Check> check, boolean sound, boolean resetVelocity,
@@ -127,5 +134,22 @@ public class TransportZone extends Zone {
 
       transport(player);
     }
+  }
+
+  @Override
+  public String getDescription(CommandSender viewer) {
+    return "Portal" + super.getDescription(viewer);
+  }
+
+  @Override
+  public ConfigurableField[] getFields() {
+    return ArrayUtils.addAll(super.getFields(),
+        new RegisteredObjectField<BoundedRegion>("Destination", () -> this.destination, (v) -> this.destination = v, BoundedRegion.class),
+        new OptionalField<>("Use Check", () -> this.check, (v) -> this.check = v, new RegisteredObjectField<>("Use Check", Check.class)),
+        new BooleanField("Heal", () -> this.heal, (v) -> this.heal = v),
+        new BooleanField("Feed", () -> this.feed, (v) -> this.feed = v),
+        new OptionalField<>("Yaw", () -> this.yaw, (v) -> this.yaw = v, new AngleProviderField("yaw")),
+        new OptionalField<>("Pitch", () -> this.pitch, (v) -> this.pitch = v, new AngleProviderField("yaw"))
+    );
   }
 }

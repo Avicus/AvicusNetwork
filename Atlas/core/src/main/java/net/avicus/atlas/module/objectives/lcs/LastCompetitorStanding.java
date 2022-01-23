@@ -32,6 +32,11 @@ public class LastCompetitorStanding implements Objective {
   }
 
   @Override
+  public void setName(LocalizedXmlString name) {
+
+  }
+
+  @Override
   public boolean canComplete(Competitor competitor) {
     return true;
   }

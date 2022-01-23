@@ -3,7 +3,6 @@ package net.avicus.atlas.util;
 
 import static net.avicus.compendium.locale.TranslationProvider.$NULL$;
 
-import net.avicus.atlas.Atlas;
 import net.avicus.atlas.AtlasConfig;
 import net.avicus.compendium.locale.LocaleBundle;
 import net.avicus.compendium.locale.TranslationProvider;

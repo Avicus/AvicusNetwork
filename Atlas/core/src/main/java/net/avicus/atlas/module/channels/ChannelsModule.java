@@ -10,8 +10,12 @@ import net.avicus.atlas.module.Module;
 import net.avicus.atlas.module.groups.Competitor;
 import net.avicus.atlas.module.groups.Group;
 import net.avicus.atlas.module.groups.GroupsModule;
+import net.avicus.atlas.runtimeconfig.RuntimeConfigurable;
+import net.avicus.atlas.runtimeconfig.fields.ConfigurableField;
+import net.avicus.atlas.runtimeconfig.fields.SimpleFields;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -21,7 +25,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 /**
  * This module is responsible for handling team and global chat channels.
  */
-public class ChannelsModule implements Module {
+public class ChannelsModule implements Module, RuntimeConfigurable {
 
   /**
    * Map of players that are currently talking in global chat.
@@ -35,11 +39,11 @@ public class ChannelsModule implements Module {
   /**
    * If team chat is allowed during this match.
    */
-  private final boolean allowTeamChat;
+  private boolean allowTeamChat;
   /**
    * If global chat is allowed during this match.
    */
-  private final boolean allowGlobalChat;
+  private boolean allowGlobalChat;
 
   /**
    * Constructor.
@@ -139,5 +143,18 @@ public class ChannelsModule implements Module {
       String format = color + "[Team] " + ChatColor.RESET + event.getFormat();
       event.setFormat(format);
     }
+  }
+
+  @Override
+  public ConfigurableField[] getFields() {
+    return new ConfigurableField[]{
+        new SimpleFields.BooleanField("Team Chat", () -> this.allowTeamChat, (b) -> this.allowTeamChat = b),
+        new SimpleFields.BooleanField("Global Chat", () -> this.allowGlobalChat, (b) -> this.allowGlobalChat = b)
+    };
+  }
+
+  @Override
+  public String getDescription(CommandSender viewer) {
+    return "Chat Channels";
   }
 }

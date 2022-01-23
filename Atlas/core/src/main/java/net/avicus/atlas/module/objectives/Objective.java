@@ -2,13 +2,18 @@ package net.avicus.atlas.module.objectives;
 
 import java.util.Optional;
 import net.avicus.atlas.Atlas;
+import net.avicus.atlas.event.RefreshUIEvent;
 import net.avicus.atlas.module.groups.Competitor;
 import net.avicus.atlas.module.groups.GroupsModule;
 import net.avicus.atlas.module.locales.LocalizedXmlString;
+import net.avicus.atlas.runtimeconfig.RuntimeConfigurable;
+import net.avicus.atlas.runtimeconfig.fields.ConfigurableField;
+import net.avicus.atlas.runtimeconfig.fields.LocalizedXmlField;
+import net.avicus.atlas.util.Events;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public interface Objective {
+public interface Objective extends RuntimeConfigurable {
 
   /**
    * Called after world generation.
@@ -19,6 +24,12 @@ public interface Objective {
    * @return The name of the objective
    */
   LocalizedXmlString getName();
+
+  /**
+   * Set a new name for the objective
+   * @param name to set
+   */
+  void setName(LocalizedXmlString name);
 
   default String getName(CommandSender viewer) {
     return getName().translate(viewer.getLocale());
@@ -66,5 +77,22 @@ public interface Objective {
    */
   default boolean show() {
     return true;
+  }
+
+  @Override
+  default String getDescription(CommandSender viewer) {
+    return getClass().getSimpleName() + " (" + getName(viewer) + ")";
+  }
+
+  @Override
+  default void onFieldChange(String name) {
+    Events.call(new RefreshUIEvent());
+  }
+
+  @Override
+  default ConfigurableField[] getFields() {
+    return new ConfigurableField[]{
+        new LocalizedXmlField("Name", this::getName, this::setName)
+    };
   }
 }

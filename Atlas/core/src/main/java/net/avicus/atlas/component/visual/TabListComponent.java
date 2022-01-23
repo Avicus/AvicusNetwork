@@ -21,6 +21,7 @@ import javax.annotation.Nullable;
 import lombok.Getter;
 import lombok.Setter;
 import net.avicus.atlas.Atlas;
+import net.avicus.atlas.event.RefreshUIEvent;
 import net.avicus.atlas.event.group.GroupMaxPlayerCountChangeEvent;
 import net.avicus.atlas.event.group.GroupRenameEvent;
 import net.avicus.atlas.event.group.PlayerChangedGroupEvent;
@@ -128,6 +129,11 @@ public class TabListComponent implements ListenerModule {
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
   public void groupMaxPlayersChange(final GroupMaxPlayerCountChangeEvent event) {
+    this.update(true);
+  }
+
+  @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+  public void onRefresh(final RefreshUIEvent event) {
     this.update(true);
   }
 

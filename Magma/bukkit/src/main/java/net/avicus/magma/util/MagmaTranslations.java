@@ -8,7 +8,6 @@ import net.avicus.compendium.locale.LocaleBundle;
 import net.avicus.compendium.locale.TranslationProvider;
 import net.avicus.compendium.locale.text.LocalizedFormat;
 import net.avicus.compendium.locale.text.LocalizedText;
-import net.avicus.magma.Magma;
 import net.avicus.magma.MagmaConfig;
 import org.bukkit.ChatColor;
 

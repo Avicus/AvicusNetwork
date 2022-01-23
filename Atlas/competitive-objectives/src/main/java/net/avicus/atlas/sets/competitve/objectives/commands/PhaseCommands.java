@@ -43,7 +43,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.joda.time.Duration;
-import org.joda.time.Period;
 
 public class PhaseCommands {
 

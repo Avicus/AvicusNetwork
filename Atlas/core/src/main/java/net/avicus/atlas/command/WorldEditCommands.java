@@ -48,6 +48,7 @@ public class WorldEditCommands {
       CuboidRegion region = new CuboidRegion(min, max);
 
       match.getRegistry().add(new RegisteredObject<>(id, region));
+      sender.sendMessage("Registered region with ID " + id);
     } else {
       // TODO: Translate
       sender.sendMessage(ChatColor.RED + "You must make a selection first!");

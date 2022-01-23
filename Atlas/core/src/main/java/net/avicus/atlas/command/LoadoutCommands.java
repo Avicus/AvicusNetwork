@@ -10,14 +10,12 @@ import java.util.List;
 import net.avicus.atlas.Atlas;
 import net.avicus.atlas.command.exception.CommandMatchException;
 import net.avicus.atlas.match.Match;
-import net.avicus.atlas.match.registry.RegisteredObject;
 import net.avicus.atlas.module.loadouts.Loadout;
 import net.avicus.atlas.module.loadouts.modmenu.LoadoutModificationMenu;
 import net.avicus.atlas.module.loadouts.type.ItemLoadout;
 import net.avicus.atlas.module.loadouts.type.LoadoutNode;
 import net.avicus.compendium.StringUtil;
 import net.avicus.compendium.commands.exception.MustBePlayerCommandException;
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 

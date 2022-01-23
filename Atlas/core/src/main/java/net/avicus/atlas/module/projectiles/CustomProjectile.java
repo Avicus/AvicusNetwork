@@ -9,7 +9,16 @@ import lombok.Getter;
 import lombok.ToString;
 import net.avicus.atlas.match.registry.WeakReference;
 import net.avicus.atlas.module.loadouts.Loadout;
+import net.avicus.atlas.runtimeconfig.RuntimeConfigurable;
+import net.avicus.atlas.runtimeconfig.fields.ConfigurableField;
+import net.avicus.atlas.runtimeconfig.fields.DurationField;
+import net.avicus.atlas.runtimeconfig.fields.EnumField;
+import net.avicus.atlas.runtimeconfig.fields.MaterialMatcherField.SingleMatcherField;
+import net.avicus.atlas.runtimeconfig.fields.OptionalField;
+import net.avicus.atlas.runtimeconfig.fields.SimpleFields.BooleanField;
+import net.avicus.atlas.runtimeconfig.fields.SimpleFields.DoubleField;
 import net.avicus.compendium.inventory.SingleMaterialMatcher;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -24,7 +33,7 @@ import org.joda.time.Instant;
  * A custom projectile with various features.
  */
 @ToString
-public class CustomProjectile {
+public class CustomProjectile implements RuntimeConfigurable {
 
   private final UUID uuid;
   // TODO: Implement
@@ -32,22 +41,22 @@ public class CustomProjectile {
   @Getter
   private final boolean throwable;
   @Getter
-  private final EntityType type;
+  private EntityType type;
   @Getter
-  private final double damage;
+  private double damage;
   @Getter
-  private final double velocity;
+  private double velocity;
   // TODO: Implement
   @Getter
   private final Optional<WeakReference<Loadout>> loadout;
   @Getter
-  private final Optional<Duration> cooldown;
+  private Optional<Duration> cooldown;
   @Getter
-  private final boolean mount;
+  private boolean mount;
   @Getter
-  private final boolean sticky;
+  private boolean sticky;
   @Getter
-  private final Optional<SingleMaterialMatcher> block;
+  private Optional<SingleMaterialMatcher> block;
 
   @Getter
   private final Collection<PotionEffect> effects;
@@ -148,5 +157,23 @@ public class CustomProjectile {
    */
   public String getShortUuid() {
     return this.uuid.toString().substring(0, 5);
+  }
+
+  @Override
+  public ConfigurableField[] getFields() {
+    return new ConfigurableField[]{
+        new EnumField<>("Type", () -> this.type, (v) -> this.type = v, EntityType.class),
+        new DoubleField("Damage", () -> this.damage, (v) -> this.damage = v),
+        new DoubleField("Velocity", () -> this.velocity, (v) -> this.velocity = v),
+        new OptionalField<>("Cooldown", () -> this.cooldown, (v) -> this.cooldown = v, new DurationField("cooldown")),
+        new BooleanField("Mount", () -> this.mount, (v) -> this.mount = v),
+        new BooleanField("Sticky", () -> this.sticky, (v) -> this.sticky = v),
+        new OptionalField<>("Block", () -> this.block, (v) -> this.block = v, new SingleMatcherField("block"))
+    };
+  }
+
+  @Override
+  public String getDescription(CommandSender viewer) {
+    return this.name;
   }
 }

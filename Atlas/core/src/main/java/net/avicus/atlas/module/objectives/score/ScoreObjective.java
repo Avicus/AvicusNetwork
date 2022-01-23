@@ -13,9 +13,13 @@ import net.avicus.atlas.module.locales.LocalizedXmlString;
 import net.avicus.atlas.module.objectives.IntegerObjective;
 import net.avicus.atlas.module.objectives.score.event.PointEarnEvent;
 import net.avicus.atlas.module.shop.PlayerEarnPointEvent;
+import net.avicus.atlas.runtimeconfig.fields.ConfigurableField;
+import net.avicus.atlas.runtimeconfig.fields.OptionalField;
+import net.avicus.atlas.runtimeconfig.fields.SimpleFields.IntField;
 import net.avicus.atlas.util.Events;
 import net.avicus.atlas.util.Messages;
 import net.avicus.compendium.number.NumberAction;
+import org.apache.commons.lang3.ArrayUtils;
 import org.bukkit.entity.Player;
 
 @ToString(exclude = "match")
@@ -23,14 +27,15 @@ public class ScoreObjective implements IntegerObjective {
 
   private final Match match;
   @Getter
-  private final Optional<Integer> limit;
+  private Optional<Integer> limit;
   @Getter
   private final Optional<Team> team;
   @Getter
-  private final Optional<Integer> kills;
+  private Optional<Integer> kills;
   @Getter
-  private final Optional<Integer> deaths;
+  private Optional<Integer> deaths;
   private final Map<Competitor, Integer> points;
+  private Optional<LocalizedXmlString> overriddenName = Optional.empty();
 
   public ScoreObjective(Match match, Optional<Integer> limit, Optional<Team> team,
       Optional<Integer> kills, Optional<Integer> deaths) {
@@ -78,7 +83,12 @@ public class ScoreObjective implements IntegerObjective {
 
   @Override
   public LocalizedXmlString getName() {
-    return new LocalizedXmlString(Messages.UI_POINTS);
+    return this.overriddenName.orElse(new LocalizedXmlString(Messages.UI_POINTS));
+  }
+
+  @Override
+  public void setName(LocalizedXmlString name) {
+    this.overriddenName = Optional.of(name);
   }
 
   @Override
@@ -115,5 +125,15 @@ public class ScoreObjective implements IntegerObjective {
   @Override
   public boolean isIncremental() {
     return true;
+  }
+
+  @Override
+  public ConfigurableField[] getFields() {
+    return ArrayUtils.addAll(
+        IntegerObjective.super.getFields(),
+        new OptionalField<>("Limit", () -> this.limit, (v) -> this.limit = v, new IntField("limit")),
+        new OptionalField<>("Points Per Kill", () -> this.kills, (v) -> this.kills = v, new IntField("kills")),
+        new OptionalField<>("Points Per Death", () -> this.deaths, (v) -> this.deaths = v, new IntField("deaths"))
+    );
   }
 }

@@ -5,8 +5,14 @@ import lombok.ToString;
 import net.avicus.atlas.match.Match;
 import net.avicus.atlas.module.zones.Zone;
 import net.avicus.atlas.module.zones.ZoneMessage;
+import net.avicus.atlas.runtimeconfig.fields.ConfigurableField;
+import net.avicus.atlas.runtimeconfig.fields.OptionalField;
+import net.avicus.atlas.runtimeconfig.fields.SimpleFields.DoubleField;
+import net.avicus.atlas.runtimeconfig.fields.VectorField;
 import net.avicus.magma.util.region.Region;
+import org.apache.commons.lang3.ArrayUtils;
 import org.bukkit.Location;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -17,9 +23,9 @@ import tc.oc.tracker.event.PlayerCoarseMoveEvent;
 @ToString(callSuper = true)
 public class VelocityModZone extends Zone {
 
-  private final Optional<Vector> velocity;
-  private final Optional<Double> push;
-  private final Optional<Double> icarus;
+  private Optional<Vector> velocity;
+  private Optional<Double> push;
+  private Optional<Double> icarus;
 
   public VelocityModZone(Match match, Region region, Optional<ZoneMessage> message,
       Optional<Vector> velocity, Optional<Double> push, Optional<Double> icarus) {
@@ -72,5 +78,19 @@ public class VelocityModZone extends Zone {
     }
 
     player.setVelocity(velocity);
+  }
+
+  @Override
+  public ConfigurableField[] getFields() {
+    return ArrayUtils.addAll(super.getFields(),
+        new OptionalField<>("velocity", () -> this.velocity, (v) -> this.velocity = v, new VectorField("velocity")),
+        new OptionalField<>("push", () -> this.push, (v) -> this.push = v, new DoubleField("push")),
+        new OptionalField<>("icarus", () -> this.icarus, (v) -> this.icarus = v, new DoubleField("icarus"))
+    );
+  }
+
+  @Override
+  public String getDescription(CommandSender viewer) {
+    return "Velocity Modification" + super.getDescription(viewer);
   }
 }

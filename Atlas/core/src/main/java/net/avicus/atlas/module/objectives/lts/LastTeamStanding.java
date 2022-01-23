@@ -45,6 +45,11 @@ public class LastTeamStanding implements Objective, GlobalObjective {
   }
 
   @Override
+  public void setName(LocalizedXmlString name) {
+
+  }
+
+  @Override
   public boolean canComplete(Competitor competitor) {
     return this.team.equals(competitor.getGroup());
   }

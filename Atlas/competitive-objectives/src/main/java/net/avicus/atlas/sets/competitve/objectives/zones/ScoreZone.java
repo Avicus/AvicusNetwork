@@ -17,6 +17,11 @@ import net.avicus.atlas.module.groups.GroupsModule;
 import net.avicus.atlas.module.objectives.ObjectivesModule;
 import net.avicus.atlas.module.zones.Zone;
 import net.avicus.atlas.module.zones.ZoneMessage;
+import net.avicus.atlas.runtimeconfig.fields.ConfigurableField;
+import net.avicus.atlas.runtimeconfig.fields.NumberActionField;
+import net.avicus.atlas.runtimeconfig.fields.OptionalField;
+import net.avicus.atlas.runtimeconfig.fields.RegisteredObjectField;
+import net.avicus.atlas.runtimeconfig.fields.SimpleFields.IntField;
 import net.avicus.atlas.util.Messages;
 import net.avicus.compendium.TextStyle;
 import net.avicus.compendium.inventory.SingleMaterialMatcher;
@@ -25,8 +30,10 @@ import net.avicus.compendium.locale.text.LocalizedNumber;
 import net.avicus.compendium.locale.text.UnlocalizedText;
 import net.avicus.compendium.number.NumberAction;
 import net.avicus.magma.util.region.Region;
+import org.apache.commons.lang3.ArrayUtils;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -37,10 +44,10 @@ import tc.oc.tracker.event.PlayerCoarseMoveEvent;
 @ToString
 public class ScoreZone extends Zone {
 
-  private final int points;
-  private final NumberAction scoreModifier;
+  private int points;
+  private NumberAction scoreModifier;
   private final Optional<Double> pointsGrowth;
-  private final Optional<Check> check;
+  private Optional<Check> check;
   private final Optional<HashMap<Material, HashMap<SingleMaterialMatcher, Integer>>> itemRewards;
   private double nextPoints;
 
@@ -164,5 +171,26 @@ public class ScoreZone extends Zone {
         }
       }
     }
+  }
+
+  @Override
+  public void onFieldChange(String name) {
+    super.onFieldChange(name);
+    if (name.equalsIgnoreCase("points"))
+      this.nextPoints = points;
+  }
+
+  @Override
+  public ConfigurableField[] getFields() {
+    return ArrayUtils.addAll(super.getFields(),
+        new IntField("Points", () -> this.points, (v) -> this.points = v),
+        new NumberActionField("Score Modifier", () -> this.scoreModifier, (v) -> this.scoreModifier = v),
+        new OptionalField<>("Check", () -> this.check, (v) -> this.check = v, new RegisteredObjectField<>("Check", Check.class))
+    );
+  }
+
+  @Override
+  public String getDescription(CommandSender viewer) {
+    return "Scorebox" + super.getDescription(viewer);
   }
 }

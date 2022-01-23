@@ -6,8 +6,12 @@ import net.avicus.atlas.match.Match;
 import net.avicus.atlas.module.loadouts.Loadout;
 import net.avicus.atlas.module.zones.Zone;
 import net.avicus.atlas.module.zones.ZoneMessage;
+import net.avicus.atlas.runtimeconfig.fields.ConfigurableField;
+import net.avicus.atlas.runtimeconfig.fields.RegisteredObjectField;
 import net.avicus.magma.util.region.Region;
+import org.apache.commons.lang3.ArrayUtils;
 import org.bukkit.Location;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -17,7 +21,7 @@ import tc.oc.tracker.event.PlayerCoarseMoveEvent;
 @ToString(callSuper = true)
 public class LoadoutApplicationZone extends Zone {
 
-  private final Loadout loadout;
+  private Loadout loadout;
 
   public LoadoutApplicationZone(Match match, Region region, Optional<ZoneMessage> message,
       Loadout loadout) {
@@ -58,5 +62,15 @@ public class LoadoutApplicationZone extends Zone {
     }
 
     this.loadout.apply(player);
+  }
+
+  @Override
+  public String getDescription(CommandSender viewer) {
+    return "Loadout Application" + super.getDescription(viewer);
+  }
+
+  @Override
+  public ConfigurableField[] getFields() {
+    return ArrayUtils.addAll(super.getFields(), new RegisteredObjectField<>("Loadout", () -> this.loadout, (v) -> this.loadout = v, Loadout.class));
   }
 }

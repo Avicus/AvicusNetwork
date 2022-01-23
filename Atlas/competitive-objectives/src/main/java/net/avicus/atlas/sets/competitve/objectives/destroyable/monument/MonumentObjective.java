@@ -2,6 +2,7 @@ package net.avicus.atlas.sets.competitve.objectives.destroyable.monument;
 
 import java.util.Optional;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import net.avicus.atlas.match.Match;
 import net.avicus.atlas.module.checks.Check;
@@ -25,7 +26,8 @@ import net.avicus.magma.util.region.BoundedRegion;
 public class MonumentObjective extends DestroyableObjective {
 
   private final Match match;
-  private final LocalizedXmlString name;
+  @Setter
+  private LocalizedXmlString name;
   private final Optional<Team> owner;
 
   public MonumentObjective(Match match, TouchableDistanceMetrics metrics, LocalizedXmlString name,

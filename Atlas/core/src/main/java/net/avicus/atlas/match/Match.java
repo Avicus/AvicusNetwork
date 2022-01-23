@@ -20,6 +20,8 @@ import net.avicus.atlas.map.AtlasMap;
 import net.avicus.atlas.match.registry.MatchRegistry;
 import net.avicus.atlas.module.Module;
 import net.avicus.atlas.module.world.WorldModule;
+import net.avicus.atlas.runtimeconfig.RuntimeConfigurable;
+import net.avicus.atlas.runtimeconfig.RuntimeConfigurablesManager;
 import net.avicus.atlas.util.Events;
 import net.avicus.atlas.util.Messages;
 import net.avicus.compendium.TextStyle;
@@ -46,6 +48,8 @@ public class Match {
   private String id;
   @Getter
   private boolean loaded = false;
+  @Getter
+  private final RuntimeConfigurablesManager configurablesManager;
 
   public Match(AtlasMap map, MatchFactory factory) {
     this.id = UUID.randomUUID().toString().substring(0, 4);
@@ -53,6 +57,7 @@ public class Match {
     this.factory = factory;
     this.registry = new MatchRegistry(this);
     this.modules = new HashSet<>();
+    this.configurablesManager = new RuntimeConfigurablesManager();
   }
 
   public Collection<Player> getPlayers() {
@@ -149,6 +154,16 @@ public class Match {
 
     MatchOpenEvent event = new MatchOpenEvent(this);
     Events.call(event);
+    reRegisterConfigurables();
+  }
+
+  public void reRegisterConfigurables() {
+    this.configurablesManager.reset();
+    for (Module module : getModules()) {
+      if (module instanceof RuntimeConfigurable) {
+        this.configurablesManager.registerConfigurable((RuntimeConfigurable) module, null);
+      }
+    }
   }
 
   public void close() {

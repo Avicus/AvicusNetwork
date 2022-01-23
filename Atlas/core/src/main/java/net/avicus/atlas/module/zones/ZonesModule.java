@@ -2,13 +2,16 @@ package net.avicus.atlas.module.zones;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.ToString;
 import net.avicus.atlas.match.Match;
 import net.avicus.atlas.module.Module;
+import net.avicus.atlas.runtimeconfig.RuntimeConfigurable;
 import net.avicus.atlas.util.Events;
+import org.bukkit.command.CommandSender;
 
 @ToString
-public class ZonesModule implements Module {
+public class ZonesModule implements Module, RuntimeConfigurable {
 
   private final List<Zone> zones;
 
@@ -42,5 +45,15 @@ public class ZonesModule implements Module {
     this.zones.stream()
         .filter(z -> z instanceof ZoneNode && z.isActive())
         .flatMap(z -> ((ZoneNode) z).getZones().stream()).forEach(Events::unregister);
+  }
+
+  @Override
+  public List<RuntimeConfigurable> getChildren() {
+    return this.zones.stream().map(z -> (RuntimeConfigurable)z).collect(Collectors.toList());
+  }
+
+  @Override
+  public String getDescription(CommandSender viewer) {
+    return "Zones";
   }
 }

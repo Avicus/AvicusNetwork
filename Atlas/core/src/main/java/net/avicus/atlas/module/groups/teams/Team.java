@@ -11,7 +11,10 @@ import net.avicus.atlas.module.groups.Competitor;
 import net.avicus.atlas.module.groups.Group;
 import net.avicus.atlas.module.groups.GroupMember;
 import net.avicus.atlas.module.locales.LocalizedXmlString;
+import net.avicus.atlas.runtimeconfig.fields.ConfigurableField;
+import net.avicus.atlas.runtimeconfig.fields.EnumField;
 import net.avicus.atlas.util.color.TeamColor;
+import org.apache.commons.lang3.ArrayUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.DyeColor;
@@ -22,7 +25,7 @@ public class Team implements Group, Competitor {
 
   private final String id;
   private final LocalizedXmlString originalName;
-  private final TeamColor color;
+  private TeamColor color;
   private final int min;
   private final Map<UUID, GroupMember> members;
   private LocalizedXmlString name;
@@ -177,5 +180,12 @@ public class Team implements Group, Competitor {
   @Override
   public int getMaxOverfill() {
     return this.maxOverfill;
+  }
+
+  @Override
+  public ConfigurableField[] getFields() {
+    return ArrayUtils.addAll(Group.super.getFields(),
+        new EnumField<>("Color", () -> this.color, (v) -> this.color = v, TeamColor.class)
+    );
   }
 }

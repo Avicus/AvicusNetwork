@@ -2,10 +2,13 @@ package net.avicus.atlas.module.zones;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.ToString;
 import net.avicus.atlas.match.Match;
+import net.avicus.atlas.runtimeconfig.RuntimeConfigurable;
 import net.avicus.magma.util.region.Region;
+import org.bukkit.command.CommandSender;
 
 @Getter
 @ToString
@@ -21,5 +24,17 @@ public class ZoneNode extends Zone {
   @Override
   public boolean isActive() {
     return this.zones.stream().anyMatch(Zone::isActive);
+  }
+
+  @Override
+  public String getDescription(CommandSender viewer) {
+    return "Zone Group";
+  }
+
+  @Override
+  public List<RuntimeConfigurable> getChildren() {
+    List<RuntimeConfigurable> res = this.zones.stream().map(z -> (RuntimeConfigurable)z).collect(Collectors.toList());
+    res.addAll(super.getChildren());
+    return res;
   }
 }

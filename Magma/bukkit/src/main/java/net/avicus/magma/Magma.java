@@ -20,7 +20,6 @@ import net.avicus.compendium.locale.text.UnlocalizedText;
 import net.avicus.magma.alerts.Alerts;
 import net.avicus.magma.announce.Announce;
 import net.avicus.magma.api.API;
-import net.avicus.magma.api.APIClient;
 import net.avicus.magma.channel.ChannelManager;
 import net.avicus.magma.channel.distributed.DistributedChannels;
 import net.avicus.magma.channel.premium.Premium;
@@ -56,9 +55,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.event.Listener;
 import org.joda.time.Instant;
 
 /**

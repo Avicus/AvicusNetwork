@@ -8,12 +8,19 @@ import net.avicus.atlas.event.world.BlockChangeEvent;
 import net.avicus.atlas.match.Match;
 import net.avicus.atlas.module.zones.Zone;
 import net.avicus.atlas.module.zones.ZoneMessage;
+import net.avicus.atlas.runtimeconfig.fields.ConfigurableField;
+import net.avicus.atlas.runtimeconfig.fields.DurationField;
+import net.avicus.atlas.runtimeconfig.fields.SimpleFields.BooleanField;
+import net.avicus.atlas.runtimeconfig.fields.SimpleFields.FloatField;
+import net.avicus.atlas.runtimeconfig.fields.SimpleFields.IntField;
 import net.avicus.magma.util.region.Region;
+import org.apache.commons.lang3.ArrayUtils;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Dispenser;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -31,12 +38,12 @@ public class TNTCustomizationZone extends Zone {
 
   private final Random random = new Random();
 
-  private final Float yield;
-  private final Float power;
-  private final boolean instantIgnite;
-  private final Duration fuse;
-  private final int dispenserNukeLimit;
-  private final Float dispenserNukeMultiplier;
+  private Float yield;
+  private Float power;
+  private boolean instantIgnite;
+  private Duration fuse;
+  private int dispenserNukeLimit;
+  private Float dispenserNukeMultiplier;
 
   public TNTCustomizationZone(Match match,
       Region region,
@@ -185,5 +192,22 @@ public class TNTCustomizationZone extends Zone {
         }
       }
     }
+  }
+
+  @Override
+  public String getDescription(CommandSender viewer) {
+    return "TNT Customization" + super.getDescription(viewer);
+  }
+
+  @Override
+  public ConfigurableField[] getFields() {
+    return ArrayUtils.addAll(super.getFields(),
+        new FloatField("Yield", () -> this.yield, (v) -> this.yield = v),
+        new FloatField("Power", () -> this.power, (v) -> this.power = v),
+        new BooleanField("Instant Ignite", () -> this.instantIgnite, (v) -> this.instantIgnite = v),
+        new DurationField("Fuse", () -> this.fuse, (v) -> this.fuse = v),
+        new IntField("Dispenser Nuke Limit", () -> this.dispenserNukeLimit, (v) -> this.dispenserNukeLimit = v),
+        new FloatField("Dispenser Nuke Multiplier", () -> this.dispenserNukeMultiplier, (v) -> this.dispenserNukeMultiplier = v)
+    );
   }
 }

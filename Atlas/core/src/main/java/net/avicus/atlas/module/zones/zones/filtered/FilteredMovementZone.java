@@ -13,10 +13,15 @@ import net.avicus.atlas.module.checks.CheckContext;
 import net.avicus.atlas.module.checks.variable.PlayerVariable;
 import net.avicus.atlas.module.zones.Zone;
 import net.avicus.atlas.module.zones.ZoneMessage;
+import net.avicus.atlas.runtimeconfig.fields.ConfigurableField;
+import net.avicus.atlas.runtimeconfig.fields.OptionalField;
+import net.avicus.atlas.runtimeconfig.fields.RegisteredObjectField;
 import net.avicus.atlas.util.AtlasTask;
 import net.avicus.magma.util.region.Region;
 import net.avicus.magma.util.region.RepelableRegion;
+import org.apache.commons.lang3.ArrayUtils;
 import org.bukkit.Location;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -30,8 +35,8 @@ import tc.oc.tracker.event.PlayerCoarseMoveEvent;
 @ToString(callSuper = true)
 public class FilteredMovementZone extends Zone {
 
-  private final Optional<Check> enter;
-  private final Optional<Check> leave;
+  private Optional<Check> enter;
+  private Optional<Check> leave;
 
   private final ArrayListMultimap<UUID, Instant> attempts; // stores enter attempts in the past 5 seconds
   private final AtlasTask clearAttempts;
@@ -152,5 +157,18 @@ public class FilteredMovementZone extends Zone {
     if (attempts >= 10) {
       player.damage(1);
     }
+  }
+
+  @Override
+  public String getDescription(CommandSender viewer) {
+    return "Filtered Movement" + super.getDescription(viewer);
+  }
+
+  @Override
+  public ConfigurableField[] getFields() {
+    return ArrayUtils.addAll(super.getFields(),
+        new OptionalField<>("Enter", () -> this.enter, (v) -> this.enter = v, new RegisteredObjectField<>("enter", Check.class)),
+        new OptionalField<>("Leave", () -> this.leave, (v) -> this.leave = v, new RegisteredObjectField<>("leave", Check.class))
+    );
   }
 }

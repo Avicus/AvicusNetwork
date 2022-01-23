@@ -34,7 +34,8 @@ import org.bukkit.util.Vector;
 @ToString
 public class LeakableObjective extends DestroyableObjective {
 
-  private final LocalizedXmlString name;
+  @Setter
+  private LocalizedXmlString name;
   private final Optional<Team> owner;
   private final BoundedRegion leakArea;
 

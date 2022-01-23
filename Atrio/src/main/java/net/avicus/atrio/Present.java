@@ -1,6 +1,5 @@
 package net.avicus.atrio;
 
-import org.apache.commons.lang3.tuple.Pair;
 import lombok.Data;
 import net.avicus.hook.utils.HookTask;
 import net.avicus.hook.utils.ParticleEffect;
@@ -8,6 +7,7 @@ import net.avicus.magma.Magma;
 import net.avicus.magma.database.model.impl.User;
 import net.avicus.magma.network.user.Users;
 import net.md_5.bungee.api.ChatColor;
+import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;

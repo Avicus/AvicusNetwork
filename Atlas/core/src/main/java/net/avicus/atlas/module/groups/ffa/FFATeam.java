@@ -12,7 +12,10 @@ import java.util.stream.Collectors;
 import lombok.ToString;
 import net.avicus.atlas.module.groups.Group;
 import net.avicus.atlas.module.locales.LocalizedXmlString;
+import net.avicus.atlas.runtimeconfig.fields.ConfigurableField;
+import net.avicus.atlas.runtimeconfig.fields.SimpleFields.BooleanField;
 import net.avicus.atlas.util.color.TeamColor;
+import org.apache.commons.lang3.ArrayUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.DyeColor;
@@ -25,7 +28,7 @@ public class FFATeam implements Group {
   private final Map<UUID, FFAMember> members;
   private final Map<UUID, TeamColor> colors;
   private final boolean colorize;
-  private final boolean friendlyFire;
+  private boolean friendlyFire;
   private LocalizedXmlString name;
   private int max;
   private int maxOverfill;
@@ -211,5 +214,12 @@ public class FFATeam implements Group {
   @Override
   public boolean equals(Object compare) {
     return compare instanceof FFATeam && ((FFATeam) compare).getId().equals(this.getId());
+  }
+
+  @Override
+  public ConfigurableField[] getFields() {
+    return ArrayUtils.addAll(Group.super.getFields(),
+        new BooleanField("Friendly Fire", () -> this.friendlyFire, (v) -> this.friendlyFire = v)
+    );
   }
 }
