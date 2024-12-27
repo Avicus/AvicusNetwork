@@ -29,12 +29,11 @@ public class SpectatorListener implements Listener {
     ItemStack stack = new ItemStack(Material.COMPASS);
     ItemMeta meta = stack.getItemMeta();
 
-    Locale locale = player.getLocale();
     meta.setDisplayName(
-        Messages.UI_TELEPORT_DEVICE.with(TextStyle.ofColor(ChatColor.RED)).translate(locale)
+        Messages.UI_TELEPORT_DEVICE.with(TextStyle.ofColor(ChatColor.RED)).render(player)
             .toLegacyText());
     meta.setLore(Collections.singletonList(
-        Messages.UI_TELEPORT_DEVICE_TEXT.with(TextStyle.ofColor(ChatColor.WHITE)).translate(locale)
+        Messages.UI_TELEPORT_DEVICE_TEXT.with(TextStyle.ofColor(ChatColor.WHITE)).render(player)
             .toLegacyText()
     ));
 

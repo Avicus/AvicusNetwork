@@ -35,10 +35,10 @@ public class AutoJoinItem extends StaticInventoryMenuItem implements ClickableIn
 
     Locale locale = this.player.getLocale();
     meta.setDisplayName(
-        Messages.UI_AUTO_JOIN.with(TextStyle.ofColor(ChatColor.WHITE).bold()).translate(locale)
+        Messages.UI_AUTO_JOIN.with(TextStyle.ofColor(ChatColor.WHITE).bold()).render(this.player)
             .toLegacyText());
     meta.setLore(Collections.singletonList(
-        Messages.UI_AUTO_JOIN_TEXT.with(TextStyle.ofColor(ChatColor.GRAY)).translate(locale)
+        Messages.UI_AUTO_JOIN_TEXT.with(TextStyle.ofColor(ChatColor.GRAY)).render(this.player)
             .toLegacyText()
     ));
 

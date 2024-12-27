@@ -89,13 +89,13 @@ public class ScopableItemStack {
     }
 
     if (player.isPresent()) {
-      this.customName.ifPresent(n -> meta.setDisplayName(n.translate(player.get())));
+      this.customName.ifPresent(n -> meta.setDisplayName(n.render(player.get())));
       this.lore.ifPresent(l -> meta
-          .setLore(l.stream().map(s -> s.translate(player.get())).collect(Collectors.toList())));
+          .setLore(l.stream().map(s -> s.render(player.get())).collect(Collectors.toList())));
     } else {
-      this.customName.ifPresent(n -> meta.setDisplayName(n.translateDefault()));
+      this.customName.ifPresent(n -> meta.setDisplayName(n.renderDefault()));
       this.lore.ifPresent(l -> meta.setLore(
-          l.stream().map(LocalizedXmlString::translateDefault).collect(Collectors.toList())));
+          l.stream().map(LocalizedXmlString::renderDefault).collect(Collectors.toList())));
     }
 
     boolean colorable = (item.getType() == Material.WOOL ||

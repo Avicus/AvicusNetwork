@@ -2,7 +2,7 @@ package net.avicus.hook.gadgets.types.track;
 
 import com.google.gson.JsonObject;
 import java.util.Arrays;
-import java.util.Locale;
+
 import lombok.Getter;
 import net.avicus.compendium.TextStyle;
 import net.avicus.compendium.locale.text.Localizable;
@@ -27,15 +27,15 @@ public class TrackContext extends AbstractGadgetContext<TrackGadget> {
   }
 
   @Override
-  public ItemStack icon(Locale locale) {
-    ItemStack stack = super.icon(locale);
+  public ItemStack icon(Player player) {
+    ItemStack stack = super.icon(player);
     ItemMeta meta = stack.getItemMeta();
     Localizable used = new LocalizedNumber(this.usages, TextStyle.ofColor(ChatColor.WHITE));
     Localizable total = new LocalizedNumber(getGadget().getMaxUsages(),
         TextStyle.ofColor(ChatColor.WHITE));
     meta.setLore(Arrays.asList(
-        Messages.UI_USAGES.with(ChatColor.GRAY, used, total).translate(locale).toLegacyText(),
-        Messages.UI_CLICK_TRACK.with(ChatColor.WHITE).translate(locale).toLegacyText()
+        Messages.UI_USAGES.with(ChatColor.GRAY, used, total).render(player).toLegacyText(),
+        Messages.UI_CLICK_TRACK.with(ChatColor.WHITE).render(player).toLegacyText()
     ));
     stack.setItemMeta(meta);
     return stack;

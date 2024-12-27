@@ -1,7 +1,6 @@
 package net.avicus.hook.gadgets.types.map.setnext;
 
 import com.google.gson.JsonObject;
-import java.util.Locale;
 import net.avicus.atlas.match.Match;
 import net.avicus.compendium.locale.text.Localizable;
 import net.avicus.hook.gadgets.types.map.AtlasGadget;
@@ -22,11 +21,11 @@ public class SetNextGadget extends AtlasGadget {
   }
 
   @Override
-  public ItemStack icon(Locale locale) {
+  public ItemStack icon(Player player) {
     ItemStack stack = new ItemStack(Material.EMPTY_MAP);
     ItemMeta meta = stack.getItemMeta();
 
-    meta.setDisplayName(getName().translate(locale).toLegacyText());
+    meta.setDisplayName(getName().render(player).toLegacyText());
 
     stack.setItemMeta(meta);
     return stack;

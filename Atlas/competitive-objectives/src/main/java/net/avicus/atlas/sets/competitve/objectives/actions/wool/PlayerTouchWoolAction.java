@@ -40,7 +40,7 @@ public class PlayerTouchWoolAction extends PlayerTouchObjectiveAction implements
 
   private Pair<StringBuilder, Double> calcScore() {
     StringBuilder stringBuilder = new StringBuilder(
-        "Touch Wool: " + wool.getName().translateDefault() + " ");
+        "Touch Wool: " + wool.getName().renderDefault() + " ");
     GroupsModule module = Atlas.getMatch().getRequiredModule(GroupsModule.class);
 
     Pair<StringBuilder, HashMap<Integer, AtomicDouble>> nearby = getNearbyPlayers(

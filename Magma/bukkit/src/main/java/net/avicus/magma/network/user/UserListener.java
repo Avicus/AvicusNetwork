@@ -2,6 +2,8 @@ package net.avicus.magma.network.user;
 
 import java.util.Optional;
 import java.util.UUID;
+
+import com.viaversion.viaversion.api.Via;
 import net.avicus.magma.Magma;
 import net.avicus.magma.database.model.impl.User;
 import net.avicus.magma.event.user.AsyncHookLoginEvent;
@@ -17,7 +19,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scheduler.BukkitRunnable;
-import us.myles.ViaVersion.api.Via;
 
 public class UserListener implements Listener {
 
@@ -43,7 +44,7 @@ public class UserListener implements Listener {
     Magma.get().getServer().getPluginManager().callEvent(call);
 
     if (call.isCancelled()) {
-      String message = call.getKickMessage().translate(user.getLocale()).toLegacyText();
+      String message = call.getKickMessage().render(null).toLegacyText();
       event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, message);
       return;
     }
@@ -62,7 +63,7 @@ public class UserListener implements Listener {
           @Override
           public void run() {
             player.kickPlayer(MagmaTranslations.JOIN_DISALLOW_PERMISSION.with(ChatColor.RED)
-                .translate(player.getLocale()).toLegacyText());
+                .render(player).toLegacyText());
           }
         }.runTaskLater(Magma.get(), 5);
         return;

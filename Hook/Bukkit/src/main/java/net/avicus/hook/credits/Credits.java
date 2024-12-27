@@ -64,7 +64,7 @@ public class Credits {
     ItemMeta meta = stack.getItemMeta();
 
     meta.setDisplayName(
-        Messages.UI_GADGET_STORE.with(ChatColor.YELLOW).translate(player.getLocale())
+        Messages.UI_GADGET_STORE.with(ChatColor.YELLOW).render(player)
             .toLegacyText());
     meta.setLore(Arrays.asList(ChatColor.BLACK + "Gadget Store"));
 

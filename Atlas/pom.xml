@@ -23,13 +23,13 @@
   <dependencies>
     <!-- Server -->
     <dependency>
-      <groupId>net.avicus</groupId>
-      <artifactId>magnet</artifactId>
+      <groupId>app.ashcon</groupId>
+      <artifactId>sportpaper</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>net.avicus</groupId>
-      <artifactId>magnet-api</artifactId>
+      <groupId>app.ashcon</groupId>
+      <artifactId>sportpaper-api</artifactId>
       <scope>provided</scope>
     </dependency>
     <!-- Database -->
@@ -77,8 +77,8 @@
     </dependency>
     <!-- Packets -->
     <dependency>
-      <groupId>us.myles</groupId>
-      <artifactId>viaversion</artifactId>
+      <groupId>com.viaversion</groupId>
+      <artifactId>viaversion-api</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>

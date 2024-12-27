@@ -5,7 +5,6 @@ import static net.avicus.magma.module.gadgets.ranks.RankManager.DATE_FORMAT;
 import com.google.gson.JsonObject;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.Locale;
 import java.util.Optional;
 import lombok.Getter;
 import net.avicus.compendium.locale.text.Localizable;
@@ -17,6 +16,7 @@ import net.avicus.magma.module.gadgets.Gadget;
 import net.avicus.magma.module.gadgets.GadgetManager;
 import net.avicus.magma.util.MagmaTranslations;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -37,12 +37,12 @@ public class RankGadget implements Gadget<EmptyGadgetContext<RankGadget>> {
   }
 
   @Override
-  public ItemStack icon(Locale locale) {
+  public ItemStack icon(Player player) {
     ItemStack stack = new ItemStack(Material.COMMAND_MINECART);
     ItemMeta meta = stack.getItemMeta();
-    meta.setDisplayName(getName().translate(locale).toLegacyText());
+    meta.setDisplayName(getName().render(player).toLegacyText());
     this.expires.ifPresent(e -> meta.setLore(Arrays.asList("This rank will expire in",
-        new LocalizedDate(e).translate(locale).toLegacyText())));
+        new LocalizedDate(e).render(player).toLegacyText())));
     stack.setItemMeta(meta);
     return stack;
   }

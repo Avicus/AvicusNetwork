@@ -1,7 +1,6 @@
 package net.avicus.hook.gadgets.types.badge;
 
 import com.google.gson.JsonObject;
-import java.util.Locale;
 import lombok.ToString;
 import net.avicus.compendium.locale.text.Localizable;
 import net.avicus.compendium.locale.text.UnlocalizedText;
@@ -9,6 +8,7 @@ import net.avicus.hook.utils.Messages;
 import net.avicus.magma.module.gadgets.AbstractGadget;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -35,11 +35,11 @@ public class BadgeGadget extends AbstractGadget<BadgeContext> {
   }
 
   @Override
-  public ItemStack icon(Locale locale) {
+  public ItemStack icon(Player player) {
     ItemStack stack = new ItemStack(Material.NETHER_STAR);
     ItemMeta meta = stack.getItemMeta();
 
-    meta.setDisplayName(getName().translate(locale).toLegacyText());
+    meta.setDisplayName(getName().render(player).toLegacyText());
 
     // Todo: Add example of how it would look with your name? <funkystudios*>: Hey, chat!
 

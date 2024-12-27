@@ -30,7 +30,7 @@ public class PlayerDropFlagAction extends PlayerInteractWithObjectiveAction impl
 
   @Override
   public String getDebugMessage() {
-    return "Flag Drop: " + flag.getName().translateDefault();
+    return "Flag Drop: " + flag.getName().renderDefault();
   }
 
   @Override

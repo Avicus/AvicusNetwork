@@ -104,21 +104,20 @@ public class MapRatings implements Listener {
         .callEvent(new MapRateEvent(match, (Player) source, rating));
   }
 
-  private static Localizable createSummaryComponent(Locale locale, int rating, int ratings) {
+  private static Localizable createSummaryComponent(int rating, int ratings) {
     final LocalizedNumber quantityComponent = new LocalizedNumber(ratings);
     quantityComponent.style()
         .color(COLORS[rating - 1])
         .hover(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new BaseComponent[]{
-            Messages.MAP_RATINGS_SUMMARY_RATING_OF.with(new LocalizedNumber(rating)).translate(
-                locale)}));
+            Messages.MAP_RATINGS_SUMMARY_RATING_OF.with(new LocalizedNumber(rating)).render(null)}));
     return new UnlocalizedText("[{0}]", TextStyle.ofColor(ChatColor.WHITE), quantityComponent);
   }
 
-  private static Localizable createInteractiveButton(Locale locale, int rating) {
-    return createButton(locale, rating, true);
+  private static Localizable createInteractiveButton(Player viewer, int rating) {
+    return createButton(viewer, rating, true);
   }
 
-  private static Localizable createButton(Locale locale, int rating, boolean interactive) {
+  private static Localizable createButton(Player viewer, int rating, boolean interactive) {
     final LocalizedNumber numberComponent = new LocalizedNumber(rating);
     numberComponent.style().color(COLORS[rating - 1]);
 
@@ -127,18 +126,18 @@ public class MapRatings implements Listener {
       component.style()
           .click(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rate " + rating))
           .hover(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new BaseComponent[]{
-              Messages.MAP_RATINGS_RATE_BUTTON_HOVER.with(numberComponent).translate(locale)}));
+              Messages.MAP_RATINGS_RATE_BUTTON_HOVER.with(numberComponent).render(viewer)}));
     }
 
     return new UnlocalizedText("[{0}]", TextStyle.ofColor(ChatColor.WHITE), component);
   }
 
   private static ItemStack createFeedbackBook(String key, UnlocalizedComponent mapName,
-      UnlocalizedText mapVersion, Locale locale) {
+                                              UnlocalizedText mapVersion, Player viewer) {
     ItemStack stack = new ItemStack(Material.BOOK_AND_QUILL);
     BookMeta meta = (BookMeta) stack.getItemMeta();
     meta.setDisplayName(
-        Messages.MAP_RATINGS_FEEDBACK_BOOK_TITLE.with(mapName, mapVersion).translate(locale)
+        Messages.MAP_RATINGS_FEEDBACK_BOOK_TITLE.with(mapName, mapVersion).render(viewer)
             .toLegacyText());
     meta.setLore(Collections.singletonList(ChatColor.BLACK + key));
     meta.addPage(
@@ -198,13 +197,13 @@ public class MapRatings implements Listener {
     args[1] = new UnlocalizedText(this.map.getVersion().toString());
     args[args.length - 1] = new LocalizedNumber(average(values));
     for (final int rating : ALL_RATINGS) {
-      args[rating + 1] = createSummaryComponent(locale, rating,
+      args[rating + 1] = createSummaryComponent(rating,
           Collections.frequency(values, rating));
     }
 
     LocalizedText summary = Messages.MAP_RATINGS_SUMMARY_OVERALL.with(ChatColor.GRAY, args);
     StaffChannels.MAPDEV_CHANNEL
-        .simpleLocalSend(Bukkit.getConsoleSender(), summary.translate(Locale.US));
+        .simpleLocalSend(Bukkit.getConsoleSender(), summary.render(null));
 
     // Send to authors who can't see the MD channel.
     this.map.getAuthors().stream()
@@ -262,13 +261,13 @@ public class MapRatings implements Listener {
 
       HookTask.of(() -> {
         source.sendMessage(message.with(sameRating ? ChatColor.YELLOW : ChatColor.GREEN,
-            createButton(locale, rating, false), mapNameComponent, mapVersionComponent));
+            createButton(source, rating, false), mapNameComponent, mapVersionComponent));
 
         if (HookConfig.MapRatings.isBookEnabled() && groups.isObserving(source)) {
           source.sendMessage(Messages.MAP_RATINGS_RATE_SUCCESS_BOOK.with(ChatColor.GREEN));
           source.getInventory().addItem(
               createFeedbackBook(serialize(mapSlug, mapName, mapVersion), mapNameComponent,
-                  mapVersionComponent, locale));
+                  mapVersionComponent, source));
         }
 
         if (!previouslyRatedVersion) {
@@ -286,7 +285,7 @@ public class MapRatings implements Listener {
     final Locale locale = player.getLocale();
     final Localizable[] args = new Localizable[ALL_RATINGS.length];
     for (final int rating : ALL_RATINGS) {
-      args[rating - 1] = createInteractiveButton(locale, rating);
+      args[rating - 1] = createInteractiveButton(player, rating);
     }
 
     player.sendMessage(Messages.MAP_RATINGS_RATE_MESSAGE.with(args));

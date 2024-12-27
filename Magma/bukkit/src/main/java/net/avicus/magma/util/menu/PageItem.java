@@ -32,19 +32,17 @@ public class PageItem extends StaticInventoryMenuItem implements IndexedMenuItem
 
   @Override
   public ItemStack getItemStack() {
-    Locale locale = this.player.getLocale();
-
     StringBuilder name = new StringBuilder();
     name.append(ChatColor.GRAY);
 
     if (this.direction) {
-      name.append(MagmaTranslations.GUI_PAGE_NEXT.with().translate(locale).toPlainText());
+      name.append(MagmaTranslations.GUI_PAGE_NEXT.with().render(this.player).toPlainText());
       name.append(" ");
       name.append(RIGHT_ARROW);
     } else {
       name.append(LEFT_ARROW);
       name.append(" ");
-      name.append(MagmaTranslations.GUI_PAGE_PREV.with().translate(locale).toPlainText());
+      name.append(MagmaTranslations.GUI_PAGE_PREV.with().render(this.player).toPlainText());
     }
 
     ItemStack stack = new ItemStack(Material.EMPTY_MAP);

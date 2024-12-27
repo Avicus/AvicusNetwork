@@ -46,7 +46,7 @@ public class GroupMenuItem implements InventoryMenuItem, ClickableInventoryMenuI
     Localizable teamName = this.group.getName().toText(this.group.getChatColor());
     meta.setDisplayName(
         Messages.UI_JOIN_TEAM.with(TextStyle.ofColor(ChatColor.WHITE).bold(), teamName)
-            .translate(locale).toLegacyText());
+            .render(this.player).toLegacyText());
 
     String maxPlayers =
         this.group.getMaxPlayers() == Integer.MAX_VALUE ? "∞" : this.group.getMaxPlayers() + "";
@@ -63,7 +63,7 @@ public class GroupMenuItem implements InventoryMenuItem, ClickableInventoryMenuI
     // Cannot pick team
     if (!this.hasPermissionToChoose()) {
       lore.add(
-          Messages.ERROR_CANNOT_PICK_TEAM.with(ChatColor.RED).translate(locale).toLegacyText());
+          Messages.ERROR_CANNOT_PICK_TEAM.with(ChatColor.RED).render(this.player).toLegacyText());
     }
 
     meta.setLore(lore);
@@ -97,7 +97,7 @@ public class GroupMenuItem implements InventoryMenuItem, ClickableInventoryMenuI
     GroupsModule groups = this.match.getRequiredModule(GroupsModule.class);
     Group previousGroup = groups.getGroup(this.player);
 
-    String name = ChatColor.stripColor(this.group.getName().translate(this.player));
+    String name = ChatColor.stripColor(this.group.getName().render(this.player));
     Bukkit.dispatchCommand(this.player, "join " + name);
 
     Group updatedGroup = groups.getGroup(this.player);

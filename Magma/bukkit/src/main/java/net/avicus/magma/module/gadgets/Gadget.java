@@ -1,8 +1,8 @@
 package net.avicus.magma.module.gadgets;
 
 import com.google.gson.JsonObject;
-import java.util.Locale;
 import net.avicus.compendium.locale.text.Localizable;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public interface Gadget<C extends GadgetContext> {
@@ -11,7 +11,7 @@ public interface Gadget<C extends GadgetContext> {
 
   Localizable getName();
 
-  ItemStack icon(Locale locale);
+  ItemStack icon(Player player);
 
   JsonObject serialize();
 

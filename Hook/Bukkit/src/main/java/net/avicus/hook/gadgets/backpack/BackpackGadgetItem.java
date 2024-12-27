@@ -31,9 +31,7 @@ public class BackpackGadgetItem extends StaticInventoryMenuItem implements
 
   @Override
   public ItemStack getItemStack() {
-    Locale locale = this.player.getLocale();
-
-    ItemStack icon = this.gadget.icon(locale);
+    ItemStack icon = this.gadget.icon(this.player);
     ItemMeta meta = icon.getItemMeta();
 
     List<String> lore = meta.hasLore() ? new ArrayList<>(meta.getLore()) : new ArrayList<>();
@@ -43,11 +41,11 @@ public class BackpackGadgetItem extends StaticInventoryMenuItem implements
 
     if (this.menu.isTrashEnabled()) {
       lore.add(
-          Messages.UI_BACKPACK_TRASH.with(ChatColor.DARK_RED).translate(locale).toLegacyText());
+          Messages.UI_BACKPACK_TRASH.with(ChatColor.DARK_RED).render(this.player).toLegacyText());
     } else if (Hook.atlas() && !gadget.getGadget().isAllowedInMatches()) {
-      lore.add(Messages.ERROR_CANNOT_USE.with(ChatColor.RED).translate(locale).toLegacyText());
+      lore.add(Messages.ERROR_CANNOT_USE.with(ChatColor.RED).render(this.player).toLegacyText());
     } else {
-      lore.add(Messages.UI_BACKPACK_USE.with(ChatColor.YELLOW).translate(locale).toLegacyText());
+      lore.add(Messages.UI_BACKPACK_USE.with(ChatColor.YELLOW).render(this.player).toLegacyText());
     }
 
     meta.setLore(lore);

@@ -28,25 +28,24 @@ public class CrateRevealItem implements InventoryMenuItem, IndexedMenuItem {
 
   @Override
   public ItemStack getItemStack() {
-    Locale locale = this.player.getLocale();
 
-    ItemStack stack = this.gadget.icon(locale).clone();
+    ItemStack stack = this.gadget.icon(this.player).clone();
     ItemMeta meta = stack.getItemMeta();
     List<String> lore = meta.hasLore() ? meta.getLore() : new ArrayList<>();
 
     lore.add(ChatColor.DARK_GRAY.toString() + ChatColor.STRIKETHROUGH + "----------------------");
 
     if (this.likelihood <= 0.05) {
-      lore.add(MagmaTranslations.GUI_RARITY_EXTREMELY.with(ChatColor.RED).translate(locale)
+      lore.add(MagmaTranslations.GUI_RARITY_EXTREMELY.with(ChatColor.RED).render(this.player)
           .toLegacyText());
     } else if (this.likelihood <= 0.15) {
       lore.add(
-          MagmaTranslations.GUI_RARITY_RARE.with(ChatColor.GOLD).translate(locale).toLegacyText());
+          MagmaTranslations.GUI_RARITY_RARE.with(ChatColor.GOLD).render(this.player).toLegacyText());
     } else if (this.likelihood <= 0.4) {
-      lore.add(MagmaTranslations.GUI_RARITY_UNCOMMON.with(ChatColor.YELLOW).translate(locale)
+      lore.add(MagmaTranslations.GUI_RARITY_UNCOMMON.with(ChatColor.YELLOW).render(this.player)
           .toLegacyText());
     } else {
-      lore.add(MagmaTranslations.GUI_RARITY_COMMON.with(ChatColor.GREEN).translate(locale)
+      lore.add(MagmaTranslations.GUI_RARITY_COMMON.with(ChatColor.GREEN).render(this.player)
           .toLegacyText());
     }
 

@@ -105,7 +105,7 @@ public abstract class EndScenario {
 
     final Localizable translation = Messages.UI_WINNERS.with();
     match.getPlayers().forEach(player -> player.sendMessage(Strings
-        .padChatComponent(translation.translate(player.getLocale()), "-", ChatColor.GOLD,
+        .padChatComponent(translation.render(player), "-", ChatColor.GOLD,
             ChatColor.YELLOW)));
     display.getRankDisplay()
         .forEach(match::broadcast);

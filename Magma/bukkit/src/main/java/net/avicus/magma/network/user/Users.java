@@ -171,7 +171,7 @@ public class Users {
   }
 
   public static String getDisplay(User user, boolean forceRanks) {
-    return getLocalizedDisplay(user, forceRanks).translate(Locale.ENGLISH).toLegacyText();
+    return getLocalizedDisplay(user, forceRanks).render(null).toLegacyText();
   }
 
   public static User fromSender(CommandSender sender) {

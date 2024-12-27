@@ -33,7 +33,7 @@ public class TieScenario extends EndScenario {
     Localizable tie = Messages.UI_TIE.with(ChatColor.GRAY);
 
     for (Player player : Bukkit.getOnlinePlayers()) {
-      Title title = Title.builder().title(tie.translate(player.getLocale()))
+      Title title = Title.builder().title(tie.render(player))
           .fadeIn(10)
           .stay(60)
           .fadeOut(20)

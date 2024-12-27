@@ -59,7 +59,7 @@ public class MapNotificationComponent implements ListenerModule {
 
     // Game Types
     List<String> types = map.getGameTypes().stream().map(gameType ->
-        gameType.getName().with(org.bukkit.ChatColor.BLUE).translate(Locale.ENGLISH).toLegacyText()
+        gameType.getName().with(org.bukkit.ChatColor.BLUE).render(null).toLegacyText()
             + ChatColor.AQUA).collect(Collectors.toList());
     BaseComponent gameType = new TextComponent(StringUtil.listToEnglishCompound(types));
     gameType.setColor(ChatColor.BLUE);

@@ -104,7 +104,7 @@ public class MapItem extends StaticInventoryMenuItem implements ClickableInvento
     List<String> lore = new ArrayList<>();
     lore.add(ChatColor.AQUA + "By: " + authorString);
     lore.add(Messages.UI_CLICK_MAP.with(TextStyle.ofColor(org.bukkit.ChatColor.BLUE))
-        .translate(this.player).toLegacyText());
+        .render(this.player).toLegacyText());
     meta.setLore(lore);
     stack.setItemMeta(meta);
     return stack;

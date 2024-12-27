@@ -2,7 +2,7 @@ package net.avicus.magma.redis;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.lambdaworks.redis.pubsub.RedisPubSubListener;
+import io.lettuce.core.pubsub.RedisPubSubListener;
 
 public class RedisListener implements RedisPubSubListener<String, String> {
 

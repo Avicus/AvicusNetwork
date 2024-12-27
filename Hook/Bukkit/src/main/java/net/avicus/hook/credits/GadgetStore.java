@@ -33,7 +33,7 @@ public class GadgetStore extends InventoryMenu {
   }
 
   private static String createTitle(Player player) {
-    return Messages.UI_GADGET_STORE.with(ChatColor.DARK_GRAY).translate(player.getLocale())
+    return Messages.UI_GADGET_STORE.with(ChatColor.DARK_GRAY).render(player)
         .toLegacyText();
   }
 }

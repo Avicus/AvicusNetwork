@@ -31,7 +31,7 @@ public class PlayerEarnPointAction extends PlayerInteractWithObjectiveAction imp
 
   @Override
   public String getDebugMessage() {
-    return "Earn Point: " + scoreObjective.getName().translateDefault();
+    return "Earn Point: " + scoreObjective.getName().renderDefault();
   }
 
   @Override

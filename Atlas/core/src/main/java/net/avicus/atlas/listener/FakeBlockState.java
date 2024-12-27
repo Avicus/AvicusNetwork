@@ -37,6 +37,26 @@ public class FakeBlockState implements BlockState {
   }
 
   @Override
+  public Material getMaterial() {
+    return this.type.orElse(this.parent.getMaterial());
+  }
+
+  @Override
+  public MaterialData getMaterialData() {
+    return this.data.orElse(this.parent.getMaterialData());
+  }
+
+  @Override
+  public void setMaterial(Material material) {
+    this.type = Optional.ofNullable(material);
+  }
+
+  @Override
+  public void setMaterialData(MaterialData materialData) {
+    this.data = Optional.ofNullable(materialData);
+  }
+
+  @Override
   public MaterialData getData() {
     return this.data.orElse(this.parent.getData());
   }
@@ -139,6 +159,11 @@ public class FakeBlockState implements BlockState {
   @Override
   public void setMetadata(String s, MetadataValue metadataValue) {
     throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public MetadataValue getMetadata(String s, Plugin plugin) {
+    return null;
   }
 
   @Override

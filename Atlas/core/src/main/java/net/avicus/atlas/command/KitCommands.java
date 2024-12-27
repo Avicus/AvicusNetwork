@@ -50,7 +50,7 @@ public class KitCommands {
     }
 
     sender.sendMessage(Strings
-        .padChatComponent(Messages.UI_KITS.with(ChatColor.GOLD).translate(sender.getLocale()), "-",
+        .padChatComponent(Messages.UI_KITS.with(ChatColor.GOLD).render(sender), "-",
             ChatColor.BLUE, ChatColor.AQUA));
 
     List<Kit> kitList = kits.getKits();

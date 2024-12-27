@@ -58,7 +58,7 @@ public class CrateRevealMenu extends InventoryMenu {
 
   private static String createTitle(Player player) {
     return MagmaTranslations.GUI_CRATE_REVEAL.with(ChatColor.DARK_GRAY)
-        .translate(player.getLocale()).toLegacyText();
+        .render(player).toLegacyText();
   }
 
   public boolean isPicked() {

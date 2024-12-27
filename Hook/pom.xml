@@ -16,8 +16,6 @@
   <modules>
     <module>Core</module>
     <module>Bukkit</module>
-    <module>Teamspeak</module>
     <module>ServerManager</module>
-    <module>Discord</module>
   </modules>
 </project>

@@ -76,7 +76,7 @@ public interface Group extends RegisterableObject<Group>, PlayerStore, RuntimeCo
 
   @Override
   default String getDescription(CommandSender viewer) {
-    return getChatColor() + getName().translateDefault() + ChatColor.RESET;
+    return getChatColor() + getName().renderDefault() + ChatColor.RESET;
   }
 
   @Override

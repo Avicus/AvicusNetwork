@@ -46,7 +46,7 @@ public class CompassModule implements Module {
           before.getData().getData());
 
       if (compass.isPresent()) {
-        String name = compass.get().getDisplay().translate(player.getLocale()).toLegacyText();
+        String name = compass.get().getDisplay().render(player).toLegacyText();
         ItemMeta meta = after.getItemMeta();
         meta.setDisplayName(name);
         after.setItemMeta(meta);

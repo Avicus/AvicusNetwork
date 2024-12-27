@@ -1,7 +1,6 @@
 package net.avicus.hook.gadgets.types.sound;
 
 import com.google.gson.JsonObject;
-import java.util.Locale;
 import lombok.Getter;
 import net.avicus.compendium.locale.text.Localizable;
 import net.avicus.compendium.sound.SoundLocation;
@@ -38,11 +37,11 @@ public class SoundGadget extends AbstractGadget<SoundContext> {
   }
 
   @Override
-  public ItemStack icon(Locale locale) {
+  public ItemStack icon(Player player) {
     ItemStack stack = new ItemStack(Material.NOTE_BLOCK);
     ItemMeta meta = stack.getItemMeta();
 
-    meta.setDisplayName(getName().translate(locale).toLegacyText());
+    meta.setDisplayName(getName().render(player).toLegacyText());
 
     stack.setItemMeta(meta);
     return stack;

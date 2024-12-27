@@ -42,18 +42,18 @@ public final class GameModeItem extends ObserverMenuItem {
         .material(Material.EYE_OF_ENDER)
         .flags(ItemFlag.HIDE_ATTRIBUTES)
         .displayName(Translations.MODULE_OBSERVER_MENU_ITEM_GAMEMODE_NAME.with(ChatColor.AQUA)
-            .translate(this.viewer))
+            .render(this.viewer))
         .lore(Translations.MODULE_OBSERVER_MENU_ITEM_GAMEMODE_DESCRIPTION.with(ChatColor.GRAY)
-            .translate(this.viewer), MAX_LENGTH)
+            .render(this.viewer), MAX_LENGTH)
         .lore("")
         .lore(TWO_PART_FORMAT.with(Translations.MODULE_OBSERVER_MENU_CURRENT.with(ChatColor.GRAY),
             new UnlocalizedText(this.viewer.getGameMode().name().toLowerCase()))
-            .translate(this.viewer));
+            .render(this.viewer));
     if (this.viewer.getGameMode() == GameMode.SPECTATOR) {
       builder
           .lore("")
           .lore(Translations.MODULE_OBSERVER_MENU_COMMAND
-              .with(ChatColor.YELLOW, new UnlocalizedText("/obs")).translate(this.viewer));
+              .with(ChatColor.YELLOW, new UnlocalizedText("/obs")).render(this.viewer));
     }
     return builder.build();
   }

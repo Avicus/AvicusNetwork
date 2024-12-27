@@ -28,7 +28,7 @@ public class PlayerPlaceWoolAction extends PlayerCompleteObjectiveAction impleme
 
   @Override
   public String getDebugMessage() {
-    return "Place Wool: " + wool.getName().translateDefault();
+    return "Place Wool: " + wool.getName().renderDefault();
   }
 
   @Override

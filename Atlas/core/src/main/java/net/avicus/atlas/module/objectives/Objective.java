@@ -32,7 +32,7 @@ public interface Objective extends RuntimeConfigurable {
   void setName(LocalizedXmlString name);
 
   default String getName(CommandSender viewer) {
-    return getName().translate(viewer.getLocale());
+    return getName().render(viewer);
   }
 
   /**

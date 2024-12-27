@@ -59,7 +59,7 @@ public class AtrioSidebar implements Listener {
           TextStyle.ofColor(ChatColor.YELLOW).bold());
 
       sidebar.replace(4, "Credits");
-      sidebar.replace(3, creditText.translate(player.getLocale()).toLegacyText());
+      sidebar.replace(3, creditText.render(player).toLegacyText());
       sidebar.replace(2, "");
       sidebar.replace(1, "Website");
       sidebar.replace(0, ChatColor.YELLOW + ChatColor.BOLD.toString() + NetworkIdentification.URL);

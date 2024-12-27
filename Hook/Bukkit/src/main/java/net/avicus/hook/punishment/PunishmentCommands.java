@@ -118,14 +118,14 @@ public class PunishmentCommands {
             @Override
             public void run() throws Exception {
               Localizable message = Punishments.formatKick(player1.getLocale(), punishment);
-              player1.kickPlayer(message.translate(player1.getLocale()).toLegacyText());
+              player1.kickPlayer(message.render(player1).toLegacyText());
             }
           }.now());
         }
 
         Users.player(user.get()).ifPresent(toWarn -> {
           toWarn.sendTitle(new Title("",
-              Punishments.formatBroadcast(toWarn.getLocale(), punishment).translate(toWarn)
+              Punishments.formatBroadcast(toWarn.getLocale(), punishment).render(toWarn)
                   .toLegacyText()));
           toWarn.playSound(toWarn.getLocation(), Sound.ANVIL_BREAK, 1, 0.5f);
           HookTask.of(() -> {
@@ -273,7 +273,7 @@ public class PunishmentCommands {
 
       sender.sendMessage(Strings.padChatComponent(
           Messages.UI_PLAYER_HISTORY.with(ChatColor.GREEN, user.get().getName())
-              .translate(sender.getLocale()), "-", ChatColor.YELLOW, ChatColor.AQUA));
+              .render(sender), "-", ChatColor.YELLOW, ChatColor.AQUA));
 
       for (Punishment punishment : punishments) {
         if (punishment.isAppealed()) {

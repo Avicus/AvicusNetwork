@@ -105,7 +105,7 @@ public class MatchTutorialStep extends AbstractTutorialStep {
   public Optional<List<TextComponent>> getChat(Player player) {
     // Translate each line to a TextComponent for this player's language
     return this.chat.map((lines) -> lines.stream().map((line) -> {
-      String text = line.translate(player);
+      String text = line.render(player);
       return new TextComponent(text);
     }).collect(Collectors.toList()));
   }

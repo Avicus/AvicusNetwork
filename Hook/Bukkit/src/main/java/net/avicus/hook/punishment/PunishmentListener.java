@@ -95,7 +95,7 @@ public class PunishmentListener implements Listener {
         .getByIp(event.getLoginEvent().getAddress().getHostAddress());
     if (ipBan.isPresent() && ipBan.get().isEnabled() && !ipBan.get().isUserExcluded(user.getId())) {
       String message =
-          Messages.PUNISHMENT_IP_BAN.with(ChatColor.RED).translate(user.getLocale()).toLegacyText()
+          Messages.PUNISHMENT_IP_BAN.with(ChatColor.RED).render(null).toLegacyText()
               + "\n" + ChatColor.GRAY + "(" + ChatColor.GOLD + ipBan.get().getReason()
               + ChatColor.GRAY + ")";
       event.setKickMessage(new UnlocalizedText(message));

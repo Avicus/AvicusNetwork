@@ -40,13 +40,13 @@ public final class NightVisionItem extends ObserverMenuItem {
         .durability((short) 8230)
         .flags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_POTION_EFFECTS)
         .displayName(Translations.MODULE_OBSERVER_MENU_ITEM_NIGHTVISION_NAME.with(ChatColor.AQUA)
-            .translate(this.viewer))
+            .render(this.viewer))
         .lore(Translations.MODULE_OBSERVER_MENU_ITEM_NIGHTVISION_DESCRIPTION.with(ChatColor.GRAY)
-            .translate(this.viewer), MAX_LENGTH)
+            .render(this.viewer), MAX_LENGTH)
         .lore("")
         .lore(TWO_PART_FORMAT.with(Translations.MODULE_OBSERVER_MENU_CURRENT.with(ChatColor.GRAY),
             Translations.bool(this.viewer.hasPotionEffect(PotionEffectType.NIGHT_VISION)))
-            .translate(this.viewer))
+            .render(this.viewer))
         .build();
   }
 }

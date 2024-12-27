@@ -171,7 +171,6 @@ public class KitsModule implements Module {
    */
   public List<Kit> search(CommandSender viewer, String query) {
     List<Kit> result = new ArrayList<>();
-    Locale locale = viewer.getLocale();
 
     List<Kit> kits = this.kits;
     if (viewer instanceof Player) {
@@ -179,15 +178,15 @@ public class KitsModule implements Module {
     }
 
     for (Kit kit : kits) {
-      String translated = kit.getName().toText().translate(locale).toPlainText();
+      String translated = kit.getName().toText().render(viewer).toPlainText();
       if (translated.toLowerCase().startsWith(query.toLowerCase())) {
         result.add(kit);
       }
     }
 
     result.sort((o1, o2) -> {
-      String name1 = o1.getName().translate(viewer).toLowerCase();
-      String name2 = o2.getName().translate(viewer).toLowerCase();
+      String name1 = o1.getName().render(viewer).toLowerCase();
+      String name2 = o2.getName().render(viewer).toLowerCase();
 
       if (name1.equals(query.toLowerCase())) {
         return 1;

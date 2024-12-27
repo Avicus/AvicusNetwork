@@ -28,7 +28,7 @@ public class ServerMenuItem implements InventoryMenuItem, IndexedMenuItem,
     ItemMeta meta = stack.getItemMeta();
 
     meta.setDisplayName(
-        MagmaTranslations.GUI_GENERIC_BACK.with(ChatColor.RED).translate(this.player.getLocale())
+        MagmaTranslations.GUI_GENERIC_BACK.with(ChatColor.RED).render(this.player)
             .toLegacyText());
 
     stack.setItemMeta(meta);

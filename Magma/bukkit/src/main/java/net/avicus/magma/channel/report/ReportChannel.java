@@ -125,7 +125,7 @@ public class ReportChannel extends AbstractStaffChannel {
         new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/reports -p " + victim.getName()),
         new HoverEvent(HoverEvent.Action.SHOW_TEXT, new BaseComponent[]{
             MagmaTranslations.REPORT_RECENT_VIEW_PLAYER
-                .with(ChatColor.WHITE, victim.getName()).translate(Locale.US)
+                .with(ChatColor.WHITE, victim.getName()).render(null)
         })
     ));
     template.addExtra(Components.simple("]", ChatColor.GRAY));

@@ -32,16 +32,16 @@ public abstract class CategoryMenu extends InventoryMenu implements InventoryMen
     this.store = store;
     this.index = index;
 
-    add(new BackItem(player.getLocale(), store, ROWS * 9 - 5));
+    add(new BackItem(player, store, ROWS * 9 - 5));
   }
 
   private static String createTitle(Player player) {
-    return Messages.UI_GADGET_STORE.with(ChatColor.DARK_GRAY).translate(player.getLocale())
+    return Messages.UI_GADGET_STORE.with(ChatColor.DARK_GRAY).render(player)
         .toLegacyText();
   }
 
-  public void onRightClick(GadgetItem item, User clicked, Locale playerLocale) {
-    item.handleClick(clicked, playerLocale);
+  public void onRightClick(GadgetItem item, User clicked, Player player) {
+    item.handleClick(clicked, player);
   }
 
   public void add(Gadget gadget, int price, GadgetPurchaseRequirement... requirements) {
@@ -71,12 +71,12 @@ public abstract class CategoryMenu extends InventoryMenu implements InventoryMen
   private class BackItem extends StaticInventoryMenuItem implements ClickableInventoryMenuItem,
       IndexedMenuItem {
 
-    private final Locale locale;
+    private final Player p;
     private final GadgetStore store;
     private final int index;
 
-    public BackItem(Locale locale, GadgetStore store, int index) {
-      this.locale = locale;
+    public BackItem(Player player, GadgetStore store, int index) {
+      this.p = player;
       this.store = store;
       this.index = index;
     }
@@ -87,7 +87,7 @@ public abstract class CategoryMenu extends InventoryMenu implements InventoryMen
       ItemMeta meta = stack.getItemMeta();
 
       meta.setDisplayName(
-          Messages.UI_BACK.with(ChatColor.GREEN).translate(this.locale).toLegacyText());
+          Messages.UI_BACK.with(ChatColor.GREEN).render(this.p).toLegacyText());
 
       stack.setItemMeta(meta);
       return stack;

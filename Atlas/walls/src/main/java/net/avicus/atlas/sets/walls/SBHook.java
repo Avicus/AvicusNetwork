@@ -51,7 +51,7 @@ public class SBHook extends SidebarHook {
       if (g.hasPlayer(viewer)) {
         name.style().bold();
       }
-      res.append(" " + name.translate(viewer).toLegacyText());
+      res.append(" " + name.render(viewer).toLegacyText());
       res.append(" " + ChatColor.GRAY + g.getGroup().getMembers().size());
       res.append(ChatColor.GOLD + "/");
       res.append(ChatColor.GRAY + "" + g.getGroup().getMaxPlayers());

@@ -61,7 +61,7 @@
               <include>com.sk89q:command-framework-bungee</include>
               <include>com.sk89q:command-framework-core</include>
               <include>mysql.mysql-connector-java</include>
-              <include>biz.paluch.redis:lettuce</include>
+              <include>io.lettuce:lettuce-core</include>
               <include>org.apache.commons:commons-lang3</include>
               <include>commons-logging:commons-logging</include>
               <include>org.apache.httpcomponents:httpcore</include>

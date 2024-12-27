@@ -19,7 +19,7 @@ public final class ObserverMenu extends InventoryMenu {
   private ObserverMenu(final Player viewer) {
     super(
         viewer,
-        Translations.MODULE_OBSERVER_MENU_TITLE.with(ChatColor.AQUA).translate(viewer)
+        Translations.MODULE_OBSERVER_MENU_TITLE.with(ChatColor.AQUA).render(viewer)
             .toLegacyText(),
         1
     );
@@ -37,7 +37,7 @@ public final class ObserverMenu extends InventoryMenu {
     final ItemMeta meta = stack.getItemMeta();
     meta.setDisplayName(
         ChatColor.RESET + Translations.MODULE_OBSERVER_MENU_TITLE.with(ChatColor.AQUA)
-            .translate(viewer).toLegacyText());
+            .render(viewer).toLegacyText());
     meta.setLore(Collections.singletonList(ChatColor.BLACK + "observer-menu"));
     stack.setItemMeta(meta);
     return stack;

@@ -21,6 +21,6 @@ public class LocalizedXmlField extends ConfigurableField<LocalizedXmlString> {
 
     @Override
     public String getValue(LocalizedXmlString value) throws Exception {
-        return value.translateDefault();
+        return value.renderDefault();
     }
 }

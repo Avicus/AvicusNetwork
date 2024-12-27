@@ -1,7 +1,6 @@
 package net.avicus.magma.module.gadgets.crates;
 
 import com.google.gson.JsonObject;
-import java.util.Locale;
 import lombok.Getter;
 import net.avicus.compendium.TextStyle;
 import net.avicus.compendium.WeightedRandomizer;
@@ -12,6 +11,7 @@ import net.avicus.magma.module.gadgets.Gadget;
 import net.avicus.magma.module.gadgets.GadgetContext;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -43,11 +43,11 @@ public class CrateGadget extends AbstractGadget<CrateContext> {
   }
 
   @Override
-  public ItemStack icon(Locale locale) {
+  public ItemStack icon(Player player) {
     ItemStack stack = new ItemStack(Material.CHEST);
     ItemMeta meta = stack.getItemMeta();
 
-    meta.setDisplayName(getName().translate(locale).toLegacyText());
+    meta.setDisplayName(getName().render(player).toLegacyText());
 
     stack.setItemMeta(meta);
     return stack;

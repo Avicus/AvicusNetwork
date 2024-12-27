@@ -83,7 +83,7 @@ public class SoundCategory extends CategoryMenu {
   }
 
   @Override
-  public void onRightClick(GadgetItem item, User clicked, Locale playerLocale) {
+  public void onRightClick(GadgetItem item, User clicked, Player playerLocale) {
     SoundGadget gadget = (SoundGadget) item.getGadget();
     gadget.play(item.getPlayer());
   }

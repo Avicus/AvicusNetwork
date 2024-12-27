@@ -1,6 +1,6 @@
 package net.avicus.magma.module.gadgets;
 
-import java.util.Locale;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public abstract class AbstractGadgetContext<G extends Gadget> implements GadgetContext<G> {
@@ -12,8 +12,8 @@ public abstract class AbstractGadgetContext<G extends Gadget> implements GadgetC
   }
 
   @Override
-  public ItemStack icon(Locale locale) {
-    return this.gadget.icon(locale);
+  public ItemStack icon(Player player) {
+    return this.gadget.icon(player);
   }
 
   @Override

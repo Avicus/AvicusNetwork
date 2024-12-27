@@ -59,7 +59,7 @@ public class HookAtlas {
 
         UnlocalizedText text = Users.getPrefix(user, ranks);
 
-        return (text == null ? "" : text.translate(viewer).toLegacyText()) + base;
+        return (text == null ? "" : text.render(viewer).toLegacyText()) + base;
       }
     });
     RemoteTeleports.participationDelegate = new RemoteTeleports.ParticipationDelegate() {

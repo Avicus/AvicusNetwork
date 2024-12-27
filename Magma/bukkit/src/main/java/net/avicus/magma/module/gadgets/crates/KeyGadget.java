@@ -2,7 +2,7 @@ package net.avicus.magma.module.gadgets.crates;
 
 import com.google.gson.JsonObject;
 import java.util.Arrays;
-import java.util.Locale;
+
 import net.avicus.compendium.locale.text.Localizable;
 import net.avicus.compendium.locale.text.UnlocalizedText;
 import net.avicus.magma.module.gadgets.AbstractGadget;
@@ -12,6 +12,7 @@ import net.avicus.magma.module.gadgets.GadgetContext;
 import net.avicus.magma.util.MagmaTranslations;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -38,14 +39,14 @@ public class KeyGadget extends AbstractGadget<EmptyGadgetContext<KeyGadget>> {
   }
 
   @Override
-  public ItemStack icon(Locale locale) {
+  public ItemStack icon(Player player) {
     ItemStack stack = new ItemStack(Material.FEATHER);
     ItemMeta meta = stack.getItemMeta();
 
-    meta.setDisplayName(getName().translate(locale).toLegacyText());
+    meta.setDisplayName(getName().render(player).toLegacyText());
 
     meta.setLore(Arrays.asList(
-        MagmaTranslations.GUI_CLICK_KEY.with(ChatColor.GRAY).translate(locale).toLegacyText()
+        MagmaTranslations.GUI_CLICK_KEY.with(ChatColor.GRAY).render(player).toLegacyText()
     ));
 
     stack.setItemMeta(meta);

@@ -91,7 +91,7 @@ public class PhaseCommands {
   private static List<BaseComponent> describePhase(String prefix, DestroyablePhase phase, CommandSender viewer) {
     List<BaseComponent> rows = Lists.newArrayList();
 
-    rows.add(new UnlocalizedFormat(prefix + "{0} ({1})").with(phase.getName().toText(), new UnlocalizedText(phase.getId())).translate(viewer));
+    rows.add(new UnlocalizedFormat(prefix + "{0} ({1})").with(phase.getName().toText(), new UnlocalizedText(phase.getId())).render(viewer));
     rows.add(new TextComponent(prefix + INDENT + ChatColor.YELLOW + StringUtil.listToEnglishCompound(phase.describeReplacementStrategy())));
     rows.add(new TextComponent(prefix + INDENT + ChatColor.BLUE + "Applied After: " + ChatColor.AQUA + StringUtil.secondsToClock((int) phase.getDelay().getStandardSeconds())));
     if (phase.getPassPhase().isPresent()) {

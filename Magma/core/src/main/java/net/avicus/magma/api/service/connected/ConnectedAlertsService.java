@@ -1,6 +1,6 @@
 package net.avicus.magma.api.service.connected;
 
-import com.lambdaworks.com.google.common.collect.Lists;
+import com.google.common.collect.Lists;
 import java.util.List;
 import net.avicus.magma.api.APIClient;
 import net.avicus.magma.api.graph.QLBuilder;

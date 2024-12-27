@@ -21,7 +21,7 @@ public class ZoneMessage implements RuntimeConfigurable {
   }
 
   public void send(Player player) {
-    String text = this.message.translate(player);
+    String text = this.message.render(player);
     player.sendMessage(this.format.format(text));
   }
 

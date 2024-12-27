@@ -66,18 +66,18 @@ public class GadgetItem extends StaticInventoryMenuItem implements ClickableInve
     Locale locale = this.player.getLocale();
 
     if (type.equals(ClickType.RIGHT)) {
-      menu.onRightClick(this, user, locale);
+      menu.onRightClick(this, user, this.player);
     } else {
-      handleClick(user, locale);
+      handleClick(user, this.player);
     }
   }
 
-  public void handleClick(User user, Locale locale) {
+  public void handleClick(User user, Player player) {
     List<GadgetPurchaseRequirement> unmet = unmetRequirements();
     if (!unmet.isEmpty()) {
       List<String> unmetText = unmet.stream()
           .map(requirement -> requirement.getText()
-              .translate(locale)
+              .render(player)
               .toPlainText())
           .collect(Collectors.toList());
 
@@ -107,22 +107,20 @@ public class GadgetItem extends StaticInventoryMenuItem implements ClickableInve
 
   @Override
   public ItemStack getItemStack() {
-    Locale locale = this.player.getLocale();
-
-    ItemStack stack = this.gadget.icon(locale);
+    ItemStack stack = this.gadget.icon(this.player);
     ItemMeta meta = stack.getItemMeta();
 
     List<String> lore = meta.hasLore() ? new ArrayList<>(meta.getLore()) : new ArrayList<>();
     lore.add(
         ChatColor.DARK_GRAY.toString() + ChatColor.STRIKETHROUGH + "---------------------------");
     lore.add(
-        ChatColor.GOLD + this.price.getDisplay().translate(locale).toPlainText() + ChatColor.WHITE
+        ChatColor.GOLD + this.price.getDisplay().render(player).toPlainText() + ChatColor.WHITE
             + " credits");
     for (GadgetPurchaseRequirement requirement : this.requirements) {
       Localizable text = requirement.getText();
       text.style()
           .color(requirement.meetsRequirement(this.player) ? ChatColor.GREEN : ChatColor.RED);
-      lore.add(ChatColor.WHITE + "* " + text.translate(locale).toLegacyText());
+      lore.add(ChatColor.WHITE + "* " + text.render(player).toLegacyText());
     }
     meta.setLore(lore);
 

@@ -20,15 +20,13 @@ import org.bukkit.event.player.PlayerInteractEvent;
 public class FakeGUIsModule implements Module {
 
   private final boolean fakeBenches;
-  private final boolean fakeAnvils;
   private final boolean fakeEnchantTables;
   private final StatesModule statesModule;
   private final GroupsModule groupsModule;
 
-  public FakeGUIsModule(Match match, boolean fakeBenches, boolean fakeAnvils,
-      boolean fakeEnchantTables) {
+  public FakeGUIsModule(Match match, boolean fakeBenches,
+                        boolean fakeEnchantTables) {
     this.fakeBenches = fakeBenches;
-    this.fakeAnvils = fakeAnvils;
     this.fakeEnchantTables = fakeEnchantTables;
     this.statesModule = match.getRequiredModule(StatesModule.class);
     this.groupsModule = match.getRequiredModule(GroupsModule.class);
@@ -54,12 +52,6 @@ public class FakeGUIsModule implements Module {
     if (material == Material.WORKBENCH && this.fakeBenches) {
       event.setCancelled(true);
       player.openWorkbench(null, true);
-      return;
-    }
-
-    if (material == Material.ANVIL && this.fakeAnvils) {
-      event.setCancelled(true);
-      player.openVirtualAnvil(null, true);
       return;
     }
 

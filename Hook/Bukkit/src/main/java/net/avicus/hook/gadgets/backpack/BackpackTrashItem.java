@@ -32,17 +32,15 @@ public class BackpackTrashItem implements InventoryMenuItem, ClickableInventoryM
 
   @Override
   public ItemStack getItemStack() {
-    Locale locale = this.player.getLocale();
-
     Material material = Material.BUCKET;
     String title = Messages.UI_TRASH_BIN.with(TextStyle.ofColor(ChatColor.DARK_RED).bold())
-        .translate(locale).toLegacyText();
-    String fullInfo = Messages.UI_TRASH_INFO.with(ChatColor.GRAY).translate(locale).toLegacyText();
+        .render(this.player).toLegacyText();
+    String fullInfo = Messages.UI_TRASH_INFO.with(ChatColor.GRAY).render(this.player).toLegacyText();
 
     List<String> lore = new ArrayList<>(
         Splitter.on(';').splitToList(WordUtils.wrap(fullInfo, 35, ";" + ChatColor.GRAY, false)));
     lore.add(0,
-        Messages.enabledOrDisabled(this.menu.isTrashEnabled()).translate(locale).toLegacyText());
+        Messages.enabledOrDisabled(this.menu.isTrashEnabled()).render(this.player).toLegacyText());
 
     if (this.menu.isTrashEnabled()) {
       material = Material.LAVA_BUCKET;

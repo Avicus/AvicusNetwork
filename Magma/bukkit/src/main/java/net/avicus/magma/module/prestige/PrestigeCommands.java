@@ -74,24 +74,24 @@ public class PrestigeCommands {
     }
 
     final BaseComponent cancel = MagmaTranslations.GENERIC_TYPE_CONFIRM_CANCEL_NAME
-        .with(ChatColor.RED).translate(player);
+        .with(ChatColor.RED).render(player);
     cancel.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new BaseComponent[]{
-        MagmaTranslations.GENERIC_TYPE_CONFIRM_CANCEL_DESCRIPTION.with(ChatColor.RED).translate(
+        MagmaTranslations.GENERIC_TYPE_CONFIRM_CANCEL_DESCRIPTION.with(ChatColor.RED).render(
             player)
     }));
     cancel.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND,
         '/' + PRESTIGE_COMMAND + ' ' + ChildrenCommands.CANCEL_COMMAND));
     final BaseComponent confirm = MagmaTranslations.GENERIC_TYPE_CONFIRM_CONFIRM_NAME
-        .with(ChatColor.GREEN).translate(player);
+        .with(ChatColor.GREEN).render(player);
     confirm.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new BaseComponent[]{
-        MagmaTranslations.GENERIC_TYPE_CONFIRM_CONFIRM_DESCRIPTION.with(ChatColor.GREEN).translate(
+        MagmaTranslations.GENERIC_TYPE_CONFIRM_CONFIRM_DESCRIPTION.with(ChatColor.GREEN).render(
             player)
     }));
     confirm.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND,
         '/' + PRESTIGE_COMMAND + ' ' + ChildrenCommands.CONFIRM_COMMAND));
     player.sendMessage(MagmaTranslations.PRESTIGE_COMMANDS_PRESTIGE_CONFIRM
         .with(ChatColor.GRAY, new LocalizedNumber(next.getId()), new UnlocalizedComponent(confirm),
-            new UnlocalizedComponent(cancel)).translate(player));
+            new UnlocalizedComponent(cancel)).render(player));
   }
 
   private static void spawnFireworks(Player player) {

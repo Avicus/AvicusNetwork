@@ -79,7 +79,7 @@ public class Kit implements RegisterableObject<Kit> {
 
   private void applyPermissions(Permissible permissible) {
     PermissionAttachment attach = permissible.addAttachment(Atlas.get());
-    attach.setPermission("atlas.active-kit." + this.getName().translateDefault().replace(' ', '_'),
+    attach.setPermission("atlas.active-kit." + this.getName().renderDefault().replace(' ', '_'),
         true);
 
     for (KitPermission perm : this.getPermissions()) {
@@ -94,7 +94,7 @@ public class Kit implements RegisterableObject<Kit> {
 
     for (PermissionAttachmentInfo attachInfo : permissible.getEffectivePermissions()) {
       if (attachInfo.getPermission()
-          .startsWith("atlas.active-kit." + this.getName().translateDefault().replace(' ', '_'))) {
+          .startsWith("atlas.active-kit." + this.getName().renderDefault().replace(' ', '_'))) {
         permissible.removeAttachment(attachInfo.getAttachment());
         changed = true;
       }

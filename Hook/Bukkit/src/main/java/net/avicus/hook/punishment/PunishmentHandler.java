@@ -55,7 +55,7 @@ public class PunishmentHandler extends AsyncRedisHandler<PunishmentMessage> {
 
       if (player.isPresent()) {
         Localizable text = Punishments.formatKick(player.get().getLocale(), punishment);
-        player.get().kickPlayer(text.translate(player.get().getLocale()).toLegacyText());
+        player.get().kickPlayer(text.render(player.get()).toLegacyText());
       }
     }
 

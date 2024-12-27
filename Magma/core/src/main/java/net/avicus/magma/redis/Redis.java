@@ -1,12 +1,14 @@
 package net.avicus.magma.redis;
 
-import com.lambdaworks.redis.ClientOptions;
-import com.lambdaworks.redis.RedisClient;
-import com.lambdaworks.redis.RedisURI;
-import com.lambdaworks.redis.api.StatefulRedisConnection;
-import com.lambdaworks.redis.api.sync.RedisCommands;
-import com.lambdaworks.redis.pubsub.StatefulRedisPubSubConnection;
-import com.lambdaworks.redis.pubsub.api.sync.RedisPubSubCommands;
+import io.lettuce.core.ClientOptions;
+import io.lettuce.core.RedisClient;
+import io.lettuce.core.RedisURI;
+import io.lettuce.core.api.StatefulRedisConnection;
+import io.lettuce.core.api.sync.RedisCommands;
+import io.lettuce.core.pubsub.StatefulRedisPubSubConnection;
+import io.lettuce.core.pubsub.api.sync.RedisPubSubCommands;
+
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -83,7 +85,7 @@ public class Redis implements Enableable {
 
     StatefulRedisPubSubConnection<String, String> pubsub = this.client.connectPubSub();
     this.subscriber = Optional.ofNullable(pubsub.sync());
-    this.subscriber.get().addListener(new RedisListener(this));
+    pubsub.addListener(new RedisListener(this));
 
     StatefulRedisConnection<String, String> connection = this.client.connect();
     this.connection = Optional.ofNullable(connection.sync());
@@ -95,7 +97,7 @@ public class Redis implements Enableable {
       throw new IllegalStateException("Redis hasn't been enabled.");
     }
 
-    this.connection.get().close();
+    this.connection.get().getStatefulConnection().close();
     this.connection = Optional.empty();
   }
 
@@ -135,7 +137,7 @@ public class Redis implements Enableable {
       RedisURI.Builder uriBuilder = RedisURI.Builder.redis(this.host);
 
       if (this.timeout.isPresent()) {
-        uriBuilder.withTimeout(this.timeout.get(), TimeUnit.MILLISECONDS);
+        uriBuilder.withTimeout(Duration.ofMillis(this.timeout.get()));
       }
 
       if (this.database.isPresent()) {
@@ -146,7 +148,7 @@ public class Redis implements Enableable {
         uriBuilder.withPassword(this.password.get());
       }
 
-      ClientOptions.Builder options = new ClientOptions.Builder();
+      ClientOptions.Builder options = ClientOptions.builder();
 
       if (this.reconnect.isPresent()) {
         options.autoReconnect(this.reconnect.get());

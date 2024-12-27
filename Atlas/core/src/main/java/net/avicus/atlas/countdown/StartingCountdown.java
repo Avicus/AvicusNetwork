@@ -79,7 +79,7 @@ public class StartingCountdown extends MatchCountdown {
       for (Competitor competitor : this.match.getRequiredModule(GroupsModule.class)
           .getCompetitors()) {
         for (Player player : competitor.getPlayers()) {
-          Title title = new Title("", time.translate(player.getLocale()).toLegacyText(), 4, 10, 4);
+          Title title = new Title("", time.render(player).toLegacyText(), 4, 10, 4);
           player.sendTitle(title);
           SoundEvent call = Events
               .call(new SoundEvent(player, SoundType.PIANO, SoundLocation.MATCH_DING));
@@ -123,7 +123,7 @@ public class StartingCountdown extends MatchCountdown {
         .getCompetitors()) {
       for (Player player : competitor.getPlayers()) {
         Title title = new Title("",
-            Messages.UI_PLAY.with(ChatColor.GREEN).translate(player.getLocale()).toLegacyText(), 4,
+            Messages.UI_PLAY.with(ChatColor.GREEN).render(player).toLegacyText(), 4,
             10, 4);
         player.sendTitle(title);
         SoundEvent call = Events

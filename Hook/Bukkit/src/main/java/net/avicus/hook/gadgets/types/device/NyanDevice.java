@@ -2,7 +2,6 @@ package net.avicus.hook.gadgets.types.device;
 
 import com.google.gson.JsonObject;
 import java.util.Arrays;
-import java.util.Locale;
 import java.util.concurrent.atomic.AtomicInteger;
 import net.avicus.atlas.util.AtlasTask;
 import net.avicus.compendium.TextStyle;
@@ -30,11 +29,11 @@ public class NyanDevice extends DeviceGadget {
   }
 
   @Override
-  public ItemStack icon(Locale locale) {
+  public ItemStack icon(Player player) {
     ItemStack stack = new ItemStack(Material.WOOL);
 
     ItemMeta meta = stack.getItemMeta();
-    meta.setDisplayName(getName().translate(locale).toLegacyText());
+    meta.setDisplayName(getName().render(player).toLegacyText());
     stack.setItemMeta(meta);
     return stack;
   }
@@ -52,12 +51,12 @@ public class NyanDevice extends DeviceGadget {
   public ItemStack getStack(DeviceContext context, Player player) {
     ItemStack stack = new ItemStack(Material.WOOL);
     ItemMeta meta = stack.getItemMeta();
-    meta.setDisplayName(getName().translate(player).toLegacyText());
+    meta.setDisplayName(getName().render(player).toLegacyText());
     Localizable used = new LocalizedNumber(context.getUsages(), TextStyle.ofColor(ChatColor.WHITE));
     Localizable total = new LocalizedNumber(context.getGadget().getMaxUsages(),
         TextStyle.ofColor(ChatColor.WHITE));
     meta.setLore(Arrays.asList(
-        Messages.UI_USAGES.with(ChatColor.GRAY, used, total).translate(player).toLegacyText()
+        Messages.UI_USAGES.with(ChatColor.GRAY, used, total).render(player).toLegacyText()
     ));
     DeviceGadget.IS_DEVICE.set(meta, true);
     DeviceGadget.DEVICE_TYPE.set(meta, getId());
@@ -112,7 +111,7 @@ public class NyanDevice extends DeviceGadget {
   }
 
   private ItemStack findStack(Player player) {
-    String name = getName().translate(player).toLegacyText();
+    String name = getName().render(player).toLegacyText();
     for (ItemStack stack : player.getInventory().getContents()) {
       if (stack != null && stack.hasItemMeta() && stack.getItemMeta().hasDisplayName() && stack
           .getItemMeta().getDisplayName().equals(name)) {

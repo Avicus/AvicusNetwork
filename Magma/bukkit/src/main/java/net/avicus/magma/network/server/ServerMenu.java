@@ -40,7 +40,7 @@ public class ServerMenu extends InventoryMenu {
 
   private static String createTitle(Player player) {
     return MagmaTranslations.GUI_SERVER_TITLE.with(ChatColor.DARK_GRAY)
-        .translate(player.getLocale()).toLegacyText();
+        .render(player).toLegacyText();
   }
 
   private static Collection<InventoryMenuItem> itemsForPlayerFromConfig(Player player) {

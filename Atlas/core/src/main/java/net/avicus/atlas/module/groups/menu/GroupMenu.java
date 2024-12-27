@@ -51,7 +51,7 @@ public class GroupMenu extends InventoryMenu {
   }
 
   private static String createTitle(Player player) {
-    return Messages.UI_TEAM_MENU.with(ChatColor.DARK_GRAY).translate(player.getLocale())
+    return Messages.UI_TEAM_MENU.with(ChatColor.DARK_GRAY).render(player)
         .toLegacyText();
   }
 
@@ -59,7 +59,7 @@ public class GroupMenu extends InventoryMenu {
     ItemStack stack = new ItemStack(Material.NETHER_STAR);
     ItemMeta meta = stack.getItemMeta();
     meta.setDisplayName(
-        Messages.UI_TEAM_MENU.with(ChatColor.GREEN).translate(player.getLocale()).toLegacyText());
+        Messages.UI_TEAM_MENU.with(ChatColor.GREEN).render(player).toLegacyText());
     meta.setLore(Collections.singletonList(ChatColor.BLACK + "Team Menu"));
 
     stack.setItemMeta(meta);

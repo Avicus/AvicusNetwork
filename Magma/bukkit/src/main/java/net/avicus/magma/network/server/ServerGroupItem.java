@@ -104,9 +104,9 @@ public class ServerGroupItem implements InventoryMenuItem, IndexedMenuItem,
     if (Servers.getCachedServerGroupMembers(this.group).size() > 1) {
       TextStyle style = TextStyle.ofColor(ChatColor.YELLOW).bold();
       lore.add(BULLET_POINT.with(MagmaTranslations.GUI_SERVER_CLICK_LEFT.with(ChatColor.YELLOW))
-          .translate(locale).toLegacyText());
+          .render(this.player).toLegacyText());
       lore.add(
-          ARROW_POINT.with(MagmaTranslations.GUI_SERVER_CLICK_RIGHT.with(style)).translate(locale)
+          ARROW_POINT.with(MagmaTranslations.GUI_SERVER_CLICK_RIGHT.with(style)).render(this.player)
               .toLegacyText());
     }
 

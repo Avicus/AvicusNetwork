@@ -80,7 +80,7 @@ public class SidebarComponent implements ListenerModule {
           format =
               members == 1 ? Messages.UI_PLAYERS_REMAINING : Messages.UI_PLAYERS_REMAINING_PLURAL;
         }
-        result.append(format.with(ChatColor.GRAY, number).translate(locale).toLegacyText());
+        result.append(format.with(ChatColor.GRAY, number).render(viewer).toLegacyText());
       } else if (objective instanceof LastCompetitorStanding) {
         LastCompetitorStanding standing = (LastCompetitorStanding) objective;
         StatesModule module = match.getRequiredModule(StatesModule.class);
@@ -95,7 +95,7 @@ public class SidebarComponent implements ListenerModule {
               remaining == 1 ? Messages.UI_PLAYERS_REMAINING : Messages.UI_PLAYERS_REMAINING_PLURAL;
         }
 
-        result.append(format.with(ChatColor.GRAY, number).translate(locale).toLegacyText());
+        result.append(format.with(ChatColor.GRAY, number).render(viewer).toLegacyText());
       } else if (objective instanceof EntityObjective) {
         EntityObjective entity = (EntityObjective) objective;
 
@@ -119,7 +119,7 @@ public class SidebarComponent implements ListenerModule {
           if (!entity.getOwner().isPresent() && highest.isPresent()) {
             result.append(highest.get().getChatColor());
           }
-          result.append(entity.getName().translate(locale));
+          result.append(entity.getName().render(viewer));
         }
       } else if (objective instanceof ScoreObjective) {
         ScoreObjective score = (ScoreObjective) objective;
@@ -134,7 +134,7 @@ public class SidebarComponent implements ListenerModule {
           if (showName) {
             result.append(" ");
             result.append(ChatColor.WHITE);
-            result.append(score.getName().translate(viewer));
+            result.append(score.getName().render(viewer));
           } else {
             result.append("   ");
           }
@@ -223,7 +223,7 @@ public class SidebarComponent implements ListenerModule {
       }
 
       title.style().color(ChatColor.AQUA);
-      sidebar.setTitle(title.translate(player.getLocale()).toLegacyText());
+      sidebar.setTitle(title.render(player).toLegacyText());
     }
     return sidebar;
   }

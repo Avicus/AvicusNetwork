@@ -58,7 +58,7 @@ public class AnnounceMessageHandler extends
       Localizable connect = MagmaTranslations.RTP_SERVER_CONNECT
           .with(message.getServer().get().getName());
       if (who != null) {
-        BaseComponent connectTranslated = connect.translate(who);
+        BaseComponent connectTranslated = connect.render(who);
         connectTranslated.setColor(net.md_5.bungee.api.ChatColor.BLUE);
         connectTranslated.setUnderlined(true);
         connectTranslated.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND,
@@ -66,7 +66,7 @@ public class AnnounceMessageHandler extends
         who.sendMessage(new TextComponent(send, new TextComponent(" "), connectTranslated));
       } else {
         Bukkit.getOnlinePlayers().forEach(p -> {
-          BaseComponent connectTranslated = connect.translate(p);
+          BaseComponent connectTranslated = connect.render(p);
           connectTranslated.setColor(net.md_5.bungee.api.ChatColor.BLUE);
           connectTranslated.setUnderlined(true);
           connectTranslated.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND,

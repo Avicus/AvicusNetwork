@@ -62,6 +62,6 @@ public class FakeGUIsFactory implements ModuleFactory<FakeGUIsModule> {
       }
     }
 
-    return Optional.of(new FakeGUIsModule(match, fakeBenches, fakeAnvils, fakeEnchantTables));
+    return Optional.of(new FakeGUIsModule(match, fakeBenches, fakeEnchantTables));
   }
 }

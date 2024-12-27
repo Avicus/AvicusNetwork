@@ -102,7 +102,7 @@ public class StatsModule extends BridgeableModule<ModuleBridge<StatsModule>> imp
     if (lifetime != null) {
       // Header
       BaseComponent name = Translations.STATS_RECAP_LIFE.with(ChatColor.GOLD)
-          .translate(event.getPlayer().getLocale());
+          .render(event.getPlayer());
 
       List<Localizable> melee = LifetimeDisplayUtils.getMeleeDisplay(lifetime);
       List<Localizable> objectives = LifetimeDisplayUtils
@@ -170,7 +170,7 @@ public class StatsModule extends BridgeableModule<ModuleBridge<StatsModule>> imp
           }
           Events.call(new PlayerReceiveMVPEvent(Bukkit.getPlayer(mvp)));
           Bukkit.getOnlinePlayers().forEach(p -> {
-            p.sendTitle(new Title(name.translate(p), sub.translate(p), 20, 150, 40));
+            p.sendTitle(new Title(name.render(p), sub.render(p), 20, 150, 40));
           });
 
           StringBuilder data = new StringBuilder("Match Action Data:\n");
@@ -207,7 +207,7 @@ public class StatsModule extends BridgeableModule<ModuleBridge<StatsModule>> imp
   private void matchRecap(Player player) {
     // Header
     BaseComponent name = Translations.STATS_RECAP_MATCH.with(ChatColor.GOLD)
-        .translate(player.getLocale());
+        .render(player);
 
     List<Localizable> melee = LifetimeDisplayUtils
         .getMeleeDisplay(this.store.getLifetimeStore(), player.getUniqueId());

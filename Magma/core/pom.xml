@@ -16,9 +16,8 @@
       <artifactId>minecraft-api</artifactId>
     </dependency>
     <dependency>
-      <groupId>biz.paluch.redis</groupId>
-      <artifactId>lettuce</artifactId>
-      <classifier>shaded</classifier>
+      <groupId>io.lettuce</groupId>
+      <artifactId>lettuce-core</artifactId>
     </dependency>
     <dependency>
       <groupId>net.avicus</groupId>
@@ -51,7 +50,7 @@
     <dependency>
       <groupId>com.shopify.graphql.support</groupId>
       <artifactId>support</artifactId>
-      <version>0.1.1</version>
+      <version>0.2.1</version>
     </dependency>
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>

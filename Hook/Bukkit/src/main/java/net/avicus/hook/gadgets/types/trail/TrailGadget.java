@@ -2,7 +2,7 @@ package net.avicus.hook.gadgets.types.trail;
 
 import com.google.gson.JsonObject;
 import java.util.List;
-import java.util.Locale;
+
 import net.avicus.compendium.locale.text.Localizable;
 import net.avicus.compendium.locale.text.UnlocalizedText;
 import net.avicus.magma.module.gadgets.AbstractGadget;
@@ -31,11 +31,11 @@ public class TrailGadget extends AbstractGadget<TrailContext> {
   }
 
   @Override
-  public ItemStack icon(Locale locale) {
+  public ItemStack icon(Player player) {
     ItemStack stack = new ItemStack(Material.MELON_SEEDS);
     ItemMeta meta = stack.getItemMeta();
 
-    meta.setDisplayName(getName().translate(locale).toLegacyText());
+    meta.setDisplayName(getName().render(player).toLegacyText());
 
     stack.setItemMeta(meta);
     return stack;

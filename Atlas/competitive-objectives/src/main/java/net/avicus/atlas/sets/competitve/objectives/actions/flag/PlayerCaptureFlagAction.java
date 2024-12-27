@@ -28,7 +28,7 @@ public class PlayerCaptureFlagAction extends PlayerCompleteObjectiveAction imple
 
   @Override
   public String getDebugMessage() {
-    return "Flag Capture: " + flag.getName().translateDefault();
+    return "Flag Capture: " + flag.getName().renderDefault();
   }
 
   @Override

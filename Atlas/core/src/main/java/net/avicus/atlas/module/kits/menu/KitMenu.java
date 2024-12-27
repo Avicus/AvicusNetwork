@@ -19,7 +19,7 @@ public class KitMenu extends InventoryMenu {
 
   private KitMenu(KitsModule module, Player player) {
     super(player,
-        Messages.UI_KITS.with(ChatColor.RED).translate(player.getLocale()).toLegacyText(),
+        Messages.UI_KITS.with(ChatColor.RED).render(player).toLegacyText(),
         Inventories.rowCount(module.getKits(player).size()),
         createContents(module, player));
   }
@@ -42,7 +42,7 @@ public class KitMenu extends InventoryMenu {
     final ItemStack stack = new ItemStack(Material.BLAZE_ROD);
     final ItemMeta meta = stack.getItemMeta();
     meta.setDisplayName(
-        Messages.UI_KIT_MENU.with(ChatColor.GOLD).translate(player.getLocale()).toLegacyText());
+        Messages.UI_KIT_MENU.with(ChatColor.GOLD).render(player).toLegacyText());
     meta.setLore(Collections.singletonList(ChatColor.BLACK + "Kit Menu"));
     stack.setItemMeta(meta);
     return stack;

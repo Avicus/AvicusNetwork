@@ -64,7 +64,7 @@ final class RecentReportDisplay extends BukkitRunnable {
 
     this.source.sendMessage(Strings.padChatComponent(HEADER_FORMAT
             .with(this.getTitle(), new LocalizedNumber(this.page + 1),
-                new LocalizedNumber(paginator.getPageCount())).translate(this.source), "-",
+                new LocalizedNumber(paginator.getPageCount())).render(this.source), "-",
         ChatColor.YELLOW, ChatColor.AQUA));
 
     paginator.getPage(this.page).forEach(report -> {

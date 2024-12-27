@@ -22,18 +22,19 @@ import net.avicus.compendium.locale.text.UnlocalizedText;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Material;
+import org.bukkit.command.CommandSender;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.Vector;
 
 public class VariableUtils {
 
-  public static BaseComponent replaceString(Localizable original, Locale locale,
+  public static BaseComponent replaceString(Localizable original, CommandSender sender,
       CheckContext context) {
-    String translated = original.translate(locale).toLegacyText();
+    String translated = original.render(sender).toLegacyText();
     for (Map.Entry<String, Localizable> entry : createContextAttributes("", context).entrySet()) {
       translated = translated
-          .replace("[" + entry.getKey() + "]", entry.getValue().translate(locale).toLegacyText());
+          .replace("[" + entry.getKey() + "]", entry.getValue().render(sender).toLegacyText());
     }
     return new TextComponent(translated);
   }

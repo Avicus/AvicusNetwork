@@ -105,7 +105,7 @@ public class FriendCommands {
         }
         Localizable title = titleFormat.with(ChatColor.GREEN, onlineText, pageText, pageCount);
         sender.sendMessage(Strings
-            .padChatComponent(title.translate(sender.getLocale()), "-", ChatColor.YELLOW,
+            .padChatComponent(title.render(sender), "-", ChatColor.YELLOW,
                 ChatColor.AQUA));
 
         for (User friend : paginated.getPage(page)) {

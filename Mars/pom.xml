@@ -18,8 +18,8 @@
   <dependencies>
     <!-- Server -->
     <dependency>
-      <groupId>net.avicus</groupId>
-      <artifactId>magnet</artifactId>
+      <groupId>app.ashcon</groupId>
+      <artifactId>sportpaper</artifactId>
       <scope>provided</scope>
     </dependency>
     <!-- Utilities -->

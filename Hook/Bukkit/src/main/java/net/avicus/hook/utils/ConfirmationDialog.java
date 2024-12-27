@@ -51,21 +51,18 @@ public class ConfirmationDialog extends InventoryMenu {
     this.confirm = confirm;
     this.cancel = cancel;
 
-    Locale locale = player.getLocale();
-
     for (int index : CONFIRM) {
-      add(new Action(index, true, locale));
+      add(new Action(index, true, player));
     }
 
     for (int index : CANCEL) {
-      add(new Action(index, false, locale));
+      add(new Action(index, false, player));
     }
   }
 
   private static String generateTitle(Player player, Optional<Localizable> providedTitle) {
-    Locale locale = player.getLocale();
     return providedTitle.orElse(Messages.UI_CONFIRM_CANCEL.with(ChatColor.DARK_GRAY))
-        .translate(locale).toLegacyText();
+        .render(player).toLegacyText();
   }
 
   private void onConfirm() {
@@ -86,12 +83,12 @@ public class ConfirmationDialog extends InventoryMenu {
 
     private final int index;
     private final boolean confirm;
-    private final Locale locale;
+    private final Player player;
 
-    public Action(int index, boolean confirm, Locale locale) {
+    public Action(int index, boolean confirm, Player player) {
       this.index = index;
       this.confirm = confirm;
-      this.locale = locale;
+      this.player = player;
     }
 
     @Override
@@ -117,7 +114,7 @@ public class ConfirmationDialog extends InventoryMenu {
         ItemMeta meta = stack.getItemMeta();
 
         Localizable title = Messages.UI_CONFIRM.with(TextStyle.ofColor(ChatColor.GREEN).bold());
-        meta.setDisplayName(title.translate(this.locale).toLegacyText());
+        meta.setDisplayName(title.render(this.player).toLegacyText());
 
         stack.setItemMeta(meta);
         return stack;
@@ -126,7 +123,7 @@ public class ConfirmationDialog extends InventoryMenu {
         ItemMeta meta = stack.getItemMeta();
 
         Localizable title = Messages.UI_CANCEL.with(TextStyle.ofColor(ChatColor.DARK_RED).bold());
-        meta.setDisplayName(title.translate(this.locale).toLegacyText());
+        meta.setDisplayName(title.render(this.player).toLegacyText());
 
         stack.setItemMeta(meta);
         return stack;

@@ -11,14 +11,6 @@
   <artifactId>hook-bukkit</artifactId>
   <repositories>
     <repository>
-      <id>avicus-private</id>
-      <url>https://repo.avicus.net/content/groups/private/</url>
-    </repository>
-    <repository>
-      <id>avicus-public</id>
-      <url>https://repo.avicus.net/content/groups/public/</url>
-    </repository>
-    <repository>
       <id>dmulloy2-repo</id>
       <url>http://repo.dmulloy2.net/nexus/repository/public/</url>
     </repository>
@@ -30,13 +22,13 @@
   <dependencies>
     <!-- Server -->
     <dependency>
-      <groupId>net.avicus</groupId>
-      <artifactId>magnet</artifactId>
+      <groupId>app.ashcon</groupId>
+      <artifactId>sportpaper</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>net.avicus</groupId>
-      <artifactId>magnet-api</artifactId>
+      <groupId>app.ashcon</groupId>
+      <artifactId>sportpaper-api</artifactId>
       <scope>provided</scope>
     </dependency>
     <!-- Utilities -->
@@ -125,7 +117,7 @@
               <include>net.buycraft:*</include>
               <include>net.avicus:hook-core</include>
               <include>net.avicus:quest</include>
-              <include>biz.paluch.redis:lettuce</include>
+              <include>io.lettuce:lettuce-core</include>
             </includes>
           </artifactSet>
         </configuration>

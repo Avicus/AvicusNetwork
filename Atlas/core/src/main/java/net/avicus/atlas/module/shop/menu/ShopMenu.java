@@ -44,7 +44,7 @@ public class ShopMenu extends InventoryMenu {
   private ShopMenu(Shop shop, Player player) {
     super(player,
         new UnlocalizedFormat("{0} - {1}").with(shop.getName().toText(), Messages.UI_SHOP_POINTS
-            .with(new LocalizedNumber(shop.getPointListener().getPoints(player)))).translate(player)
+            .with(new LocalizedNumber(shop.getPointListener().getPoints(player)))).render(player)
             .toLegacyText(),
         Inventories.rowCount(shop.getItems().size()),
         createContents(shop, player));
@@ -85,7 +85,7 @@ public class ShopMenu extends InventoryMenu {
     final ItemStack stack = new ItemStack(Material.NETHER_STAR);
     final ItemMeta meta = stack.getItemMeta();
     meta.setDisplayName(
-        Messages.UI_SHOP_MENU.with(ChatColor.GOLD).translate(player.getLocale()).toLegacyText());
+        Messages.UI_SHOP_MENU.with(ChatColor.GOLD).render(player).toLegacyText());
     IS_OPENER.set(meta, true);
     SHOP_ID.set(meta, shopID);
     stack.setItemMeta(meta);

@@ -88,27 +88,19 @@ public class AtlasMap implements Module, MinecraftMap {
     return StringUtil.slugify(name);
   }
 
-  public TextComponent getClickableName(CommandSender source) {
+  public BaseComponent getClickableName(CommandSender source) {
     return this.getClickableName(source, false);
   }
 
-  public TextComponent getClickableName(CommandSender source, boolean withVersion) {
-    return this.getClickableName(source.getLocale(), withVersion);
-  }
-
-  public TextComponent getClickableName(Locale source) {
-    return this.getClickableName(source, false);
-  }
-
-  public TextComponent getClickableName(Locale source, boolean withVersion) {
+  public BaseComponent getClickableName(CommandSender source, boolean withVersion) {
     return this.applyClickHover(source,
-        withVersion ? this.clickableNameVersion.translate(source) : new TextComponent(this.name));
+            withVersion ? this.clickableNameVersion.render(source) : new TextComponent(this.name));
   }
 
-  private TextComponent applyClickHover(Locale source, TextComponent component) {
+  private BaseComponent applyClickHover(CommandSender source, BaseComponent component) {
     component.setClickEvent(this.clickEvent);
     component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-        new BaseComponent[]{Messages.UI_VIEW_MAP_ON_WEBSITE.with().translate(source)}));
+        new BaseComponent[]{Messages.UI_VIEW_MAP_ON_WEBSITE.with().render(source)}));
     return component;
   }
 

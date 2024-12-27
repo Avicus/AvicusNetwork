@@ -37,7 +37,7 @@ public class UserCommands {
 
       sender.sendMessage(Strings.padChatComponent(
           Messages.UI_NAME_HISTORY.with(ChatColor.BLUE, Users.getDisplay(user))
-              .translate(sender.getLocale()), "-", ChatColor.YELLOW, ChatColor.AQUA));
+              .render(sender), "-", ChatColor.YELLOW, ChatColor.AQUA));
 
       List<Username> names = Hook.database().getUsernames().findByUser(user);
 

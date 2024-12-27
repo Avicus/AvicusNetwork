@@ -2,7 +2,7 @@ package net.avicus.hook.gadgets.types.morph;
 
 import com.google.gson.JsonObject;
 import java.util.Arrays;
-import java.util.Locale;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -66,12 +66,12 @@ public class MorphContext extends AbstractGadgetContext<MorphGadget> {
   }
 
   @Override
-  public ItemStack icon(Locale locale) {
-    ItemStack stack = super.icon(locale);
+  public ItemStack icon(Player player) {
+    ItemStack stack = super.icon(player);
     ItemMeta meta = stack.getItemMeta();
 
     meta.setLore(Arrays.asList(
-        Messages.enabledOrDisabled(this.enabled).translate(locale).toLegacyText()
+        Messages.enabledOrDisabled(this.enabled).render(player).toLegacyText()
     ));
 
     stack.setItemMeta(meta);

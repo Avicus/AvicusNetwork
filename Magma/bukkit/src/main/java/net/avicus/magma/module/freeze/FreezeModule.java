@@ -106,7 +106,7 @@ public class FreezeModule implements CommandModule, ListenerModule {
     StaffChannels.STAFF_CHANNEL.simpleLocalSend(source,
         (frozen ? MagmaTranslations.FREEZE_BROADCAST_FROZE
             : MagmaTranslations.FREEZE_BROADCAST_UNFROZE)
-            .with(ChatColor.AQUA, source.getName(), victim.getName()).translate(Locale.US));
+            .with(ChatColor.AQUA, source.getName(), victim.getName()).render(null));
     victim.sendMessage(
         (frozen ? MagmaTranslations.FREEZE_FROZEN : MagmaTranslations.FREEZE_UNFROZEN)
             .with(ChatColor.AQUA, Users.getLocalizedDisplay(Users.user(source))));
@@ -149,7 +149,7 @@ public class FreezeModule implements CommandModule, ListenerModule {
       this.setFrozen(player, true, false);
       StaffChannels.STAFF_CHANNEL.simpleLocalSend(null,
           MagmaTranslations.FREEZE_BROADCAST_JOINED.with(ChatColor.AQUA, player.getName())
-              .translate(Locale.US));
+              .render(null));
     }
   }
 

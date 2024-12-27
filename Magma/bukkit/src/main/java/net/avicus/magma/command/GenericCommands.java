@@ -43,7 +43,7 @@ public class GenericCommands {
         }
         sender.sendMessage(Strings.padChatComponent(
             MagmaTranslations.COMMANDS_STAFF_TITLE.with(ChatColor.GREEN)
-                .translate(sender.getLocale()), "-", ChatColor.YELLOW, ChatColor.AQUA));
+                .render(sender), "-", ChatColor.YELLOW, ChatColor.AQUA));
         if (online.values().isEmpty()) {
           sender.sendMessage(MagmaTranslations.COMMANDS_STAFF_NONE.with(ChatColor.GRAY));
           return;

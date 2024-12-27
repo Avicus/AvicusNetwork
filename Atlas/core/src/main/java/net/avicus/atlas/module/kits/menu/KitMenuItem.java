@@ -42,9 +42,9 @@ public class KitMenuItem implements ClickableInventoryMenuItem, InventoryMenuIte
       final Locale locale = this.player.getLocale();
       this.stack = this.kit.getIcon().getBaseItemStack().clone();
       ItemMeta meta = this.stack.getItemMeta();
-      meta.setDisplayName(ChatColor.RESET + this.kit.getName().translate(locale));
+      meta.setDisplayName(ChatColor.RESET + this.kit.getName().render(this.player));
       this.kit.getDescription().ifPresent(
-          description -> meta.setLore(Collections.singletonList(description.translate(locale))));
+          description -> meta.setLore(Collections.singletonList(description.render(this.player))));
       meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_ATTRIBUTES);
       this.stack.setItemMeta(meta);
     }

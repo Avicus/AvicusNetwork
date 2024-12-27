@@ -61,7 +61,7 @@ public class CompetitveRenderer extends ObjectiveRenderer {
           result.append(ChatColor.WHITE);
         }
 
-        result.append(hill.getName().translate(locale));
+        result.append(hill.getName().render(viewer));
       } else {
         result.append("   ");
       }
@@ -88,7 +88,7 @@ public class CompetitveRenderer extends ObjectiveRenderer {
         if (!monument.getOwner().isPresent() && highest.isPresent()) {
           result.append(highest.get().getChatColor());
         }
-        result.append(monument.getName().translate(locale));
+        result.append(monument.getName().render(viewer));
       }
     } else if (objective instanceof LeakableObjective) {
       LeakableObjective leakable = (LeakableObjective) objective;
@@ -116,7 +116,7 @@ public class CompetitveRenderer extends ObjectiveRenderer {
         if (!leakable.getOwner().isPresent() && highest.isPresent()) {
           result.append(highest.get().getChatColor());
         }
-        result.append(leakable.getName().translate(locale));
+        result.append(leakable.getName().render(viewer));
       }
     } else if (objective instanceof WoolObjective) {
       WoolObjective wool = (WoolObjective) objective;
@@ -136,7 +136,7 @@ public class CompetitveRenderer extends ObjectiveRenderer {
       if (showName) {
         result.append(SEPARATOR);
         result.append(wool.getChatColor());
-        result.append(wool.getName().translate(locale));
+        result.append(wool.getName().render(viewer));
       }
     } else if (objective instanceof FlagObjective) {
       FlagObjective flag = (FlagObjective) objective;
@@ -161,7 +161,7 @@ public class CompetitveRenderer extends ObjectiveRenderer {
       if (showName) {
         result.append(SEPARATOR);
         result.append(flag.getChatColor());
-        result.append(flag.getName().translate(locale));
+        result.append(flag.getName().render(viewer));
       }
     }
 

@@ -4,6 +4,8 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import java.util.Map;
 import java.util.UUID;
+
+import com.viaversion.viaversion.api.Via;
 import net.avicus.compendium.locale.text.LocalizedNumber;
 import net.avicus.compendium.settings.PlayerSettings;
 import net.avicus.compendium.settings.Setting;
@@ -26,7 +28,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import us.myles.ViaVersion.api.Via;
 
 public class ActionBarDisplay implements Listener {
 
@@ -103,12 +104,12 @@ public class ActionBarDisplay implements Listener {
     TextComponent xpLabel = new TextComponent(ChatColor.BLUE.toString() + "XP: ");
 
     BaseComponent xpNum = new TextComponent(new TextComponent(ChatColor.GREEN.toString()),
-        new LocalizedNumber(xp).translate(player));
+        new LocalizedNumber(xp).render(player));
 
     TextComponent levelLabel = new TextComponent(ChatColor.GOLD.toString() + "LVL: ");
 
     BaseComponent levelNum = new TextComponent(new TextComponent(ChatColor.GREEN.toString()),
-        new LocalizedNumber(level).translate(player));
+        new LocalizedNumber(level).render(player));
 
     return new TextComponent(complete, remainingBar, SPACE, xpLabel, xpNum, SPACE, levelLabel,
         levelNum);

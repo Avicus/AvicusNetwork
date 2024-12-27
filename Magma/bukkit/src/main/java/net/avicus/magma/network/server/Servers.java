@@ -155,7 +155,7 @@ public class Servers {
 
     ItemMeta meta = stack.getItemMeta();
     meta.setDisplayName(
-        MagmaTranslations.GUI_SERVER_TITLE.with(ChatColor.GOLD).translate(player.getLocale())
+        MagmaTranslations.GUI_SERVER_TITLE.with(ChatColor.GOLD).render(player)
             .toLegacyText());
 
     // English is stored plainly in order to match properly on right click

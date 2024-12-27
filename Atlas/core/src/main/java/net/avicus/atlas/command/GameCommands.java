@@ -58,7 +58,7 @@ public class GameCommands {
     @Override
     public String getDisplay(Match match, Competitor competitor, Player viewer, Objective objective,
         boolean showName) {
-      return objective.getName().translate(viewer);
+      return objective.getName().render(viewer);
     }
   };
 
@@ -96,7 +96,7 @@ public class GameCommands {
 
     // Main
     sender.sendMessage(Strings.padChatComponent(
-        Messages.UI_MATCH.with(ChatColor.GOLD, map.getName()).translate(sender.getLocale()), "-",
+        Messages.UI_MATCH.with(ChatColor.GOLD, map.getName()).render(sender), "-",
         ChatColor.BLUE, ChatColor.AQUA));
 
     // Objectives
@@ -127,7 +127,7 @@ public class GameCommands {
     AtlasMap map = match.getMap();
 
     // Header
-    TextComponent name = map.getClickableName(sender, true);
+    BaseComponent name = map.getClickableName(sender, true);
     BaseComponent header = Strings
         .padTextComponent(name, " ", ChatColor.DARK_AQUA.toString() + ChatColor.STRIKETHROUGH,
             ChatColor.BLUE);
@@ -141,7 +141,7 @@ public class GameCommands {
         promoLink =
             ChatColor.GOLD + " (" + ChatColor.BLUE + ChatColor.ITALIC + author
                 .getPromoLink().get()
-                .translate(sender.getLocale()) + ChatColor.GOLD + ")";
+                .render(sender) + ChatColor.GOLD + ")";
       }
 
       return "   " + ChatColor.AQUA + name1 + promoLink;
@@ -161,7 +161,7 @@ public class GameCommands {
         promoLink =
             ChatColor.GOLD + " (" + ChatColor.BLUE + ChatColor.ITALIC + author
                 .getPromoLink().get()
-                .translate(sender.getLocale()) + ChatColor.GOLD + ")";
+                .render(sender) + ChatColor.GOLD + ")";
       }
 
       return "   " + ChatColor.AQUA + name1 + role + promoLink;
@@ -173,7 +173,7 @@ public class GameCommands {
 //            tipString = Strings.join(match.getRequiredModule(BroadcastsModule.class).getTips(), "\n", new Strings.Stringify<Broadcast>() {
 //                @Override
 //                public String on(Broadcast broadcast) {
-//                    return "   " + broadcast.getMessage().translate(sender);
+//                    return "   " + broadcast.getMessage().render(sender);
 //                }
 //            });
 //        }
@@ -255,7 +255,7 @@ public class GameCommands {
     }
 
     // Header
-    BaseComponent name = Translations.STATS_FACTS_ALL.with(ChatColor.GOLD).translate(sender);
+    BaseComponent name = Translations.STATS_FACTS_ALL.with(ChatColor.GOLD).render(sender);
     sender.sendMessage(Strings
         .padTextComponent(name, " ", ChatColor.DARK_AQUA.toString() + ChatColor.STRIKETHROUGH,
             ChatColor.BLUE));

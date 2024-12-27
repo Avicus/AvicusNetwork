@@ -91,7 +91,7 @@ public class AlertsCommands {
         Localizable pageCount = new LocalizedNumber(paginator.getPageCount());
         LocalizableFormat header = new UnlocalizedFormat("{0} ({1}/{2})");
         sender.sendMessage(Strings
-            .padChatComponent(header.with(title, pageText, pageCount).translate(sender.getLocale()),
+            .padChatComponent(header.with(title, pageText, pageCount).render(sender),
                 "-", ChatColor.YELLOW, ChatColor.AQUA));
 
         for (Alert alert : paginator.getPage(page)) {

@@ -1,6 +1,6 @@
 package net.avicus.magma.database.model.impl;
 
-import com.lambdaworks.com.google.common.collect.Lists;
+import com.google.common.collect.Lists;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;

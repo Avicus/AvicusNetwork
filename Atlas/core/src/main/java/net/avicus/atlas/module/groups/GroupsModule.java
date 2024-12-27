@@ -378,15 +378,15 @@ public abstract class GroupsModule extends BridgeableModule<ModuleBridge<GroupsM
     Locale locale = viewer.getLocale();
 
     for (Group group : getGroups()) {
-      String translated = group.getName().toText().translate(locale).toPlainText();
+      String translated = group.getName().toText().render(viewer).toPlainText();
       if (translated.toLowerCase().startsWith(query.toLowerCase())) {
         result.add(group);
       }
     }
 
     result.sort((o1, o2) -> {
-      String name1 = o1.getName().translate(viewer).toLowerCase();
-      String name2 = o2.getName().translate(viewer).toLowerCase();
+      String name1 = o1.getName().render(viewer).toLowerCase();
+      String name2 = o2.getName().render(viewer).toLowerCase();
 
       if (name1.equals(query.toLowerCase())) {
         return 1;

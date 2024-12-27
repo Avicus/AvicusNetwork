@@ -214,7 +214,7 @@ public class ResultsModule extends BridgeableModule<ModuleBridge<ResultsModule>>
       }
       final Localizable translation = Messages.UI_WINNERS.with();
       match.getPlayers().forEach(player -> player.sendMessage(Strings
-          .padChatComponent(translation.translate(player.getLocale()), "-", ChatColor.GOLD,
+          .padChatComponent(translation.render(player), "-", ChatColor.GOLD,
               ChatColor.YELLOW)));
       res.forEach(match::broadcast);
     }
@@ -261,17 +261,17 @@ public class ResultsModule extends BridgeableModule<ModuleBridge<ResultsModule>>
     for (Player player : Bukkit.getOnlinePlayers()) {
 
       BaseComponent subtitle = Messages.UI_SPEC_JOIN_NEXT.with(ChatColor.GOLD)
-          .translate(player.getLocale());
+          .render(player);
 
       if (match.getRequiredModule(GroupsModule.class).getCompetitorOf(player).isPresent()) {
-        subtitle = Messages.UI_TEAM_LOST.with(ChatColor.RED).translate(player.getLocale());
+        subtitle = Messages.UI_TEAM_LOST.with(ChatColor.RED).render(player);
       }
 
       if (competitor.hasPlayer(player)) {
-        subtitle = Messages.UI_TEAM_WON.with(ChatColor.GREEN).translate(player.getLocale());
+        subtitle = Messages.UI_TEAM_WON.with(ChatColor.GREEN).render(player);
       }
 
-      Title title = Title.builder().title(wins.translate(player.getLocale()))
+      Title title = Title.builder().title(wins.render(player))
           .subtitle(subtitle)
           .fadeIn(10)
           .stay(60)

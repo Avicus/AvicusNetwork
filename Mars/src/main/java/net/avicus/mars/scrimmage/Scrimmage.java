@@ -1,6 +1,6 @@
 package net.avicus.mars.scrimmage;
 
-import com.lambdaworks.com.google.common.collect.Lists;
+import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

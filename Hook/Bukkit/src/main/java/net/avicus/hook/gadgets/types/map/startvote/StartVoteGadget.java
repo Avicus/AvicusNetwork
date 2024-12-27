@@ -1,7 +1,7 @@
 package net.avicus.hook.gadgets.types.map.startvote;
 
 import com.google.gson.JsonObject;
-import java.util.Locale;
+
 import java.util.function.Function;
 import lombok.Setter;
 import net.avicus.atlas.match.Match;
@@ -27,11 +27,11 @@ public class StartVoteGadget extends AtlasGadget {
   }
 
   @Override
-  public ItemStack icon(Locale locale) {
+  public ItemStack icon(Player player) {
     ItemStack stack = new ItemStack(Material.MAP);
     ItemMeta meta = stack.getItemMeta();
 
-    meta.setDisplayName(getName().translate(locale).toLegacyText());
+    meta.setDisplayName(getName().render(player).toLegacyText());
 
     stack.setItemMeta(meta);
     return stack;

@@ -1,7 +1,6 @@
 package net.avicus.hook.gadgets.types.morph;
 
 import com.google.gson.JsonObject;
-import java.util.Locale;
 import lombok.Getter;
 import lombok.ToString;
 import net.avicus.compendium.locale.text.Localizable;
@@ -9,6 +8,7 @@ import net.avicus.hook.utils.Messages;
 import net.avicus.magma.module.gadgets.AbstractGadget;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -29,11 +29,11 @@ public class MorphGadget extends AbstractGadget<MorphContext> {
   }
 
   @Override
-  public ItemStack icon(Locale locale) {
+  public ItemStack icon(Player player) {
     ItemStack stack = new ItemStack(Material.ARMOR_STAND);
     ItemMeta meta = stack.getItemMeta();
 
-    meta.setDisplayName(getName().translate(locale).toLegacyText());
+    meta.setDisplayName(getName().render(player).toLegacyText());
 
     stack.setItemMeta(meta);
     return stack;

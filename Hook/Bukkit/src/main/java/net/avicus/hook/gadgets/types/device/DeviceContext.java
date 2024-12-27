@@ -2,7 +2,7 @@ package net.avicus.hook.gadgets.types.device;
 
 import com.google.gson.JsonObject;
 import java.util.Arrays;
-import java.util.Locale;
+
 import lombok.Getter;
 import net.avicus.compendium.TextStyle;
 import net.avicus.compendium.locale.text.Localizable;
@@ -11,6 +11,7 @@ import net.avicus.hook.utils.Events;
 import net.avicus.hook.utils.Messages;
 import net.avicus.magma.module.gadgets.AbstractGadgetContext;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -53,14 +54,14 @@ public class DeviceContext extends AbstractGadgetContext<DeviceGadget> implement
   }
 
   @Override
-  public ItemStack icon(Locale locale) {
-    ItemStack stack = super.icon(locale);
+  public ItemStack icon(Player player) {
+    ItemStack stack = super.icon(player);
     ItemMeta meta = stack.getItemMeta();
     Localizable used = new LocalizedNumber(this.usages, TextStyle.ofColor(ChatColor.WHITE));
     Localizable total = new LocalizedNumber(getGadget().getMaxUsages(),
         TextStyle.ofColor(ChatColor.WHITE));
     meta.setLore(Arrays.asList(
-        Messages.UI_USAGES.with(ChatColor.GRAY, used, total).translate(locale).toLegacyText()
+        Messages.UI_USAGES.with(ChatColor.GRAY, used, total).render(player).toLegacyText()
     ));
     stack.setItemMeta(meta);
     return stack;

@@ -18,6 +18,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Nullable;
+
+import com.viaversion.viaversion.api.Via;
 import lombok.Getter;
 import lombok.Setter;
 import net.avicus.atlas.Atlas;
@@ -46,7 +48,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerQuitEvent;
-import us.myles.ViaVersion.api.Via;
 
 public class TabListComponent implements ListenerModule {
 
@@ -221,7 +222,7 @@ public class TabListComponent implements ListenerModule {
     final String time = StringUtil
         .secondsToClock((int) sm.getTotalPlayingDuration().getStandardSeconds());
     final String header = Messages.UI_BY.with(ChatColor.GRAY, mapPart, authorPart)
-        .translate(player.getLocale()).toLegacyText();
+        .render(player).toLegacyText();
     String footer = stateColor + "" + ChatColor.BOLD + time;
 
     @Nullable String serverName = Atlas.get().getBridge().getServerName();
@@ -320,7 +321,7 @@ public class TabListComponent implements ListenerModule {
   }
 
   private TextTabItem getTabItem(Group group, Player viewer) {
-    String name = group.getName().toText(group.getChatColor()).translate(viewer.getLocale())
+    String name = group.getName().toText(group.getChatColor()).render(viewer)
         .toLegacyText();
     String text =
         ChatColor.WHITE.toString() + group.size() + ChatColor.GRAY.toString() + "/" + group

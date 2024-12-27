@@ -2,11 +2,12 @@ package net.avicus.hook.gadgets.types.trail;
 
 import com.google.gson.JsonObject;
 import java.util.Arrays;
-import java.util.Locale;
+
 import lombok.Getter;
 import lombok.Setter;
 import net.avicus.hook.utils.Messages;
 import net.avicus.magma.module.gadgets.AbstractGadgetContext;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -22,12 +23,12 @@ public class TrailContext extends AbstractGadgetContext<TrailGadget> {
   }
 
   @Override
-  public ItemStack icon(Locale locale) {
-    ItemStack stack = super.icon(locale);
+  public ItemStack icon(Player player) {
+    ItemStack stack = super.icon(player);
     ItemMeta meta = stack.getItemMeta();
 
     meta.setLore(Arrays.asList(
-        Messages.enabledOrDisabled(this.enabled).translate(locale).toLegacyText()
+        Messages.enabledOrDisabled(this.enabled).render(player).toLegacyText()
     ));
 
     stack.setItemMeta(meta);

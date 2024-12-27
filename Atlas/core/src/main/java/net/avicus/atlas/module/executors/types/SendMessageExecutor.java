@@ -149,7 +149,7 @@ public class SendMessageExecutor extends Executor {
         .orElse(null);
     if (player != null) {
       BaseComponent message = VariableUtils
-          .replaceString(this.message.toText(), player.getLocale(), context);
+          .replaceString(this.message.toText(), player, context);
       switch (this.location) {
         case CHAT:
           player.sendMessage(message);

@@ -1,14 +1,15 @@
 package net.avicus.magma.module.gadgets;
 
 import com.google.gson.JsonObject;
-import java.util.Locale;
+
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public interface GadgetContext<G extends Gadget> {
 
   G getGadget();
 
-  ItemStack icon(Locale locale);
+  ItemStack icon(Player player);
 
   JsonObject serialize();
 

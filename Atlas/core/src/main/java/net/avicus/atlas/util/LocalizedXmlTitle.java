@@ -23,15 +23,11 @@ public class LocalizedXmlTitle {
   }
 
   public Title createTitle(Player player) {
-    return createTitle(player.getLocale());
-  }
-
-  public Title createTitle(Locale locale) {
     return new Title(
-        this.title.translate(locale),
-        this.subtitle.translate(locale),
-        this.fadeIn,
-        this.stay,
-        this.fadeOut);
+            this.title.render(player),
+            this.subtitle.render(player),
+            this.fadeIn,
+            this.stay,
+            this.fadeOut);
   }
 }

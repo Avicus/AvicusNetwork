@@ -216,7 +216,7 @@ public class CartsModule extends ArcadeGame {
       ObjectivesModule module) {
     List<String> res = Lists.newArrayList();
     res.add(Messages.UI_ROUND.with(ChatColor.AQUA, new LocalizedNumber(this.round.intValue(),
-        TextStyle.ofColor(ChatColor.GOLD).bold())).translate(player).toLegacyText());
+        TextStyle.ofColor(ChatColor.GOLD).bold())).render(player).toLegacyText());
     res.add("");
     getPlayingPlayers().forEach(p ->
         res.add(SideBarUtils.booleanPlayer(p, inCarts.contains(p)))

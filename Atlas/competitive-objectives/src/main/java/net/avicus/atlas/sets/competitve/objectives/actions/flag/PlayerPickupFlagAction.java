@@ -30,7 +30,7 @@ public class PlayerPickupFlagAction extends PlayerTouchObjectiveAction implement
 
   @Override
   public String getDebugMessage() {
-    return "Flag Pickup: " + flag.getName().translateDefault();
+    return "Flag Pickup: " + flag.getName().renderDefault();
   }
 
   @Override
