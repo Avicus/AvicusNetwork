@@ -12,10 +12,6 @@
   <dependencies>
     <!-- APIs -->
     <dependency>
-      <groupId>net.avicus</groupId>
-      <artifactId>minecraft-api</artifactId>
-    </dependency>
-    <dependency>
       <groupId>io.lettuce</groupId>
       <artifactId>lettuce-core</artifactId>
     </dependency>
