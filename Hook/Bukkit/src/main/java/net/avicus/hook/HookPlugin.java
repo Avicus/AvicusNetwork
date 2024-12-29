@@ -26,11 +26,7 @@ import net.avicus.hook.afk.AFKKickTask;
 import net.avicus.hook.backend.Backend;
 import net.avicus.hook.chat.Chat;
 import net.avicus.hook.chat.MessageCommands;
-import net.avicus.hook.commands.DevCommands;
-import net.avicus.hook.commands.OnlineCommand;
-import net.avicus.hook.commands.StatsCommand;
-import net.avicus.hook.commands.TeleportCommands;
-import net.avicus.hook.commands.UserCommands;
+import net.avicus.hook.commands.*;
 import net.avicus.hook.credits.Credits;
 import net.avicus.hook.friends.Friends;
 import net.avicus.hook.gadgets.HookGadgets;
@@ -132,6 +128,7 @@ public class HookPlugin extends JavaPlugin {
     Punishments.init(cmds);
     Friends.init(cmds);
     HookGadgets.init(cmds);
+    cmds.register(GadgetCommands.class);
     Backend.init(this);
     QuickPlay.init();
 
